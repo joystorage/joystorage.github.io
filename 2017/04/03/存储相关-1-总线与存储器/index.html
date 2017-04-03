@@ -8,7 +8,7 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>存储相关-1-总线与存储器 | Yu Zhang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="IO总线分类
+  <meta name="description" content="1 IO总线分类
 仲裁总线（控制总线）
 地址总线
 数据总线PCI总线
@@ -16,12 +16,12 @@ PCI总线是目前普遍使用的一种连接南桥与外设的总线技术.
 PCI总线式数据与地址总线分时复用的.
 PCI总线所有时序的产生与控制都由Master发起，同一时刻只能供一对设备完成传输.
 PCI总线共享：硬件上使用三极管的物理特性实现，软件上通过中断链的方法实现.IO总线的结构
-CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU、内">
+CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU">
 <meta property="og:type" content="article">
 <meta property="og:title" content="存储相关-1-总线与存储器">
 <meta property="og:url" content="http://yoursite.com/2017/04/03/存储相关-1-总线与存储器/index.html">
 <meta property="og:site_name" content="Yu Zhang's Blog">
-<meta property="og:description" content="IO总线分类
+<meta property="og:description" content="1 IO总线分类
 仲裁总线（控制总线）
 地址总线
 数据总线PCI总线
@@ -29,12 +29,12 @@ PCI总线是目前普遍使用的一种连接南桥与外设的总线技术.
 PCI总线式数据与地址总线分时复用的.
 PCI总线所有时序的产生与控制都由Master发起，同一时刻只能供一对设备完成传输.
 PCI总线共享：硬件上使用三极管的物理特性实现，软件上通过中断链的方法实现.IO总线的结构
-CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU、内">
+CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU">
 <meta property="og:image" content="http://img.blog.csdn.net/20160924225301792">
-<meta property="og:updated_time" content="2017-04-03T10:29:13.558Z">
+<meta property="og:updated_time" content="2017-04-03T11:35:11.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="存储相关-1-总线与存储器">
-<meta name="twitter:description" content="IO总线分类
+<meta name="twitter:description" content="1 IO总线分类
 仲裁总线（控制总线）
 地址总线
 数据总线PCI总线
@@ -42,7 +42,7 @@ PCI总线是目前普遍使用的一种连接南桥与外设的总线技术.
 PCI总线式数据与地址总线分时复用的.
 PCI总线所有时序的产生与控制都由Master发起，同一时刻只能供一对设备完成传输.
 PCI总线共享：硬件上使用三极管的物理特性实现，软件上通过中断链的方法实现.IO总线的结构
-CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU、内">
+CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20160924225301792">
   
     <link rel="alternative" href="/atom.xml" title="Yu Zhang&#39;s Blog" type="application/atom+xml">
@@ -253,7 +253,7 @@ CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU、内">
       <br/><br/>
 
       
-        <h1 id="IO总线"><a href="#IO总线" class="headerlink" title="IO总线"></a>IO总线</h1><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+        <h1 id="1-IO总线"><a href="#1-IO总线" class="headerlink" title="1 IO总线"></a>1 IO总线</h1><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
 <li>仲裁总线（控制总线）</li>
 <li>地址总线</li>
 <li>数据总线<h3 id="PCI总线"><a href="#PCI总线" class="headerlink" title="PCI总线"></a>PCI总线</h3></li>
@@ -264,7 +264,7 @@ CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU、内">
 <li>CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU、内存与IO总线.CPU与北桥连接的叫系统总线（或者前端总线）.内存与北桥连接的叫内存总线.北桥与IO总线之间会有一个南桥芯片，协调北桥与IO总线之间的速度差.南桥负责连接控制众多的外设.<h3 id="磁盘控制的指令集"><a href="#磁盘控制的指令集" class="headerlink" title="磁盘控制的指令集"></a>磁盘控制的指令集</h3>目前有ATA和SCSI指令集（或叫协议），SCSI比ATA指令集高效，所以广泛用于服务器和磁盘阵列环境.</li>
 </ul>
 <a id="more"></a>
-<h1 id="磁盘原理与技术"><a href="#磁盘原理与技术" class="headerlink" title="磁盘原理与技术"></a>磁盘原理与技术</h1><p>硬盘大致由盘片、读写头、马达、底座、电路板等几大项组成.盘片基板要求表面光滑平整，不可有任何瑕疵.磁粉需要不含杂质，并均匀地溅渡在磁盘上.磁头利用空气动力学使磁头悬浮于盘面之上.为了让磁头精确定位到每个磁道必须用步进电机，利用精确的齿轮组或者音圈，每次旋转可以仅仅使磁头进行微米级的位移.</p>
+<h1 id="2-磁盘原理与技术"><a href="#2-磁盘原理与技术" class="headerlink" title="2 磁盘原理与技术"></a>2 磁盘原理与技术</h1><p>硬盘大致由盘片、读写头、马达、底座、电路板等几大项组成.盘片基板要求表面光滑平整，不可有任何瑕疵.磁粉需要不含杂质，并均匀地溅渡在磁盘上.磁头利用空气动力学使磁头悬浮于盘面之上.为了让磁头精确定位到每个磁道必须用步进电机，利用精确的齿轮组或者音圈，每次旋转可以仅仅使磁头进行微米级的位移.</p>
 <h3 id="盘上的数据组织"><a href="#盘上的数据组织" class="headerlink" title="盘上的数据组织"></a>盘上的数据组织</h3><ul>
 <li>逻辑上分为磁道、柱面、扇区.</li>
 <li>磁道从外圈向内圈从0开始编号，每一盘面有300~1024个磁道.磁道上每段圆弧叫做一个扇区.扇区从1开始编号，每个扇区中的数据作为一个单位同时读出或者写入，是读写的最小单位.</li>
@@ -334,15 +334,13 @@ CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU、内">
 <li>内部传输速率指刺头读写磁盘时的最高速率.这个速率不包括寻道以及等待扇区旋转到磁头下所用时间.通常每秒10000转的SCSI硬盘内部传输速率大概1000MB/s.</li>
 <li>从外部接口传送给磁盘控制器时的传送速率就是硬盘的外部传输速率，10000转的SCSI硬盘实际外部传输速率只有80MB/s左右.<h3 id="并行传输和串行传输"><a href="#并行传输和串行传输" class="headerlink" title="并行传输和串行传输"></a>并行传输和串行传输</h3></li>
 <li>并行传输应用在长距离的连接上就无优点可言了.同时传输频率不能过高，因为电路高速震荡的时候，数据线之间会产生很大的干扰，所以并行传输的传输效率高但是速度慢.</li>
-<li>USB接口、IEEE1394接口以及COM接口都是串行传输的计算机外部接口.</li>
-</ul>
-<h3 id="IO延迟、IOPS和传输带宽Throughput"><a href="#IO延迟、IOPS和传输带宽Throughput" class="headerlink" title="IO延迟、IOPS和传输带宽Throughput"></a>IO延迟、IOPS和传输带宽Throughput</h3><ul>
+<li>USB接口、IEEE1394接口以及COM接口都是串行传输的计算机外部接口.<h3 id="IO延迟、IOPS和传输带宽Throughput"><a href="#IO延迟、IOPS和传输带宽Throughput" class="headerlink" title="IO延迟、IOPS和传输带宽Throughput"></a>IO延迟、IOPS和传输带宽Throughput</h3></li>
 <li>IO延迟是指控制器将IO指令发出后，知道IO完成的过程中所耗费的时间.业界又不成文的规定，IO延迟在20ms以内，对应用程序都是可以接受的.推算出IOPS=50.</li>
 <li>控制器想存储设备发起指令不是一条一条顺序发送，而是一批一批的.也就是说，只要存储设备的肚量和消化能力足够，在IO比较少的时候，处理一条指令和多条指令的耗时几乎一样.控制器所发出批量指令的最大条数，有控制器上的Queue Depth决定.</li>
 <li>IOPS=（Queue Depth）/（IO Latency）对SCSI协议来说，完成一次连续LBA地址扇区的读写就算是一次IO，从底层看，每次想磁盘发送一个SCSI帧就是一次IO.</li>
 <li>传输带宽 ： 具有高带宽规格的磁盘在传输大块连续数据时具有优势，而具有高IOPS的硬盘在传输小块不连续的数据时具有优势.</li>
 </ul>
-<h1 id="固态存储介质"><a href="#固态存储介质" class="headerlink" title="固态存储介质"></a>固态存储介质</h1><ul>
+<h1 id="3-固态存储介质"><a href="#3-固态存储介质" class="headerlink" title="3 固态存储介质"></a>3 固态存储介质</h1><ul>
 <li>结构<br>对于一个16GB的FLASH，3214*8=34512个Cell逻辑上形成一个Page，每个Page中可以存放4KB的内容和218B的ECC校验数据，Page也是Flash芯片IO的最小单位.没128个Page组成一个Block，每2048个Block组成一个区域（Plane）.一整片Flash芯片由两个区域组成，一个区域存奇数序号的Blocks，一个存偶数序号的Blocks.</li>
 <li>读写过程<ul>
 <li>对于小块随机IO，Flash会随着容量的增加而变得越来越低效.SSD的IO最小单位为1个Page.</li>
@@ -358,7 +356,7 @@ CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU、内">
 </ul>
 </li>
 </ul>
-<h1 id="存储器的读写延迟总结"><a href="#存储器的读写延迟总结" class="headerlink" title="存储器的读写延迟总结"></a>存储器的读写延迟总结</h1><p><img src="http://img.blog.csdn.net/20160924225301792" alt="这里写图片描述"></p>
+<h3 id="存储器的读写延迟总结"><a href="#存储器的读写延迟总结" class="headerlink" title="存储器的读写延迟总结"></a>存储器的读写延迟总结</h3><p><img src="http://img.blog.csdn.net/20160924225301792" alt="这里写图片描述"></p>
 
       
 
@@ -473,8 +471,8 @@ CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU、内">
     </a>
   
   
-    <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">存储相关-2-RAID、虚拟磁盘、卷和文件系统</div>
+    <a href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -633,19 +631,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">
