@@ -44,6 +44,15 @@ $(function(){
             '</ul><br/><br/><br/>';
     $("#myphoto").append(pages);
 
+        var pages='<ul class="photo_ul">'+
+    		'<h1>厦门</h1><br/><br/><p></p>'+
+			'<li class="photo_li"><div class="img-box"><img class="img-img1" src="/photos/厦门1.jpg" /></div></li>'+
+        	'<li class="photo_li"><div class="img-box"><img class="img-img1" lazy-src="/photos/厦门2.jpg" /></div></li>'+
+        	'<li class="photo_li"><div class="img-box"><img class="img-img1" lazy-src="/photos/厦门3.jpg" /></div></li>'+
+        	'<li class="photo_li"><div class="img-box"><img class="img-img1" src="/photos/厦门4.jpg" /></div></li>'+
+            '</ul><br/><br/><br/>';
+    $("#myphoto").append(pages);
+
     var pin_height = $(".photo_li").width(); //   获取div的宽度
     $(".photo_li").css('height', pin_height);  //  设置div 
     $(".img-box").css('height', pin_height);  //  设置div  高度
