@@ -2,8 +2,6 @@
 	position: relative;
 	width:25%;
 	float:left;
-	background-repeat:no-repeat;
-	background-image: url('/photos/1.jpg');
 }
 
 .img-box:before {
@@ -14,6 +12,7 @@
 
 .img-box img {
     position:  absolute;
+    height: inherit;
     top: 0;
     left: 0;
     bottom: 0;
