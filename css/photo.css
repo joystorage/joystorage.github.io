@@ -2,6 +2,8 @@
 	position: relative;
 	width:25%;
 	float:left;
+	background-repeat:no-repeat;
+	background-image: url('/photos/1.jpg');
 }
 
 .img-box:before {
