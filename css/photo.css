@@ -1,8 +1,6 @@
 .img-box{
-	position: relative;
 	width:100%;
 	height:inherit;
-	float:left;
 }
 
 .img-box:before {
@@ -23,6 +21,7 @@
 .photo_li{
 	display:inline-block;
 	width:25%;
+	list-style-type:none;
 }
 .photo_ul{
 	list-style:none;
