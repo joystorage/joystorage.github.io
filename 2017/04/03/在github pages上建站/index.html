@@ -441,13 +441,11 @@ MathJax.Hub.Queue(function() {
 
   
 <div style="position:fixed;bottom:150px;right:50px;cursor: pointer;">
-	<button id="totop" "><img src="/img/scrollup.png"/></button>
+	<a id="totop" href="pageScroll();"><img src="/img/scrollup.png"/></button>
 </div>
 
-<script type="javascript">
-	totop.onclick = function(){
-	document.body.scrollTop = document.documentElement.scrollTop = 0;
-	}
+<script>
+	functionpageScroll() {window.scrollBy(0,-10);scrolldelay=setTimeout('pageScroll()',100);}
 </script>
     
 <div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
@@ -533,19 +531,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">排队论</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
             
             <div class="clearfix"></div>
