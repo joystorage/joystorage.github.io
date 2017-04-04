@@ -1,6 +1,6 @@
 .img-box{
 	position: relative;
-	width:inherit;
+	width:100%;
 	height:inherit;
 	float:left;
 }
@@ -22,6 +22,8 @@
 
 .photo_li{
 	display:inline-block;
-	list-style:none;
 	width:25%;
+}
+.photo_ul{
+	list-style:none;
 }
