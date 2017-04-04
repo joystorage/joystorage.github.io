@@ -9,3 +9,7 @@
 	width:25%;
 	list-style-type:none;
 }
+
+.photo_li:before{
+	display:none;
+}
