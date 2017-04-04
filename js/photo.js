@@ -11,7 +11,7 @@ $(function(){
             '<li style="display:inline-block;list-style:none"><div class="img-box"><a class="img-bg" rel="example_group" href="https://github.com/joystorage/joystorage.github.io.git/photos/4.jpg"></a><img class="img-img1" src="/photos/4.jpg" /></div></li>'+
             '<li style="display:inline-block;list-style:none"><div class="img-box"><a class="img-bg" rel="example_group" href="https://github.com/joystorage/joystorage.github.io.git/photos/4.jpg"></a><img class="img-img1" src="/photos/4.jpg" /></div></li>'+
             '</ul>';
-    $("#myimg_1").html(pages);
+    $("#myimg").html(pages);
     
 
 
