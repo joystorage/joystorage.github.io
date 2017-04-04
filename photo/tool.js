@@ -23,4 +23,4 @@ fs.readdir(path, function (err, files) {
             iterator(index + 1);
         })
     }(0));
-});
+}); 
