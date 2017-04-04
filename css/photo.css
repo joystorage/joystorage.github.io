@@ -3,26 +3,9 @@
 	height:inherit;
 }
 
-.img-box:before {
-    content: "";
-    display: block;
-    padding-top: 100%;     /* initial ratio of 1:1*/
-}
-
-.img-box li {
-    position:  absolute;
-    height: inherit;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-}
 
 .photo_li{
 	display:inline-block;
 	width:25%;
 	list-style-type:none;
-}
-.photo_ul{
-	list-style:none;
 }
