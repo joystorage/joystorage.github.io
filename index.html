@@ -247,6 +247,183 @@
 
 
   
+    <article id="post-存储相关-1-总线与存储器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/03/存储相关-1-总线与存储器/">存储相关-1-总线与存储器</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/03/存储相关-1-总线与存储器/" class="archive-article-date">
+  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总线</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <h1 id="1-IO总线"><a href="#1-IO总线" class="headerlink" title="1 IO总线"></a>1 IO总线</h1><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li>仲裁总线（控制总线）</li>
+<li>地址总线</li>
+<li>数据总线<h3 id="PCI总线"><a href="#PCI总线" class="headerlink" title="PCI总线"></a>PCI总线</h3></li>
+<li>PCI总线是目前普遍使用的一种连接南桥与外设的总线技术.</li>
+<li>PCI总线式数据与地址总线分时复用的.</li>
+<li>PCI总线所有时序的产生与控制都由Master发起，同一时刻只能供一对设备完成传输.</li>
+<li>PCI总线共享：硬件上使用三极管的物理特性实现，软件上通过中断链的方法实现.<h3 id="IO总线的结构"><a href="#IO总线的结构" class="headerlink" title="IO总线的结构"></a>IO总线的结构</h3></li>
+<li>CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU、内存与IO总线.CPU与北桥连接的叫系统总线（或者前端总线）.内存与北桥连接的叫内存总线.北桥与IO总线之间会有一个南桥芯片，协调北桥与IO总线之间的速度差.南桥负责连接控制众多的外设.<h3 id="磁盘控制的指令集"><a href="#磁盘控制的指令集" class="headerlink" title="磁盘控制的指令集"></a>磁盘控制的指令集</h3>目前有ATA和SCSI指令集（或叫协议），SCSI比ATA指令集高效，所以广泛用于服务器和磁盘阵列环境.</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/04/03/存储相关-1-总线与存储器/#more">more >></a>
+        
+      
+
+      
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/03/存储相关-1-总线与存储器/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-存储相关-2-RAID、虚拟磁盘、卷和文件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">存储相关-2-RAID、虚拟磁盘、卷和文件系统</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" class="archive-article-date">
+  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">RAID</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文件系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <h1 id="七种RAID"><a href="#七种RAID" class="headerlink" title="七种RAID"></a>七种RAID</h1><p>RAID以4个扇区组成的块作为基本单位，不同磁盘的相同偏移处的块组成Stripe，也就是条带.对于RAID 0 磁盘组，如果有大块数据写入时，则数据在很大几率上可以以条带为单位写入，并行写入能大大提高写入速度.</p>
+        
+          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/#more">more >></a>
+        
+      
+
+      
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -339,19 +516,19 @@
 
 
   
-    <article id="post-存储相关-1-总线与存储器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-排队论在ad hoc无线网中的应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/存储相关-1-总线与存储器/">存储相关-1-总线与存储器</a>
+      <a class="article-title" href="/2017/04/03/排队论在ad hoc无线网中的应用/">排队论在ad hoc无线网中的应用</a>
     </h1>
   
 
         
-        <a href="/2017/04/03/存储相关-1-总线与存储器/" class="archive-article-date">
+        <a href="/2017/04/03/排队论在ad hoc无线网中的应用/" class="archive-article-date">
   	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
 </a>
         
@@ -370,11 +547,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">排队论</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总线</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ad hoc无线网</a>
         		</li>
       		
 		</ul>
@@ -387,18 +564,12 @@
       <br/><br/>
 
       
-        <h1 id="1-IO总线"><a href="#1-IO总线" class="headerlink" title="1 IO总线"></a>1 IO总线</h1><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
-<li>仲裁总线（控制总线）</li>
-<li>地址总线</li>
-<li>数据总线<h3 id="PCI总线"><a href="#PCI总线" class="headerlink" title="PCI总线"></a>PCI总线</h3></li>
-<li>PCI总线是目前普遍使用的一种连接南桥与外设的总线技术.</li>
-<li>PCI总线式数据与地址总线分时复用的.</li>
-<li>PCI总线所有时序的产生与控制都由Master发起，同一时刻只能供一对设备完成传输.</li>
-<li>PCI总线共享：硬件上使用三极管的物理特性实现，软件上通过中断链的方法实现.<h3 id="IO总线的结构"><a href="#IO总线的结构" class="headerlink" title="IO总线的结构"></a>IO总线的结构</h3></li>
-<li>CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU、内存与IO总线.CPU与北桥连接的叫系统总线（或者前端总线）.内存与北桥连接的叫内存总线.北桥与IO总线之间会有一个南桥芯片，协调北桥与IO总线之间的速度差.南桥负责连接控制众多的外设.<h3 id="磁盘控制的指令集"><a href="#磁盘控制的指令集" class="headerlink" title="磁盘控制的指令集"></a>磁盘控制的指令集</h3>目前有ATA和SCSI指令集（或叫协议），SCSI比ATA指令集高效，所以广泛用于服务器和磁盘阵列环境.</li>
-</ul>
+        <h1 id="Applications-in-Analysis-of-Ad-Hoc-Networks-using-Queuing-Theory"><a href="#Applications-in-Analysis-of-Ad-Hoc-Networks-using-Queuing-Theory" class="headerlink" title="Applications in Analysis of Ad Hoc Networks using Queuing Theory"></a>Applications in Analysis of Ad Hoc Networks using Queuing Theory</h1><blockquote>
+<p>Yu Zhang</p>
+</blockquote>
+<h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><p> Queuing problems are common scenarios in our daily life. From industrial manufacture to daily queuing, we can never leave this topic. Ad Hoc wireless networks are new kinds of networks. It has the advantages of high flexibility and extensibility, which are applied to our daily life gradually. The paper lists the applications in performance analysis of Ad Hoc networks via using queuing theory, and discusses their pros and cons as well as their development directions. At the end of the article, we reproduce some of the experiments via using MATLAB simulators and give a detailed discussion on the results.</p>
         
-          <a class="article-more-a" href="/2017/04/03/存储相关-1-总线与存储器/#more">more >></a>
+          <a class="article-more-a" href="/2017/04/03/排队论在ad hoc无线网中的应用/#more">more >></a>
         
       
 
@@ -411,7 +582,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/存储相关-1-总线与存储器/">查看全文 >></a>
+          <a class="article-more-a" href="/2017/04/03/排队论在ad hoc无线网中的应用/">查看全文 >></a>
         </p>
       
 
@@ -520,177 +691,6 @@
 
 
   
-    <article id="post-存储相关-2-RAID、虚拟磁盘、卷和文件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">存储相关-2-RAID、虚拟磁盘、卷和文件系统</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" class="archive-article-date">
-  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">RAID</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文件系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <h1 id="七种RAID"><a href="#七种RAID" class="headerlink" title="七种RAID"></a>七种RAID</h1><p>RAID以4个扇区组成的块作为基本单位，不同磁盘的相同偏移处的块组成Stripe，也就是条带.对于RAID 0 磁盘组，如果有大块数据写入时，则数据在很大几率上可以以条带为单位写入，并行写入能大大提高写入速度.</p>
-        
-          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/#more">more >></a>
-        
-      
-
-      
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-排队论在ad hoc无线网中的应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/排队论在ad hoc无线网中的应用/">排队论在ad hoc无线网中的应用</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/03/排队论在ad hoc无线网中的应用/" class="archive-article-date">
-  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">排队论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ad hoc无线网</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <h1 id="Applications-in-Analysis-of-Ad-Hoc-Networks-using-Queuing-Theory"><a href="#Applications-in-Analysis-of-Ad-Hoc-Networks-using-Queuing-Theory" class="headerlink" title="Applications in Analysis of Ad Hoc Networks using Queuing Theory"></a>Applications in Analysis of Ad Hoc Networks using Queuing Theory</h1><blockquote>
-<p>Yu Zhang</p>
-</blockquote>
-<h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><p> Queuing problems are common scenarios in our daily life. From industrial manufacture to daily queuing, we can never leave this topic. Ad Hoc wireless networks are new kinds of networks. It has the advantages of high flexibility and extensibility, which are applied to our daily life gradually. The paper lists the applications in performance analysis of Ad Hoc networks via using queuing theory, and discusses their pros and cons as well as their development directions. At the end of the article, we reproduce some of the experiments via using MATLAB simulators and give a detailed discussion on the results.</p>
-        
-          <a class="article-more-a" href="/2017/04/03/排队论在ad hoc无线网中的应用/#more">more >></a>
-        
-      
-
-      
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/排队论在ad hoc无线网中的应用/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
 
 
@@ -753,12 +753,12 @@ MathJax.Hub.Queue(function() {
 
   
 <div style="position:fixed;bottom:150px;right:50px;cursor: pointer;">
-	<a id="totop" href="#"><img src="/img/scrollup.png"/></button>
+	<a id="totop" onclick="pageScroll()"><img src="/img/scrollup.png"/></button>
 </div>
 
 <script>
 	function pageScroll() 
-	{window.scrollBy(0,-10);scrolldelay=setTimeout('pageScroll()',100);}
+	{alert("qwe");window.scrollBy(0,-10);scrolldelay=setTimeout('pageScroll()',100);}
 </script>
     
 <div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
@@ -824,23 +824,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">总线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -852,11 +836,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">排队论</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
               </li>
             
             <div class="clearfix"></div>
