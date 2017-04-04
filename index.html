@@ -253,19 +253,19 @@
 
 
   
-    <article id="post-存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-存储相关-2-RAID、虚拟磁盘、卷和文件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/">存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)</a>
+      <a class="article-title" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">存储相关-2-RAID、虚拟磁盘、卷和文件系统</a>
     </h1>
   
 
         
-        <a href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/" class="archive-article-date">
+        <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" class="archive-article-date">
   	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
 </a>
         
@@ -288,11 +288,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">存储阵列</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">RAID</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">存储系统</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文件系统</a>
         		</li>
       		
 		</ul>
@@ -305,15 +305,9 @@
       <br/><br/>
 
       
-        <h1 id="磁盘阵列"><a href="#磁盘阵列" class="headerlink" title="磁盘阵列"></a>磁盘阵列</h1><p>多个磁盘通过RAID卡组合起来,组成JBOD（just a bound of Disks,一串磁盘）.<strong>JBOD称为磁盘柜,凡是自带RAID控制器的盘柜就叫做磁盘阵列或者盘阵.</strong></p>
-<h4 id="双控制器"><a href="#双控制器" class="headerlink" title="双控制器"></a>双控制器</h4><p>常用两个控制器来保证磁盘阵列的安全性</p>
-<ul>
-<li>Active-Standby热备份<br>  一个作为备份，只有当主控制器故障时副控制器才工作</li>
-<li>Dual-Active双控制器同时工作<br>两个同时工作，当其中一个故障时，另一个仍能正常接管整个阵列的管理.</li>
-<li>Split Brain脑分裂<br>其中一个控制器检测不到另一个控制器的存在,则向电源控制器发送信号，重启对方并进入Standby状态.</li>
-</ul>
+        <h1 id="七种RAID"><a href="#七种RAID" class="headerlink" title="七种RAID"></a>七种RAID</h1><p>RAID以4个扇区组成的块作为基本单位，不同磁盘的相同偏移处的块组成Stripe，也就是条带.对于RAID 0 磁盘组，如果有大块数据写入时，则数据在很大几率上可以以条带为单位写入，并行写入能大大提高写入速度.</p>
         
-          <a class="article-more-a" href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/#more">more >></a>
+          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/#more">more >></a>
         
       
 
@@ -326,7 +320,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/">查看全文 >></a>
+          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">查看全文 >></a>
         </p>
       
 
@@ -436,6 +430,98 @@
 
 
   
+    <article id="post-存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/">存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/" class="archive-article-date">
+  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">存储阵列</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">存储系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <h1 id="磁盘阵列"><a href="#磁盘阵列" class="headerlink" title="磁盘阵列"></a>磁盘阵列</h1><p>多个磁盘通过RAID卡组合起来,组成JBOD（just a bound of Disks,一串磁盘）.<strong>JBOD称为磁盘柜,凡是自带RAID控制器的盘柜就叫做磁盘阵列或者盘阵.</strong></p>
+<h4 id="双控制器"><a href="#双控制器" class="headerlink" title="双控制器"></a>双控制器</h4><p>常用两个控制器来保证磁盘阵列的安全性</p>
+<ul>
+<li>Active-Standby热备份<br>  一个作为备份，只有当主控制器故障时副控制器才工作</li>
+<li>Dual-Active双控制器同时工作<br>两个同时工作，当其中一个故障时，另一个仍能正常接管整个阵列的管理.</li>
+<li>Split Brain脑分裂<br>其中一个控制器检测不到另一个控制器的存在,则向电源控制器发送信号，重启对方并进入Standby状态.</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/#more">more >></a>
+        
+      
+
+      
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-存储相关-4-虚拟化与系统IO路径优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -508,92 +594,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/04/03/存储相关-4-虚拟化与系统IO路径优化/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-存储相关-2-RAID、虚拟磁盘、卷和文件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">存储相关-2-RAID、虚拟磁盘、卷和文件系统</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" class="archive-article-date">
-  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">RAID</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文件系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <h1 id="七种RAID"><a href="#七种RAID" class="headerlink" title="七种RAID"></a>七种RAID</h1><p>RAID以4个扇区组成的块作为基本单位，不同磁盘的相同偏移处的块组成Stripe，也就是条带.对于RAID 0 磁盘组，如果有大块数据写入时，则数据在很大几率上可以以条带为单位写入，并行写入能大大提高写入速度.</p>
-        
-          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/#more">more >></a>
-        
-      
-
-      
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">查看全文 >></a>
         </p>
       
 
@@ -826,6 +826,18 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
               </li>
              
@@ -834,23 +846,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">
