@@ -1,6 +1,7 @@
 .img-box{
 	position: relative;
 	width:25%;
+	height:inherit;
 	float:left;
 }
 
