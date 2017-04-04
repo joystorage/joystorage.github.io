@@ -6,18 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>存储相关-2-RAID、虚拟磁盘、卷和文件系统 | Yu Zhang&#39;s Blog</title>
+  <title>相册 | Yu Zhang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="七种RAIDRAID以4个扇区组成的块作为基本单位，不同磁盘的相同偏移处的块组成Stripe，也就是条带.对于RAID 0 磁盘组，如果有大块数据写入时，则数据在很大几率上可以以条带为单位写入，并行写入能大大提高写入速度.">
-<meta property="og:type" content="article">
-<meta property="og:title" content="存储相关-2-RAID、虚拟磁盘、卷和文件系统">
-<meta property="og:url" content="http://yoursite.com/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="相册">
+<meta property="og:url" content="http://yoursite.com/photo/index.html">
 <meta property="og:site_name" content="Yu Zhang's Blog">
-<meta property="og:description" content="七种RAIDRAID以4个扇区组成的块作为基本单位，不同磁盘的相同偏移处的块组成Stripe，也就是条带.对于RAID 0 磁盘组，如果有大块数据写入时，则数据在很大几率上可以以条带为单位写入，并行写入能大大提高写入速度.">
-<meta property="og:updated_time" content="2017-04-03T11:35:48.414Z">
+<meta property="og:updated_time" content="2017-04-04T03:28:14.370Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="存储相关-2-RAID、虚拟磁盘、卷和文件系统">
-<meta name="twitter:description" content="七种RAIDRAID以4个扇区组成的块作为基本单位，不同磁盘的相同偏移处的块组成Stripe，也就是条带.对于RAID 0 磁盘组，如果有大块数据写入时，则数据在很大几率上可以以条带为单位写入，并行写入能大大提高写入速度.">
+<meta name="twitter:title" content="相册">
   
     <link rel="alternative" href="/atom.xml" title="Yu Zhang&#39;s Blog" type="application/atom+xml">
   
@@ -173,21 +170,17 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-存储相关-2-RAID、虚拟磁盘、卷和文件系统" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="page-undefined" class="article article-type-page " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      存储相关-2-RAID、虚拟磁盘、卷和文件系统
+      相册
     </h1>
   
 
-        
-        <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" class="archive-article-date">
-  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
         
  
      
@@ -199,25 +192,6 @@
    
       <div style="margin-left:-5px">
         
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">RAID</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文件系统</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
         
 
       </div>
@@ -225,80 +199,10 @@
       <br/><br/>
 
       
-        <h1 id="七种RAID"><a href="#七种RAID" class="headerlink" title="七种RAID"></a>七种RAID</h1><p>RAID以4个扇区组成的块作为基本单位，不同磁盘的相同偏移处的块组成Stripe，也就是条带.对于RAID 0 磁盘组，如果有大块数据写入时，则数据在很大几率上可以以条带为单位写入，并行写入能大大提高写入速度.</p>
-<a id="more"></a>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ul>
-<li>RAID 0<br>没有冗余，通过并行写入提高性能.</li>
-<li>RAID 1<ul>
-<li>RAID 0 数据不安全，一块盘坏掉，整个阵列就坏了.因此RAID 1 拿另一磁盘做备份，即一次性写两份.</li>
-<li>读性能和顺序写性能提高N倍，但随机写由于公用同一块备份盘，因此性能没有提升.</li>
-</ul>
-</li>
-<li>RAID 2<ul>
-<li>采用Hamming Code ECC进行校验.汉明码只能纠正一位错误.所以只能允许一块硬盘出问题.如果两块或以上硬盘出现问题，RAID 2的数据将被破坏.</li>
-<li>其实是将原本连续的一个扇区数据，以位为单位分割存放在不连续的多块物理盘上.也就是条带深度为1.</li>
-<li>RAID 2不能实现并行IO，因为每次IO都要联动所有的磁盘，只能做到一个IO内部的并行.</li>
-<li>基于其特点，能将顺序读写提升N倍，随机读写不能提升.</li>
-</ul>
-</li>
-<li>RAID 3<ul>
-<li>采用异或的性质来求校验值.对于RAID 3 连续读写性能几乎是单盘的N倍.随机读写并没有提升，几乎和单盘一样.</li>
-<li>RAID 3 执行一次IO必须牵动占用所有盘，其他IO就必须等待，因此根本不能并发IO.</li>
-<li>一般来说，RAID 3的条带长度=文件系统的块大小，避免条带不对齐的现象.</li>
-<li>与RAID 2相同，只对大的连续读写有提升，小的随机读写没有优化.</li>
-</ul>
-</li>
-<li>RAID 4<ul>
-<li>由于实际的读写常常是小的随机读写，前四种做法会有明显的缺陷，因此出现了RAID 4. RAID 4通过增大条带深度，大大增大了IO读写的并发性.</li>
-</ul>
-</li>
-<li>RAID 5<ul>
-<li>由于RAID 4写请求需要共享校验盘，因此写请求不能实现并发.因此RAID 5将校验数据分散在各个磁盘上.使并发概率最大化.</li>
-<li>新校验码=老数据XOR新数据XOR老校验码.</li>
-<li>如果之前校验码出错，只能用新数据重新计算校验码，否则新校验码仍为错误.</li>
-<li>RAID 5磁盘数越多，可并发的几率越大.</li>
-</ul>
-</li>
-<li>RAID 6<ul>
-<li>通过增加一个校验盘提高安全性，可以同时坏两块盘.</li>
-</ul>
-</li>
-<li>注意<ul>
-<li>如果随机小块IO多，则适当加大条带深度；如果连续大块IO多，则适当减少条带深度.</li>
-</ul>
-</li>
-</ul>
-<h1 id="操作系统中RAID实现"><a href="#操作系统中RAID实现" class="headerlink" title="操作系统中RAID实现"></a>操作系统中RAID实现</h1><p>为了保证性能,同一磁盘组只能用同类型的磁盘,混合使用多类型磁盘组成虚拟磁盘非特殊要求不会有这样的设计.<br>这种RAID称为软件RAID,存在如下缺点：①占用内存空间；②占用CPU资源（如利用异或求检验值等）；③软件RAID程序无法将安装有操作系统的那个磁盘分区做成RAID模式.RAID程序运行在操作系统之上,在启动操作系统之前无法实现RAID功能,因此操作系统损坏,RAID程序也无法运行,数据丢失.</p>
-<h1 id="RAID卡"><a href="#RAID卡" class="headerlink" title="RAID卡"></a>RAID卡</h1><p>其实是一种硬件实现RAID.</p>
-<ul>
-<li>0通道RAID卡<br>  自身没有SCSI通道,利用主板上已经集成或者已经插在PCI上的SCSI卡,来控制他们的通道.</li>
-<li>无驱动RAID卡<br>使用SATA接口连接计算机.</li>
-<li>RAID On Chip(ROC)技术<br>利用SCSI卡上的CPU处理芯片,通过在SCSI卡的ROM中加入RAID代码而实现.</li>
-<li>RAID卡上内存<br>用于存放CPU执行代码以及作为数据缓存.<br>#虚拟磁盘</li>
-<li>操作系统如何看待逻辑盘<ul>
-<li>目前各种RAID卡都可以划分逻辑盘，逻辑盘大小任意设置.<strong>每个逻辑盘对于OS来说都是一块单独的物理盘.而分区OS在一块物理磁盘上做的再次划分</strong>.</li>
-</ul>
-</li>
-</ul>
-<h1 id="卷管理"><a href="#卷管理" class="headerlink" title="卷管理"></a>卷管理</h1><p>由于虚拟磁盘存在不灵活性,扩展上存在缺陷,因此出现了卷管理(Volume Manager,VM).很多操作系统上都有逻辑卷管理（LVM）.<br>其主要功能是将OS识别到的物理磁盘（RAID卡虚拟化的逻辑盘）进行在组合.</p>
-<ul>
-<li>相关概念 <ul>
-<li>PV ： OS识别到的物理磁盘，叫物理卷（physical volume）</li>
-<li>VG ： 多个PV被逻辑的放到一个卷组(volume group)中</li>
-<li>PP：即物理区块（physical partition）.是在逻辑上再将一个VG分割成连续的小块.逻辑上连续的PP物理上不一定连续.</li>
-<li>LP ： 逻辑区块.为实现某种功能,由多个PP组成的一个集合.</li>
-<li>LV ：由多个LP组成的逻辑卷.</li>
-</ul>
-</li>
-<li><strong>总结起来就是将多个PV组合成一个存储集合VG,并在逻辑上将VG划分成若干PP.然后再在逻辑上组成若干LV.其中LV的基本单元是LP.而LP的基本单元是PP.</strong></li>
-<li>高级卷管理和低级卷管理<ul>
-<li>分区管理可以看做一种最简单的卷管理方式，它比LVM等要低级，比如windows自带的磁盘管理器.<strong>这些卷信息都存放在LBA1扇区上,这个扇区叫做主引导记录MBR,MBR还保存了BIOS跳转时所需要的第一句指令代码.</strong></li>
-<li>高级卷管理在划分逻辑卷之后,一定要记录逻辑卷是怎么划分的.LVM使用VGDA（volume group descriptior area）存放卷信息.</li>
-</ul>
-</li>
-</ul>
-<h1 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h1><p>在一个没有文件系统的计算机上,如果一个程序要向磁盘上存储一些自己的数据,那么这个程序只能自己调用磁盘控制器驱动,或者调用VM提供的接口,对磁盘写数据.<strong>引入文件系统后,各个程序之间都通过文件系统接口访问磁盘,所有被写入的数据都称为一个文件,有名字,是一个实体.</strong><br>文件系统的IO包括同步IO、异步IO、阻塞IO/非阻塞IO和Direct IO.</p>
+        <p><link type="text/css" href="/fancybox/jquery.fancybox.css" rel="stylesheet"></p>
+<div class="instagram"><section class="archives album"><ul class="img-box-ul"></ul></section></div>
 
+<script src="/js/photo.js"></script>
       
 
       
@@ -387,7 +291,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/photo/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -400,25 +304,6 @@
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/2017/04/03/存储相关-4-虚拟化与系统IO路径优化/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          存储相关-4-虚拟化与系统IO路径优化
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/04/03/排队论在ad hoc无线网中的应用/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">排队论在ad hoc无线网中的应用</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 
 
@@ -427,7 +312,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="存储相关-2-RAID、虚拟磁盘、卷和文件系统" data-title="存储相关-2-RAID、虚拟磁盘、卷和文件系统" data-url="http://yoursite.com/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/"></div>
+	<div class="ds-thread" data-thread-key="undefined" data-title="相册" data-url="http://yoursite.com/photo/index.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -469,7 +354,7 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
