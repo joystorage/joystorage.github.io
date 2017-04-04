@@ -10,6 +10,6 @@
 	list-style-type:none;
 }
 
-li::before{
-	display:none;
+.photo_li::before{
+	display:none!important;
 }
