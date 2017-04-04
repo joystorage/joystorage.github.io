@@ -4,6 +4,12 @@
 	float:left;
 }
 
+.img-box:before {
+    content: "";
+    display: block;
+    padding-top: 100%;     /* initial ratio of 1:1*/
+}
+
 .img-box img {
     position:  absolute;
     top: 0;
