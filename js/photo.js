@@ -6,6 +6,8 @@ $(function(){
             '<div class="img-box"><a class="img-bg" rel="example_group" href="https://github.com/joystorage/joystorage.github.io.git/photos/3.jpg"></a><img class="img-img1" src="/photos/3.jpg" /></div>'+
             '<div class="img-box"><a class="img-bg" rel="example_group" href="https://github.com/joystorage/joystorage.github.io.git/photos/4.jpg"></a><img class="img-img1" src="/photos/4.jpg" /></div>';
     $("#myimg_1").html(pages);
+    $("#myimg_2").html(pages);
+    
 
 
 	var pin_height = $(".img-box").width(); //   获取div的宽度
