@@ -2,7 +2,7 @@ $(function(){
 
     var pages='<ul class="photo_ul">'+
     		'<h1>宜昌·三峡</h1><br/><br/><p></p>'+
-			'<li class="photo_li"><div class="img-box"><a class="img-bg" rel="example_group" href="https://github.com/joystorage/joystorage.github.io/blob/master/photos/1.jpg"><img class="img-img1" src="/photos/1.jpg" /></a></div></li>'+
+			'<li class="photo_li"><div class="img-box"><a class="img-bg" rel="example_group" href="/photos/1.jpg"><img class="img-img1" src="/photos/1.jpg" /></a></div></li>'+
         	'<li class="photo_li"><div class="img-box"><a class="img-bg" rel="example_group" href="https://github.com/joystorage/joystorage.github.io.git/photos/2.JPG"></a><img class="img-img1" src="/photos/2.jpg" /></div></li>'+
             '<li class="photo_li"><div class="img-box"><a class="img-bg" rel="example_group" href="https://github.com/joystorage/joystorage.github.io.git/photos/3.jpg"></a><img class="img-img1" src="/photos/3.jpg" /></div></li>'+
             '<li class="photo_li"><div class="img-box"><a class="img-bg" rel="example_group" href="https://github.com/joystorage/joystorage.github.io.git/photos/4.jpg"></a><img class="img-img1" src="/photos/4.jpg" /></div></li>'+
