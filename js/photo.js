@@ -25,13 +25,6 @@ $(function(){
 			$.each(item.data,function(j,item2){
 		    	var con = secpath+item2.url;
 		    	var mincon = secminpath + item2.url;
-		    	// pages += '<figure class="thumb" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">'+
-		    	// '<a class="img-wrap" href="'+con+'" itemprop="contentUrl" data-size="200x200" '+
-		    	// 'data-type="image" data-target="'+con+'" target="_blank">'+
-		    	// '<img alter="IMG_1818" class="reward-img" data-type="image" data-src="'+data.root+'timg.jpg?tn=1" '+
-		    	// 'src="'+data.root+'timg.jpg?tn=1" itemprop="thumbnail" data-lzled="true"></a>'+
-		    	// '<figcaption style="display:none" itemprop="caption description">与你跋山涉水</figcaption>'+
-		    	// '</figure>'
 		    	pages += '<li class="photo_li">'+
 		    			'<div class="img-box"><a href="javascript:void(0);" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
 		    			'<img class="img-img1"  data-url="/photos/timg.jpg" src="'+con+'" /></a></div></li>';
@@ -43,22 +36,11 @@ $(function(){
 		});
 
 		$("img").attr("onclick",null);
-		
-		// $(".photo-a").each(function(){
-		// 	//$(this).attr("onclick", "biggerFunction()");
-		// 	$(this).click(function(){
-		// 		$(this).preventDefault(); 
-		// 		console.log($(this).attr("src-data"));
-		// 	});
-		// });
 
 		$(".photo-a").click(function(){
 				$("#model-img").attr("src",$(this).attr("src-data"));
-				//console.log($(this).attr("src-data"));
 		});
 
-		//var pin_width = ($(".photo_li").width() - 60)*0.25;
-		//$(".photo_li").css('width',pin_width);
 		var pin_height = $(".photo_li").width(); //   获取div的宽度
 		$(".photo_li").css('height', pin_height);  //  设置div 
 		$(".img-box").css('height', pin_height);  //  设置div  高度
@@ -98,7 +80,7 @@ $(function(){
 		    	var mincon = secminpath + item2.url;
 
 		    	pages += '<li class="photo_li_mob">'+
-		    			'<div class="img-box"><a href="'+con+'">'+
+		    			'<div class="img-box"><a href="javascript:void(0);" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
 		    			'<img class="img-img2 scrollLoading"  data-url="/photos/timg.jpg" src="'+mincon+'" /></div></li></a>';
 			});
 
@@ -106,6 +88,12 @@ $(function(){
 			$("#myphoto").append(pages);
 		});
 
+		$("img").attr("onclick",null);
+
+		$(".photo-a").click(function(){
+				$("#model-img").attr("src",$(this).attr("src-data"));
+		});
+		
 		var pin_height = $(".photo_li_mob").width(); //   获取div的宽度
 		$(".photo_li_mob").css('height', pin_height);  //  设置div 
 		$(".img-box").css('height', pin_height);  //  设置div  高度
