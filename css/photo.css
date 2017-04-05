@@ -6,10 +6,8 @@
 
 .photo_li{
 	display:inline-block;
-	width:23%;
+	width:25%;
 	list-style-type:none;
-	margin-left:20px;
-	margin-top:20px
 }
 
 .photo_li::before{
@@ -18,10 +16,8 @@
 
 .photo_li_mob{
 	display:inline-block;
-	width:48%;
+	width:50%;
 	list-style-type:none;
-	margin-left:10px;
-	margin-top:10px
 }
 
 .photo_li_mob::before{
