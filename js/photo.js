@@ -2,12 +2,12 @@ $(function(){
 
 	
     $.getJSON("/json/photos.json",function(data) {
-        $("#info").html("");//清空info内容
-        $.each(data.comments, function(i, item) {
-            console.log(
-                    "<div>" + item.id + "</div>" + 
-                    "<div>" + item.nickname    + "</div>" +
-                    "<div>" + item.content + "</div><hr/>");
+    	var rootpath=data.root;
+        $.each(data.contents, function(i, item) {
+        	var secpath = rootpath + item.pre;
+        	$.each(item.data,function(j,item2){
+            	console.log(secpath+item2.url);
+        	});
     	});
     });
 
