@@ -51,6 +51,13 @@ $(function(){
 		$(".img-img1").css('width', pin_height);  //  设置div  高度
 		$(".img-img1").css('height', pin_height);  //  设置div 
 		});
+
+		
+		$(".photo-a").each(function(){
+			console.log("123123");
+			console.log($(this).attr("src-data"));
+		});
+
  	}else{
  		$("#photo_div").html('');
 		var pages = '<br/><br/><img class="scrollLoading"  data-url="/photos/timg.jpg" '+
@@ -111,12 +118,6 @@ $(function(){
 
 		});
  	}
-	
-
-	$(".photo-a").each(function(){
-		console.log("123123");
-		console.log($(this).attr("src-data"));
-	});
 
 });
 
