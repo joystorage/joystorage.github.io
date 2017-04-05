@@ -27,3 +27,26 @@
 .photo_li_mob::before{
 	display:none!important;
 }
+
+.img-wrap{
+	width: 150px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thumb{
+	text-align: center;
+    list-style: none;
+    float: left;
+    width: 150px;
+    height: 120px;
+    margin: 10px;
+    padding: 8px;
+    background: #fff;
+    position: relative;
+    cursor: pointer;
+    align-items: flex-end;
+    justify-content: center;
+}
