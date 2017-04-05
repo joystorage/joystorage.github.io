@@ -2,10 +2,10 @@ $(function(){
 
     var pages='<ul class="photo_ul">'+
     		'<h1>黑龙江·哈尔滨</h1><br/><br/><p></p>'+
-			'<li class="photo_li"><div class="img-box"><img class="img-img1 scrollLoading"  data-url="/photos/timg.jpg" src="/photos/哈尔滨1.jpg" /></div></li>'+
-        	'<li class="photo_li"><div class="img-box"><img class="img-img1 scrollLoading"  data-url="/photos/timg.jpg" src="/photos/哈尔滨2.jpg" /></div></li>'+
-            '<li class="photo_li"><div class="img-box"><img class="img-img1 scrollLoading"  data-url="/photos/timg.jpg" src="/photos/哈尔滨3.jpg" /></div></li>'+
-            '<li class="photo_li"><div class="img-box"><img cclass="img-img1 scrollLoading"  data-url="/photos/timg.jpg" src="/photos/哈尔滨4.jpg" /></div></li>'+
+			'<li class="photo_li"><div class="img-box"><img class="img-img1 scrollLoading"  data-url="/photos/timg.jpg" src="onx1obrfu.bkt.clouddn.com/joystorage/photos/哈尔滨1.jpg" /></div></li>'+
+        	'<li class="photo_li"><div class="img-box"><img class="img-img1 scrollLoading"  data-url="/photos/timg.jpg" src="onx1obrfu.bkt.clouddn.com/joystorage/photos/哈尔滨2.jpg" /></div></li>'+
+            '<li class="photo_li"><div class="img-box"><img class="img-img1 scrollLoading"  data-url="/photos/timg.jpg" src="onx1obrfu.bkt.clouddn.com/joystorage/photos/哈尔滨3.jpg" /></div></li>'+
+            '<li class="photo_li"><div class="img-box"><img cclass="img-img1 scrollLoading"  data-url="/photos/timg.jpg" src="onx1obrfu.bkt.clouddn.com/joystorage/photos/哈尔滨4.jpg" /></div></li>'+
             '</ul><br/>';
     $("#myphoto").html(pages);
 
