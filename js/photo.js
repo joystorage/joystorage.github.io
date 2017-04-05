@@ -1,4 +1,12 @@
 $(function(){
+	$("#photo_div").html('');
+	var pages = '<img class="scrollLoading"  data-url="/photos/timg.jpg" '+
+				'src="http://onx1obrfu.bkt.clouddn.com/joystorage/photos/毕业3 .jpg"/>'+
+				'<br/><br/>';
+	$("#photo_div").append(pages);
+	pages = '<section class="archives album" id="myphoto"></section>';
+	$("#photo_div").append(pages);
+
 	$("#myphoto").html('');
 
     $.getJSON("/json/photos.json",function(data) {
