@@ -75,7 +75,7 @@ $(function(){
 });
 
 function loadInfo(data) {
-    $.getJSON("loadInfo", function(data) {
+    $.getJSON(function(data) {
         $("#info").html("");//清空info内容
         $.each(data.comments, function(i, item) {
             console.log(
