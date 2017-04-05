@@ -35,11 +35,6 @@ $(function(){
 
 		});
 
-		var iimg = document.getElementsByTagname('img');
-		iimg.addEventListener('click',function(e){
-		　　e.preventDefault();
-		});
-
 		$(".photo-a").click(function(e){
 				e.preventDefault();
 				$("#model-img").attr("src",$(this).attr("src-data"));
@@ -92,11 +87,6 @@ $(function(){
 			$("#myphoto").append(pages);
 		});
 
-
-		$("img").addEventListener('click',function(e){
-		　　e.preventDefault();
-		});
-
 		$(".photo-a").click(function(e){
 				e.preventDefault();
 				$("#model-img").attr("src",$(this).attr("src-data"));
@@ -117,9 +107,7 @@ $(function(){
         });
         // 异步加载图片，实现逐屏加载图片
         $(".scrollLoading").scrollLoading(); 
-
-
-		});
+    });
  	}
 
 });
