@@ -23,3 +23,5 @@
 .photo_li_mob::before{
 	display:none!important;
 }
+
+.header-music {margin-top: 80px; }
