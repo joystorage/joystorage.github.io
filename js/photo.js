@@ -92,6 +92,7 @@ $(function(){
 
 		$(".photo-a").click(function(){
 				$("#model-img").attr("src",$(this).attr("src-data"));
+				return false;
 		});
 
 		var pin_height = $(".photo_li_mob").width(); //   获取div的宽度
