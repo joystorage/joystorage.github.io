@@ -33,7 +33,7 @@ $(function(){
 		    	// '<figcaption style="display:none" itemprop="caption description">与你跋山涉水</figcaption>'+
 		    	// '</figure>'
 		    	pages += '<li class="photo_li">'+
-		    			'<div class="img-box"><a class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
+		    			'<div class="img-box"><a href="javascript:void(0);" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
 		    			'<img class="img-img1"  data-url="/photos/timg.jpg" src="'+con+'" /></a></div></li>';
 			});
 
@@ -44,13 +44,18 @@ $(function(){
 
 		$("img").attr("onclick",null);
 		
-		$(".photo-a").each(function(){
-			//$(this).attr("onclick", "biggerFunction()");
-			$(this).click(function(){
-				$(this).preventDefault(); 
+		// $(".photo-a").each(function(){
+		// 	//$(this).attr("onclick", "biggerFunction()");
+		// 	$(this).click(function(){
+		// 		$(this).preventDefault(); 
+		// 		console.log($(this).attr("src-data"));
+		// 	});
+		// });
+
+		$(".photo-a").click(function(){
 				console.log($(this).attr("src-data"));
-			});
 		});
+
 		//var pin_width = ($(".photo_li").width() - 60)*0.25;
 		//$(".photo_li").css('width',pin_width);
 		var pin_height = $(".photo_li").width(); //   获取div的宽度
