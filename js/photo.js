@@ -23,7 +23,7 @@ $(function(){
 			$.each(item.data,function(j,item2){
 		    	var con = secpath+item2.url;
 		    	pages += '<figure class="thumb" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">'+
-		    	'<a href="http://litten.me/ins/BSc5TamlT16.jpg" itemprop="contentUrl" data-size="640x640" '+
+		    	'<a href="'+con+'" itemprop="contentUrl" data-size="640x640" '+
 		    	'data-type="image" data-target="'+con+'" target="_blank">'+
 		    	'<img class="reward-img" data-type="image" data-src="'+data.root+'timg.jpg" '+
 		    	'src="'+con+'" itemprop="thumbnail" data-lzled="true"></a>'+
