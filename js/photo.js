@@ -1,7 +1,7 @@
 $(function(){
     $.getJSON("/json/photos.json",function(data) {
-    	var rootpath=data.photos[0]];
-        $.each(data.photos[1], function(i, item) {
+    	var rootpath=data.root;
+        $.each(data.contents, function(i, item) {
         	var title = item.title;
         	console.log("123");
         	console.log(title);
