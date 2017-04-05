@@ -33,8 +33,8 @@ $(function(){
 		    	// '<figcaption style="display:none" itemprop="caption description">与你跋山涉水</figcaption>'+
 		    	// '</figure>'
 		    	pages += '<li class="photo_li">'+
-		    			'<div class="img-box"><a href="'+con+'">'+
-		    			'<img class="img-img1"  data-url="/photos/timg.jpg" src="'+con+'" /></div></li></a>';
+		    			'<div class="img-box"><a data-toggle="modal" data-target="#myModal">'+
+		    			'<img class="img-img1"  data-url="/photos/timg.jpg" src="'+con+'" /></a></div></li>';
 			});
 
 			pages += '</ul><br/>';
