@@ -69,8 +69,8 @@ $(function(){
 			$("#myphoto").append(pages);
 		});
 
-		var pin_height = $(".photo_li").width(); //   获取div的宽度
-		$(".photo_li").css('height', pin_height);  //  设置div 
+		var pin_height = $(".photo_li_mob").width(); //   获取div的宽度
+		$(".photo_li_mob").css('height', pin_height);  //  设置div 
 		$(".img-box").css('height', pin_height);  //  设置div  高度
 		$(".img-img2").css('width', pin_height);  //  设置div  高度
 		$(".img-img2").css('height', pin_height);  //  设置div 
