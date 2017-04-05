@@ -114,6 +114,7 @@ $(function(){
 	
 
 	$(".photo-a").each(function(){
+		console.log("123123");
 		console.log($(this).attr("src-data"));
 	});
 
