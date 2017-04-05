@@ -3,9 +3,9 @@ $(function(){
     var pages='<ul class="photo_ul">'+
     		'<h1>黑龙江·哈尔滨</h1><br/><br/><p></p>'+
 			'<li class="photo_li"><div class="img-box"><img class="img-img1" src="/photos/哈尔滨1.jpg" /></div></li>'+
-        	'<li class="photo_li"><div class="img-box"><img class="img-img1" lazy-src="/photos/哈尔滨2.jpg" /></div></li>'+
+        	'<li class="photo_li"><div class="img-box"><img class="img-img1" src="/photos/哈尔滨2.jpg" /></div></li>'+
             '<li class="photo_li"><div class="img-box"><img class="img-img1" src="/photos/哈尔滨3.jpg" /></div></li>'+
-            '<li class="photo_li"><div class="img-box"><img class="img-img1" lazy-src="/photos/哈尔滨4.jpg" /></div></li>'+
+            '<li class="photo_li"><div class="img-box"><img class="img-img1" src="/photos/哈尔滨4.jpg" /></div></li>'+
             '</ul><br/>';
     $("#myphoto").html(pages);
 
@@ -38,9 +38,9 @@ $(function(){
 
      var pages='<ul class="photo_ul">'+
     		'<h1>吉林·长春</h1><br/><br/><p></p>'+
-			'<li class="photo_li"><div class="img-box"><img class="img-img1" lazy-src="/photos/长春1.jpg" /></div></li>'+
+			'<li class="photo_li"><div class="img-box"><img class="img-img1 scrollLoading"  data-url="深圳1.jpg" src="/photos/长春1.jpg" /></div></li>'+
         	'<li class="photo_li"><div class="img-box"><img class="img-img1" src="/photos/长春2.jpg" /></div></li>'+
-        	'<li class="photo_li"><div class="img-box"><img class="img-img1" lazy-src="/photos/长春3.jpg" /></div></li>'+
+        	'<li class="photo_li"><div class="img-box"><img class="img-img1" src="/photos/长春3.jpg" /></div></li>'+
             '</ul><br/><br/><br/>';
     $("#myphoto").append(pages);
 
@@ -58,4 +58,14 @@ $(function(){
     $(".img-box").css('height', pin_height);  //  设置div  高度
     $(".img-img1").css('width', pin_height);  //  设置div  高度
     $(".img-img1").css('height', pin_height);  //  设置div 
+
+   //实现图片慢慢浮现出来的效果
+    $("img").load(function () {
+        //图片默认隐藏  
+        $(this).hide();
+        //使用fadeIn特效  
+        $(this).fadeIn("5000");
+    });
+    // 异步加载图片，实现逐屏加载图片
+    $(".scrollLoading").scrollLoading(); 
 });
