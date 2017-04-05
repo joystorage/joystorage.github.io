@@ -35,7 +35,12 @@ $(function(){
 
 		});
 
-		$(".photo-a").click(function(){
+		$("img").addEventListener('click',function(e){
+		　　e.preventDefault();
+		});
+
+		$(".photo-a").click(function(e){
+				e.preventDefault();
 				$("#model-img").attr("src",$(this).attr("src-data"));
 		});
 
@@ -84,6 +89,11 @@ $(function(){
 
 			pages += '</ul><br/>';
 			$("#myphoto").append(pages);
+		});
+
+
+		$("img").addEventListener('click',function(e){
+		　　e.preventDefault();
 		});
 
 		$(".photo-a").click(function(e){
