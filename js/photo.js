@@ -46,7 +46,7 @@ $(function(){
 		
 		$(".photo-a").each(function(){
 			//$(this).attr("onclick", "biggerFunction()");
-			$(this).on('click',fucntion(){
+			$(this).click(fucntion(){
 				console.log($(this).attr("src-data"));
 			});
 		});
