@@ -13,3 +13,13 @@
 .photo_li::before{
 	display:none!important;
 }
+
+.photo_li_mob{
+	display:inline-block;
+	width:50%;
+	list-style-type:none;
+}
+
+.photo_li_mob::before{
+	display:none!important;
+}
