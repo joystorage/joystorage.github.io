@@ -34,7 +34,7 @@ $(function(){
 		    	// '</figure>'
 		    	pages += '<li class="photo_li">'+
 		    			'<div class="img-box"><a href="'+con+'">'+
-		    			'<img class="img-img1"  data-url="/photos/timg.jpg" src="'+mincon+'" /></div></li></a>';
+		    			'<img class="img-img1"  data-url="/photos/timg.jpg" src="'+con+'" /></div></li></a>';
 			});
 
 			pages += '</ul><br/>';
@@ -61,7 +61,10 @@ $(function(){
 		$("#myphoto").html('');
 
 		$.getJSON("/json/photos.json",function(data) {
+
 		var rootpath=data.root;
+		var minpath=data.min;
+
 		var pages = '';
 		$.each(data.contents, function(i, item) {
 			var title = item.title;
@@ -70,11 +73,16 @@ $(function(){
 			pages += '<h1>'+title+'</h1><br/><br/><p></p>';
 
 			var secpath = rootpath + item.pre;
+			var secminpath = minpath + item.pre;
+
 			$.each(item.data,function(j,item2){
+
 		    	var con = secpath+item2.url;
+		    	var mincon = secminpath + item2.url;
+
 		    	pages += '<li class="photo_li_mob">'+
 		    			'<div class="img-box"><a href="'+con+'">'+
-		    			'<img class="img-img2 scrollLoading"  data-url="/photos/timg.jpg" src="'+con+'" /></div></li></a>';
+		    			'<img class="img-img2 scrollLoading"  data-url="/photos/timg.jpg" src="'+mincon+'" /></div></li></a>';
 			});
 
 			pages += '</ul><br/>';
