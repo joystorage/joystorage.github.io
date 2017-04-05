@@ -53,7 +53,8 @@ $(function(){
 		// });
 
 		$(".photo-a").click(function(){
-				console.log($(this).attr("src-data"));
+				$("#model-img").attr("src",$(this).attr("src-data"));
+				//console.log($(this).attr("src-data"));
 		});
 
 		//var pin_width = ($(".photo_li").width() - 60)*0.25;
