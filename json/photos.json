@@ -1,6 +1,6 @@
 {
 	"root":"http://onx1obrfu.bkt.clouddn.com/joystorage/photos/",
-	"min":"http://onx1obrfu.bkt.clouddn.com/joystorage/photo-min/"
+	"min":"http://onx1obrfu.bkt.clouddn.com/joystorage/photo-min/",
 	"contents":[
 		{"title":"毕业","pre":"毕业","data":[{"url":"1.jpg"},{"url":"2.jpg"},{"url":"3 .jpg"}]},
 		{"title":"黑龙江·哈尔滨","pre":"哈尔滨","data":[{"url":"1.jpg"},{"url":"2.jpg"},{"url":"3.jpg"},{"url":"4.jpg"}]},
