@@ -27,3 +27,7 @@
 .header-music {
 	margin-top:-80px;
 }
+
+a{
+  cursor:pointer;
+}
