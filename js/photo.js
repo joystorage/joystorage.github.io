@@ -3,6 +3,7 @@ $(function(){
     	var rootpath=data.root;
         $.each(data.contents, function(i, item) {
         	var title = item.title;
+        	console.log("123");
         	console.log(title);
         	var secpath = rootpath + item.pre;
         	console.log(secpath);
