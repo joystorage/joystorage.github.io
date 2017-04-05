@@ -27,15 +27,13 @@ $(function(){
 		    	var mincon = secminpath + item2.url;
 		    	pages += '<li class="photo_li">'+
 		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
-		    			'<img class="img-img1"  data-url="/photos/timg.jpg" src="'+con+'" /></a></div></li>';
+		    			'<img class="img-img1"  onclick="return false" src="'+con+'" /></a></div></li>';
 			});
 
 			pages += '</ul><br/>';
 			$("#myphoto").append(pages);
 
 		});
-
-		$("img").attr("onclick",null);
 
 		$(".photo-a").click(function(){
 				$("#model-img").attr("src",$(this).attr("src-data"));
@@ -81,14 +79,12 @@ $(function(){
 
 		    	pages += '<li class="photo_li_mob">'+
 		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
-		    			'<img class="img-img2 scrollLoading"  data-url="/photos/timg.jpg" src="'+mincon+'" /></div></li></a>';
+		    			'<img class="img-img2 scrollLoading" onclick="return false" src="'+mincon+'" /></div></li></a>';
 			});
 
 			pages += '</ul><br/>';
 			$("#myphoto").append(pages);
 		});
-
-		$("img").attr("onclick",null);
 
 		$(".photo-a").click(function(e){
 				e.preventDefault();
@@ -111,7 +107,6 @@ $(function(){
         // 异步加载图片，实现逐屏加载图片
         $(".scrollLoading").scrollLoading(); 
 
-        $("img").attr("onclick",null);
 
 		});
  	}
