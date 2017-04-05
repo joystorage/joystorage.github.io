@@ -1,9 +1,7 @@
 $(function(){
 
-	var data = '{"comments":[{"content":"很不错嘛","id":1,"nickname":"纳尼"},{"content":"哟西哟西","id":2,"nickname":"小强"}]}';
-
 	
-    $.getJSON(function(data) {
+    $.getJSON("/json/photos.json",function(data) {
         $("#info").html("");//清空info内容
         $.each(data.comments, function(i, item) {
             console.log(
