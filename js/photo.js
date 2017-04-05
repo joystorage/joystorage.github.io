@@ -33,12 +33,14 @@ $(function(){
 		    	// '<figcaption style="display:none" itemprop="caption description">与你跋山涉水</figcaption>'+
 		    	// '</figure>'
 		    	pages += '<li class="photo_li">'+
-		    			'<div class="img-box"><a data-toggle="modal" data-target="#myModal">'+
+		    			'<div class="img-box"><a data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
 		    			'<img class="img-img1"  data-url="/photos/timg.jpg" src="'+con+'" /></a></div></li>';
 			});
 
 			pages += '</ul><br/>';
 			$("#myphoto").append(pages);
+
+			$("img").attr("onclick",null);
 		});
 
 		//var pin_width = ($(".photo_li").width() - 60)*0.25;
@@ -105,9 +107,15 @@ $(function(){
         // 异步加载图片，实现逐屏加载图片
         $(".scrollLoading").scrollLoading(); 
 
+        $("img").attr("onclick",null);
+
 		});
  	}
 	
+
+	$("a").onclick(function(){
+		console.log($(this).attr("src-data"));
+	});
 
 });
 
