@@ -26,7 +26,7 @@ $(function(){
 		    	var con = secpath+item2.url;
 		    	var mincon = secminpath + item2.url;
 		    	pages += '<li class="photo_li">'+
-		    			'<div class="img-box"><a href="javascript:void(0);" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
+		    			'<div class="img-box"><a href="javascript:void(0)return false;" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
 		    			'<img class="img-img1"  data-url="/photos/timg.jpg" src="'+con+'" /></a></div></li>';
 			});
 
@@ -80,7 +80,7 @@ $(function(){
 		    	var mincon = secminpath + item2.url;
 
 		    	pages += '<li class="photo_li_mob">'+
-		    			'<div class="img-box"><a href="javascript:void(0);" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
+		    			'<div class="img-box"><a href="javascript:void(0)return false;" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
 		    			'<img class="img-img2 scrollLoading"  data-url="/photos/timg.jpg" src="'+mincon+'" /></div></li></a>';
 			});
 
@@ -93,7 +93,7 @@ $(function(){
 		$(".photo-a").click(function(){
 				$("#model-img").attr("src",$(this).attr("src-data"));
 		});
-		
+
 		var pin_height = $(".photo_li_mob").width(); //   获取div的宽度
 		$(".photo_li_mob").css('height', pin_height);  //  设置div 
 		$(".img-box").css('height', pin_height);  //  设置div  高度
