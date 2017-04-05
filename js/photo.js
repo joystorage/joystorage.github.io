@@ -25,8 +25,8 @@ $(function(){
 		    	pages += '<figure class="thumb" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject">'+
 		    	'<a class="img-wrap" href="'+con+'" itemprop="contentUrl" data-size="200x200" '+
 		    	'data-type="image" data-target="'+con+'" target="_blank">'+
-		    	'<img alter="IMG_1818" class="reward-img" data-type="image" data-src="'+data.root+'timg.jpg" '+
-		    	'src="'+data.root+'timg.jpg" itemprop="thumbnail" data-lzled="true"></a>'+
+		    	'<img alter="IMG_1818" class="reward-img" data-type="image" data-src="'+data.root+'timg.jpg?tn=1" '+
+		    	'src="'+data.root+'timg.jpg?tn=1" itemprop="thumbnail" data-lzled="true"></a>'+
 		    	'<figcaption style="display:none" itemprop="caption description">与你跋山涉水</figcaption>'+
 		    	'</figure>'
 		    	//pages += '<li class="photo_li">'+
