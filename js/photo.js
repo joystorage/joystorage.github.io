@@ -4,6 +4,7 @@ $(function(){
     $.getJSON("/json/photos.json",function(data) {
     	var rootpath=data.root;
         $.each(data.contents, function(i, item) {
+        	var title = item.title;
         	var secpath = rootpath + item.pre;
         	$.each(item.data,function(j,item2){
             	console.log(secpath+item2.url);
@@ -70,13 +71,4 @@ $(function(){
     $(".img-img1").css('width', pin_height);  //  设置div  高度
     $(".img-img1").css('height', pin_height);  //  设置div 
 
-   //实现图片慢慢浮现出来的效果
-    $("img").load(function () {
-        //图片默认隐藏  
-        $(this).hide();
-        //使用fadeIn特效  
-        $(this).fadeIn("5000");
-    });
-    // 异步加载图片，实现逐屏加载图片
-    $(".scrollLoading").scrollLoading(); 
 });
