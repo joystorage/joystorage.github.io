@@ -40,9 +40,14 @@ $(function(){
 			pages += '</ul><br/>';
 			$("#myphoto").append(pages);
 
-			$("img").attr("onclick",null);
 		});
 
+		$("img").attr("onclick",null);
+		
+		$(".photo-a").each(function(){
+			console.log("123123");
+			console.log($(this).attr("src-data"));
+		});
 		//var pin_width = ($(".photo_li").width() - 60)*0.25;
 		//$(".photo_li").css('width',pin_width);
 		var pin_height = $(".photo_li").width(); //   获取div的宽度
@@ -50,12 +55,6 @@ $(function(){
 		$(".img-box").css('height', pin_height);  //  设置div  高度
 		$(".img-img1").css('width', pin_height);  //  设置div  高度
 		$(".img-img1").css('height', pin_height);  //  设置div 
-		});
-
-		
-		$(".photo-a").each(function(){
-			console.log("123123");
-			console.log($(this).attr("src-data"));
 		});
 
  	}else{
