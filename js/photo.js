@@ -45,8 +45,9 @@ $(function(){
 		$("img").attr("onclick",null);
 		
 		$(".photo-a").each(function(){
-			console.log("123123");
-			console.log($(this).attr("src-data"));
+			$(this).onclick(fucntion(){
+				console.log($(this).attr("src-data"));
+			});
 		});
 		//var pin_width = ($(".photo_li").width() - 60)*0.25;
 		//$(".photo_li").css('width',pin_width);
