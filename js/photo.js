@@ -26,7 +26,7 @@ $(function(){
 		    	'<a href="'+con+'" itemprop="contentUrl" data-size="640x640" '+
 		    	'data-type="image" data-target="'+con+'" target="_blank">'+
 		    	'<img class="reward-img" data-type="image" data-src="'+data.root+'timg.jpg" '+
-		    	'src="'+con+'" itemprop="thumbnail" data-lzled="true"></a>'+
+		    	'src="'+data.root+'timg.jpg" " itemprop="thumbnail" data-lzled="true"></a>'+
 		    	'<figcaption style="display:none" itemprop="caption description">与你跋山涉水</figcaption>'+
 		    	'</figure>'
 		    	//pages += '<li class="photo_li">'+
