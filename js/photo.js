@@ -2,15 +2,7 @@ $(function(){
 
 	var data = '{"comments":[{"content":"很不错嘛","id":1,"nickname":"纳尼"},{"content":"哟西哟西","id":2,"nickname":"小强"}]}';
 
-	$.getJSON("loadInfo", function(data) {
-        $("#info").html("");//清空info内容
-        $.each(data.comments, function(i, item) {
-            console.log(
-                    "<div>" + item.id + "</div>" + 
-                    "<div>" + item.nickname    + "</div>" +
-                    "<div>" + item.content + "</div><hr/>");
-    	});
-    });
+	loadInfo(data);
 
     var pages='<ul class="photo_ul">'+
     		'<h1>黑龙江·哈尔滨</h1><br/><br/><p></p>'+
@@ -81,3 +73,15 @@ $(function(){
     // 异步加载图片，实现逐屏加载图片
     $(".scrollLoading").scrollLoading(); 
 });
+
+function loadInfo(data) {
+    $.getJSON("loadInfo", function(data) {
+        $("#info").html("");//清空info内容
+        $.each(data.comments, function(i, item) {
+            console.log(
+                    "<div>" + item.id + "</div>" + 
+                    "<div>" + item.nickname    + "</div>" +
+                    "<div>" + item.content + "</div><hr/>");
+    	});
+    });
+}
