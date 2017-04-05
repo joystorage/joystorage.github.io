@@ -35,7 +35,8 @@ $(function(){
 
 		});
 
-		$("img").addEventListener('click',function(e){
+		var iimg = document.getElementsByTagname('img');
+		iimg.addEventListener('click',function(e){
 		　　e.preventDefault();
 		});
 
