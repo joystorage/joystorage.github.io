@@ -1,5 +1,6 @@
 $(function(){
 
+	console.log("asdfasdfasdf");
 	
     $.getJSON("/json/photos.json",function(data) {
     	var rootpath=data.root;
