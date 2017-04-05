@@ -1,7 +1,4 @@
 $(function(){
-
-	console.log("asdfasdfasdf");
-	
     $.getJSON("/json/photos.json",function(data) {
     	var rootpath=data.root;
         $.each(data.contents, function(i, item) {
