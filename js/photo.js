@@ -14,8 +14,8 @@ $(function(){
         	$.each(item.data,function(j,item2){
             	var con = secpath+item2.url;
             	pages += '<li class="photo_li">'+
-            			'<div class="img-box"><a href="'+con+'"></a>'+
-            			'<img class="img-img1"  data-url="/photos/timg.jpg" src="'+con+'" /></div></li>';
+            			'<div class="img-box"><a href="'+con+'">'+
+            			'<img class="img-img1"  data-url="/photos/timg.jpg" src="'+con+'" /></div></li></a>';
         	});
 
         	pages += '</ul><br/>';
