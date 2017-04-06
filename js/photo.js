@@ -87,6 +87,10 @@ $(function(){
 			$("#myphoto").append(pages);
 		});
 
+		$("img").click(function(e){
+				e.preventDefault();
+		});
+
 		$(".photo-a").click(function(e){
 				e.preventDefault();
 				$("#model-img").attr("src",$(this).attr("src-data"));
