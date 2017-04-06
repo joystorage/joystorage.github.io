@@ -25,9 +25,14 @@ $(function(){
 			$.each(item.data,function(j,item2){
 		    	var con = secpath+item2.url;
 		    	var midcon = secmidpath + item2.url;
-		    	pages += '<li class="photo_li">'+
+		    	/*pages += '<li class="photo_li">'+
 		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+midcon+'">'+
-		    			'<img class="img-img1"  onclick="javascript:void(0);return false" src="'+con+'" /></a></div></li>';
+		    			'<img class="img-img1"  onclick="javascript:void(0);return false" src="'+con+'" /></a></div></li>';*/
+				pages += '<li class="photo_li_mob">'+
+		    			'<div class="img-box" style="background:url("'+mincon+'") no-repeat">'+
+		    			'<a href="javascript:void(0);return false" class="photo-a" '+
+		    			'data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
+		    			'</a></div></li>';
 			});
 
 			pages += '</ul><br/>';
@@ -82,9 +87,14 @@ $(function(){
 		    	var con = secpath+item2.url;
 		    	var mincon = secminpath + item2.url;
 
-		    	pages += '<li class="photo_li_mob">'+
+		    	/*pages += '<li class="photo_li_mob">'+
 		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
-		    			'<img class="img-img2 scrollLoading" onclick="javascript:void(0);return false" src="'+mincon+'" /></div></li></a>';
+		    			'<img class="img-img2 scrollLoading" onclick="javascript:void(0);return false" src="'+mincon+'" /></div></li></a>';*/
+			pages += '<li class="photo_li_mob">'+
+		    			'<div class="img-box" style="background:url("'+mincon+'") no-repeat">'+
+		    			'<a href="javascript:void(0);return false" class="photo-a" '+
+		    			'data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
+		    			'</a></div></li>';
 			});
 
 			pages += '</ul><br/>';
