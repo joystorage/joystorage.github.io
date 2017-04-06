@@ -3,10 +3,6 @@
 	background-repeat: no-repeat; 
 }
 
-.img-img1{
-	z-index: -1;
-}
-
 .img-box::before{
 	content: ""; 
 	display: block; 

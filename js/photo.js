@@ -25,9 +25,7 @@ $(function(){
 			$.each(item.data,function(j,item2){
 		    	var con = secpath+item2.url;
 		    	var midcon = secmidpath + item2.url;
-		    	/*pages += '<li class="photo_li">'+
-		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+midcon+'">'+
-		    			'<img class="img-img1"  onclick="javascript:void(0);return false" src="'+con+'" /></a></div></li>';*/
+		    	
 				pages += '<li class="photo_li">'+
 		    			'<a href="javascript:void(0);return false" class="photo-a" '+
 		    			'data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
@@ -48,8 +46,6 @@ $(function(){
 		var pin_height = $(".photo_li").width(); //   获取div的宽度
 		$(".photo_li").css('height', pin_height);  //  设置div 
 		$(".img-box").css('height', pin_height);  //  设置div  高度
-		$(".img-img1").css('height', pin_height);  //  设置div  高度
-		$(".img-img1").css('width', pin_height);  //  设置div  高度
 		$(".img-box").css('height', '100%');  //  设置div  高度
 		$(".img-box").css('background-size', 'cover');  //  设置div  高度
 
@@ -69,7 +65,7 @@ $(function(){
 		$.getJSON("/json/photos.json",function(data) {
 
 		var rootpath=data.root;
-		var minpath=data.mid;
+		var minpath=data.min;
 
 		var pages = '';
 		$.each(data.contents, function(i, item) {
@@ -108,6 +104,8 @@ $(function(){
 		var pin_height = $(".photo_li_mob").width(); //   获取div的宽度
 		$(".photo_li_mob").css('height', pin_height);  //  设置div 
 		$(".img-box").css('height', pin_height);  //  设置div  高度
+		$(".img-box").css('height', '100%');  //  设置div  高度
+		$(".img-box").css('background-size', 'cover');  //  设置div  高度
     });
  	}
 
