@@ -31,7 +31,8 @@ $(function(){
 				pages += '<li class="photo_li">'+
 		    			'<a href="javascript:void(0);return false" class="photo-a" '+
 		    			'data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
-		    			'<div class="img-box" style="background:url('+midcon+');background-repeat:no-repeat;">'+
+		    			'<div class="img-box">'+
+		    			'<img class="img-img1"  onclick="javascript:void(0);return false" src="'+con+'" />'+
 		    			'</div></a></li>';
 			});
 
@@ -48,6 +49,9 @@ $(function(){
 		var pin_height = $(".photo_li").width(); //   获取div的宽度
 		$(".photo_li").css('height', pin_height);  //  设置div 
 		$(".img-box").css('height', pin_height);  //  设置div  高度
+		$(".img-img1").css('height', pin_height);  //  设置div  高度
+		$(".img-img1").css('width', pin_height);  //  设置div  高度
+
 		});
 
  	}else{
