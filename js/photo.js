@@ -29,7 +29,7 @@ $(function(){
 		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+midcon+'">'+
 		    			'<img class="img-img1"  onclick="javascript:void(0);return false" src="'+con+'" /></a></div></li>';*/
 				pages += '<li class="photo_li_mob">'+
-		    			'<div class="img-box" style="background:url("'+mincon+'") no-repeat">'+
+		    			'<div class="img-box" style="background:url('+mincon+');background-repeat:no-repeat;">'+
 		    			'<a href="javascript:void(0);return false" class="photo-a" '+
 		    			'data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
 		    			'</a></div></li>';
