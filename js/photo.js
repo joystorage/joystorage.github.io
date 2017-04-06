@@ -50,7 +50,8 @@ $(function(){
 		$(".img-box").css('height', pin_height);  //  设置div  高度
 		$(".img-img1").css('height', pin_height);  //  设置div  高度
 		$(".img-img1").css('width', pin_height);  //  设置div  高度
-		$(".img-box").css('background-size', cover);  //  设置div  高度
+		$(".img-box").css('height', '100%');  //  设置div  高度
+		$(".img-box").css('background-size', 'cover');  //  设置div  高度
 
 		});
 
