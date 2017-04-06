@@ -51,7 +51,8 @@ $(function(){
 		$(".img-img1").css('height', pin_height);  //  设置div  高度
 		$(".img-img1").css('width', pin_height);  //  设置div  高度
 		$(".img-box").css('background-size','100%');
-		$(".img-box").css('background-size','100%');
+		$(".img-box").css('background-size','cover');
+
 		});
 
  	}else{
