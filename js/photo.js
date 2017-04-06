@@ -64,7 +64,7 @@ $(function(){
 		$.getJSON("/json/photos.json",function(data) {
 
 		var rootpath=data.root;
-		var minpath=data.min;
+		var minpath=data.mid;
 
 		var pages = '';
 		$.each(data.contents, function(i, item) {
@@ -85,18 +85,14 @@ $(function(){
 		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
 		    			'<img class="img-img2 scrollLoading" onclick="javascript:void(0);return false" src="'+mincon+'" /></div></li></a>';*/
 			pages += '<li class="photo_li_mob">'+
-		    			'<div class="img-box" style="background:url('+mincon+');background-repeat:no-repeat;">'+
 		    			'<a href="javascript:void(0);return false" class="photo-a" '+
 		    			'data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
-		    			'</a></div></li>';
+		    			'<div class="img-box" style="background:url('+mincon+');background-repeat:no-repeat;">'+
+		    			'</div></a></li>';
 			});
 
 			pages += '</ul><br/>';
 			$("#myphoto").append(pages);
-		});
-
-		$("img").click(function(e){
-				e.preventDefault();
 		});
 
 		$(".photo-a").click(function(e){
@@ -107,18 +103,6 @@ $(function(){
 		var pin_height = $(".photo_li_mob").width(); //   获取div的宽度
 		$(".photo_li_mob").css('height', pin_height);  //  设置div 
 		$(".img-box").css('height', pin_height);  //  设置div  高度
-		$(".img-img2").css('width', pin_height);  //  设置div  高度
-		$(".img-img2").css('height', pin_height);  //  设置div 
-
-		//实现图片慢慢浮现出来的效果
-        $("img").load(function () {
-            //图片默认隐藏  
-            $(this).hide();
-            //使用fadeIn特效  
-            $(this).fadeIn("5000");
-        });
-        // 异步加载图片，实现逐屏加载图片
-        $(".scrollLoading").scrollLoading(); 
     });
  	}
 
