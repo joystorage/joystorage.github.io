@@ -12,7 +12,7 @@ $(function(){
 
 		$.getJSON("/json/photos.json",function(data) {
 		var rootpath=data.root;
-		var minpath=data.min;
+		var midpath=data.mid;
 		var pages = '';
 		$.each(data.contents, function(i, item) {
 			var title = item.title;
@@ -21,12 +21,12 @@ $(function(){
 			pages += '<h1>'+title+'</h1><br/><br/><p></p>';
 
 			var secpath = rootpath + item.pre;
-			var secminpath = minpath + item.pre;
+			var secmidpath = midpath + item.pre;
 			$.each(item.data,function(j,item2){
 		    	var con = secpath+item2.url;
-		    	var mincon = secminpath + item2.url;
+		    	var midcon = secmidpath + item2.url;
 		    	pages += '<li class="photo_li">'+
-		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
+		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+midcon+'">'+
 		    			'<img class="img-img1"  onclick="return false" src="'+con+'" /></a></div></li>';
 			});
 
