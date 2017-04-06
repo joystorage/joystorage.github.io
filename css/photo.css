@@ -146,7 +146,6 @@ a{
   opacity: .5;
 }
 button.close {
-  float:right;
   -webkit-appearance: none;
   padding: 0;
   cursor: pointer;

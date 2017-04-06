@@ -27,7 +27,7 @@ $(function(){
 		    	var midcon = secmidpath + item2.url;
 		    	pages += '<li class="photo_li">'+
 		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+midcon+'">'+
-		    			'<img class="img-img1"  onclick="return false" src="'+con+'" /></a></div></li>';
+		    			'<img class="img-img1"  onclick="return false;" src="'+con+'" /></a></div></li>';
 			});
 
 			pages += '</ul><br/>';
@@ -80,7 +80,7 @@ $(function(){
 
 		    	pages += '<li class="photo_li_mob">'+
 		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
-		    			'<img class="img-img2 scrollLoading" onclick="return false" src="'+mincon+'" /></div></li></a>';
+		    			'<img class="img-img2 scrollLoading" onclick="return false;" src="'+mincon+'" /></div></li></a>';
 			});
 
 			pages += '</ul><br/>';
