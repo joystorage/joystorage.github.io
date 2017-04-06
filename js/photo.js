@@ -28,11 +28,11 @@ $(function(){
 		    	/*pages += '<li class="photo_li">'+
 		    			'<div class="img-box"><a href="javascript:void(0);return false" class="photo-a" data-toggle="modal" data-target="#myModal" src-data="'+midcon+'">'+
 		    			'<img class="img-img1"  onclick="javascript:void(0);return false" src="'+con+'" /></a></div></li>';*/
-				pages += '<li class="photo_li_mob">'+
+				pages += '<li class="photo_li">'+
 		    			'<a href="javascript:void(0);return false" class="photo-a" '+
 		    			'data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
 		    			'<div class="img-box" style="background:url('+midcon+');background-repeat:no-repeat;">'+
-		    			'</a></div></li>';
+		    			'</div></a></li>';
 			});
 
 			pages += '</ul><br/>';
@@ -45,7 +45,7 @@ $(function(){
 				$("#model-img").attr("src",$(this).attr("src-data"));
 		});
 
-		var pin_height = $(".img-box").width(); //   获取div的宽度
+		var pin_height = $(".photo_li").width(); //   获取div的宽度
 		$(".photo_li").css('height', pin_height);  //  设置div 
 		$(".img-box").css('height', pin_height);  //  设置div  高度
 		$(".img-img1").css('width', pin_height);  //  设置div  高度
