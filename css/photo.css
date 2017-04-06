@@ -1,11 +1,11 @@
 .img-box{
-	width:25%;
+	width:100%;
 	height:inherit;
 }
 
 .photo_li{
 	display:inline-block;
-	width:100%;
+	width:25%;
 	list-style-type:none;
 }
 
