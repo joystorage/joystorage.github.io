@@ -1,6 +1,14 @@
 .img-box{
 	width:100%;
 	height:inherit;
+	background-size: 100% auto;
+	background-repeat: no-repeat; 
+}
+
+.img-box::before{
+	content: ""; 
+	display: block; 
+	padding-top: 100%; /* 代表1：1，如果是想要5：1就是20%，根据图片大小比例，那就自己算一下吧*/ 
 }
 
 .photo_li{
