@@ -1,7 +1,6 @@
 .img-box{
 	width:100%;
-	height:inherit;
-	background-size: 100% auto;
+	background-size: cover;
 	background-repeat: no-repeat; 
 }
 
