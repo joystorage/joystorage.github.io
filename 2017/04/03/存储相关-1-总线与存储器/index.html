@@ -31,7 +31,7 @@ PCI总线所有时序的产生与控制都由Master发起，同一时刻只能�
 PCI总线共享：硬件上使用三极管的物理特性实现，软件上通过中断链的方法实现.IO总线的结构
 CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU">
 <meta property="og:image" content="http://img.blog.csdn.net/20160924225301792">
-<meta property="og:updated_time" content="2017-04-04T04:27:42.001Z">
+<meta property="og:updated_time" content="2017-04-06T07:01:17.675Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="存储相关-1-总线与存储器">
 <meta name="twitter:description" content="1 IO总线分类
@@ -284,9 +284,11 @@ CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU">
 </li>
 <li>影响磁盘性能的因素<ul>
 <li>磁盘每个时刻只允许一个磁头来读写数据，因此多个磁头不可能提高磁盘的吞吐量和IO性能.</li>
-<li>影响硬盘性能的因素包括：转速、寻道时间、单碟容量（越高，相同开销下读出数据越多）、接口速度（影响最小）.<h3 id="硬盘接口技术"><a href="#硬盘接口技术" class="headerlink" title="硬盘接口技术"></a>硬盘接口技术</h3></li>
+<li>影响硬盘性能的因素包括：转速、寻道时间、单碟容量（越高，相同开销下读出数据越多）、接口速度（影响最小）.</li>
 </ul>
 </li>
+</ul>
+<h3 id="硬盘接口技术"><a href="#硬盘接口技术" class="headerlink" title="硬盘接口技术"></a>硬盘接口技术</h3><ul>
 <li>分类<ul>
 <li>用于ATA指令系统的IDE接口</li>
 <li>用于ATA指令系统的SATA接口</li>
@@ -321,14 +323,22 @@ CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU">
 <li>SCSI寻址机制和几个阶段<ul>
 <li>空闲阶段</li>
 <li>仲裁阶段<br>SCSI总线寻址方式，控制器-通道-SCSI ID -LUN ID来寻址.LUN（Logical Unit Number）对传统的SCSI总线来说意义不大，因为传统SCSI设备本身已经不可物理上再分了.因此设备的LUN ID为0.代表物理设备本身.对于带RAID功能的SCSI接口磁盘阵列设备来说，由于会产生的虚拟磁盘，所以只靠SCSI ID是不够的，这时候就要用LUN来扩充可寻址的范围.</li>
-<li>选择阶段<h3 id="磁盘控制器、驱动器"><a href="#磁盘控制器、驱动器" class="headerlink" title="磁盘控制器、驱动器"></a>磁盘控制器、驱动器</h3></li>
+<li>选择阶段</li>
 </ul>
 </li>
-<li>硬盘的接口包括接入到磁盘控制器上的物理接口以及定义的一套指令系统，即逻辑接口.<h3 id="内部传输速率和外部传输速率"><a href="#内部传输速率和外部传输速率" class="headerlink" title="内部传输速率和外部传输速率"></a>内部传输速率和外部传输速率</h3></li>
+</ul>
+<h3 id="磁盘控制器、驱动器"><a href="#磁盘控制器、驱动器" class="headerlink" title="磁盘控制器、驱动器"></a>磁盘控制器、驱动器</h3><ul>
+<li>硬盘的接口包括接入到磁盘控制器上的物理接口以及定义的一套指令系统，即逻辑接口.</li>
+</ul>
+<h3 id="内部传输速率和外部传输速率"><a href="#内部传输速率和外部传输速率" class="headerlink" title="内部传输速率和外部传输速率"></a>内部传输速率和外部传输速率</h3><ul>
 <li>内部传输速率指刺头读写磁盘时的最高速率.这个速率不包括寻道以及等待扇区旋转到磁头下所用时间.通常每秒10000转的SCSI硬盘内部传输速率大概1000MB/s.</li>
-<li>从外部接口传送给磁盘控制器时的传送速率就是硬盘的外部传输速率，10000转的SCSI硬盘实际外部传输速率只有80MB/s左右.<h3 id="并行传输和串行传输"><a href="#并行传输和串行传输" class="headerlink" title="并行传输和串行传输"></a>并行传输和串行传输</h3></li>
+<li>从外部接口传送给磁盘控制器时的传送速率就是硬盘的外部传输速率，10000转的SCSI硬盘实际外部传输速率只有80MB/s左右.</li>
+</ul>
+<h3 id="并行传输和串行传输"><a href="#并行传输和串行传输" class="headerlink" title="并行传输和串行传输"></a>并行传输和串行传输</h3><ul>
 <li>并行传输应用在长距离的连接上就无优点可言了.同时传输频率不能过高，因为电路高速震荡的时候，数据线之间会产生很大的干扰，所以并行传输的传输效率高但是速度慢.</li>
-<li>USB接口、IEEE1394接口以及COM接口都是串行传输的计算机外部接口.<h3 id="IO延迟、IOPS和传输带宽Throughput"><a href="#IO延迟、IOPS和传输带宽Throughput" class="headerlink" title="IO延迟、IOPS和传输带宽Throughput"></a>IO延迟、IOPS和传输带宽Throughput</h3></li>
+<li>USB接口、IEEE1394接口以及COM接口都是串行传输的计算机外部接口.</li>
+</ul>
+<h3 id="IO延迟、IOPS和传输带宽Throughput"><a href="#IO延迟、IOPS和传输带宽Throughput" class="headerlink" title="IO延迟、IOPS和传输带宽Throughput"></a>IO延迟、IOPS和传输带宽Throughput</h3><ul>
 <li>IO延迟是指控制器将IO指令发出后，知道IO完成的过程中所耗费的时间.业界又不成文的规定，IO延迟在20ms以内，对应用程序都是可以接受的.推算出IOPS=50.</li>
 <li>控制器想存储设备发起指令不是一条一条顺序发送，而是一批一批的.也就是说，只要存储设备的肚量和消化能力足够，在IO比较少的时候，处理一条指令和多条指令的耗时几乎一样.控制器所发出批量指令的最大条数，有控制器上的Queue Depth决定.</li>
 <li>IOPS=（Queue Depth）/（IO Latency）对SCSI协议来说，完成一次连续LBA地址扇区的读写就算是一次IO，从底层看，每次想磁盘发送一个SCSI帧就是一次IO.</li>
@@ -460,9 +470,18 @@ CPU与内存之间存在一个北桥芯片，这个芯片连接了CPU">
   
 <nav id="article-nav">
   
+    <a href="/2017/04/03/在github pages上建站/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          在github pages上建站
+        
+      </div>
+    </a>
   
-    <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">存储相关-2-RAID、虚拟磁盘、卷和文件系统</div>
+  
+    <a href="/2017/04/03/存储相关-4-虚拟化与系统IO路径优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">存储相关-4-虚拟化与系统IO路径优化</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -616,11 +635,27 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">存储</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">总线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,27 +675,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">排队论</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
