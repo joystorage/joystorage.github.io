@@ -1,5 +1,6 @@
 $(function(){
-	 if (!navigator.userAgent.match(/mobile/i)) {//如果是桌面端
+	 if (!navigator.userAgent.match(/mobile/i)||(navigator.userAgent.match(/mobile/i)&&(screen.width >= 500)) {//如果是桌面端
+		console.log(navigator.connection);
 		$("#photo_div").html('');
 		var pages = '<br/><br/><img class="scrollLoading"  data-url="/photos/timg.jpg" '+
 				'src="http://onx1obrfu.bkt.clouddn.com/joystorage/photos/毕业3 .jpg"/>'+
@@ -110,10 +111,6 @@ $(function(){
  	}
 
 });
-
-function biggerFunction(data){
-	console.log(data);
-}
 
 (function($) {
 	// alert($.fn.scrollLoading);
