@@ -1,9 +1,8 @@
 $(function(){
 	 if (!navigator.userAgent.match(/mobile/i)||(navigator.userAgent.match(/mobile/i)&&(screen.width >= 500))) {//如果是桌面端
-		console.log(navigator.connection);
 		$("#photo_div").html('');
 		var pages = '<br/><br/><img class="scrollLoading"  data-url="/photos/timg.jpg" '+
-				'src="http://onx1obrfu.bkt.clouddn.com/joystorage/photos/毕业3 .jpg"/>'+
+				'src="http://onx1obrfu.bkt.clouddn.com/joystorage/photos/毕业3.jpg"/>'+
 				'<br/><h5>提示：点击图片查看原图</h5><br/>';
 		$("#photo_div").append(pages);
 		pages = '<section class="archives album" id="myphoto"></section>';
@@ -30,7 +29,7 @@ $(function(){
 				pages += '<li class="photo_li">'+
 		    			'<a href="javascript:void(0);return false" class="photo-a" '+
 		    			'data-toggle="modal" data-target="#myModal" src-data="'+con+'">'+
-		    			'<div class="img-box" style="background:url('+midcon+');background-repeat:no-repeat;">'+
+		    			'<div class="img-box" style="background:url('+con+');background-repeat:no-repeat;">'+
 		    			'</div></a></li>';
 			});
 
