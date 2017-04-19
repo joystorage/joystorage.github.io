@@ -265,11 +265,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">vs code</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">编辑器</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">VSCode</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -286,48 +282,12 @@
       <br/><br/>
 
       
-        <blockquote>
-<p>工欲善其事必先利其器，学长都推荐source insight来看代码，用了一段时间，感觉还是不太方便，于是开始转战VS Code了！<br>VS Code确实是一个不错的编辑器，而且支持Linux/Mac Os/Windows系统。</p>
+        <p>工欲善其事必先利其器，学长都推荐source insight来看代码，用了一段时间，感觉还是不太方便，于是开始转战VS Code了！<br>VS Code确实是一个不错的编辑器，而且支持Linux/Mac Os/Windows系统。</p>
 <p>为什么用它看代码会比较方便呢？比如我要看下面这个变量buswait的定义(图1)，只需要按住ctl点击该变量即可转到定义(图2)，是不是跟eclipse的功能有点像呢！！！对于我这种JAVA转战C的码农简直就是天降福利啊，而且还支持分屏显示(图3)！！！</p>
-</blockquote>
-<p>图1.<br><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/VSCode配置-2.png" alt="image"></p>
-<p>图2.<br><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/VSCode配置-3.png" alt="image"></p>
-<p>图3.<br><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/VSCode配置-4.png" alt="image"></p>
-<p>当然VS code还可以用来编译调试C/C++代码，下面说一下具体配置过流程</p>
-<h3 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h3><ul>
-<li>下载安装vscode</li>
-<li>安装cpptools插件</li>
-<li>安装编译、调试环境</li>
-<li>修改vscode调试配置文件</li>
-</ul>
-<h3 id="下载安装vscode"><a href="#下载安装vscode" class="headerlink" title="下载安装vscode"></a>下载安装vscode</h3><p><a href="https://code.visualstudio.com/Download" target="_blank" rel="external">https://code.visualstudio.com/Download</a> </p>
-<h3 id="安装VSCode的C-插件"><a href="#安装VSCode的C-插件" class="headerlink" title="安装VSCode的C++插件"></a>安装VSCode的C++插件</h3><p>Ctrl+P，再输入ext install cpptools 进行安装。</p>
-<h3 id="安装TDM-GCC-编译调试环境"><a href="#安装TDM-GCC-编译调试环境" class="headerlink" title="安装TDM-GCC(编译调试环境)"></a>安装TDM-GCC(编译调试环境)</h3><p>VSCode默认不带编译和调试环境的，需要自行安装编译器等。</p>
-<p>我选用的是TDM-GCC编译套件，方便易用。（Codeblocks、Dev-Cpp等默认带的都是这款）。</p>
-<p>下载地址：<a href="http://tdm-gcc.tdragon.net/download" target="_blank" rel="external">http://tdm-gcc.tdragon.net/download</a></p>
-<p>根据自己的情况下载安装即可，会自动添加路径到环境变量PATH。</p>
-<h3 id="配置VSCode"><a href="#配置VSCode" class="headerlink" title="配置VSCode"></a>配置VSCode</h3><blockquote>
-<p>新建test.cpp</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line">int main(int argc, char** argv)</div><div class="line">&#123;</div><div class="line">    cout &lt;&lt; &quot;Hello World! &quot; &lt;&lt; endl;</div><div class="line"></div><div class="line">    system(&quot;pause&quot;);</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>按F5，打开launch.json文件，编辑并保存</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;version&quot;: &quot;0.2.0&quot;,</div><div class="line">    &quot;configurations&quot;: [</div><div class="line">        &#123;</div><div class="line">            &quot;name&quot;: &quot;C++ Launch (GDB)&quot;, // 配置名称，将会在启动配置的下拉菜单中显示</div><div class="line">            &quot;type&quot;: &quot;cppdbg&quot;, // 配置类型，这里只能为cppdbg</div><div class="line">            &quot;request&quot;: &quot;launch&quot;, // 请求配置类型，可以为launch（启动）或attach（附加）</div><div class="line">            &quot;launchOptionType&quot;: &quot;Local&quot;, // 调试器启动类型，这里只能为Local</div><div class="line">            &quot;targetArchitecture&quot;: &quot;x86&quot;, // 生成目标架构，一般为x86或x64，可以为x86, arm, arm64, mips, x64, amd64, x86_64</div><div class="line">            &quot;program&quot;: &quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe&quot;, // 将要进行调试的程序的路径</div><div class="line">            &quot;miDebuggerPath&quot;: &quot;gdb.exe&quot;, // miDebugger的路径，注意这里要与MinGw的路径对应。64位系统用gdb64.exe</div><div class="line">            &quot;args&quot;: [</div><div class="line">                &quot;&quot;</div><div class="line">            ], // 程序调试时传递给程序的命令行参数，一般设为空即可</div><div class="line">            &quot;stopAtEntry&quot;: false, // 设为true时程序将暂停在程序入口处，我一般设置为true</div><div class="line">            &quot;cwd&quot;: &quot;$&#123;workspaceRoot&#125;&quot;, // 调试程序时的工作目录，一般为$&#123;workspaceRoot&#125;即代码所在目录</div><div class="line">            &quot;externalConsole&quot;: true, // 调试时是否显示控制台窗口，一般设置为true显示控制台</div><div class="line">            &quot;preLaunchTask&quot;: &quot;g++&quot; // 调试会话开始前执行的任务，一般为编译程序，c++为g++, c为gcc</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>按F1键，出来输入框后，输入task，选择“配置任务运行程序”，再随便选一项，编辑并保存tasks.json：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;version&quot;: &quot;0.1.0&quot;,</div><div class="line">    &quot;command&quot;: &quot;g++&quot;,</div><div class="line">    &quot;args&quot;: [</div><div class="line">        &quot;-g&quot;,</div><div class="line">        &quot;$&#123;file&#125;&quot;,</div><div class="line">        &quot;-o&quot;,</div><div class="line">        &quot;$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe&quot;</div><div class="line">    ], // 编译命令参数</div><div class="line">    &quot;problemMatcher&quot;: &#123;</div><div class="line">        &quot;owner&quot;: &quot;cpp&quot;,</div><div class="line">        &quot;fileLocation&quot;: [</div><div class="line">            &quot;relative&quot;,</div><div class="line">            &quot;$&#123;workspaceRoot&#125;&quot;</div><div class="line">        ],</div><div class="line">        &quot;pattern&quot;: &#123;</div><div class="line">            &quot;regexp&quot;: &quot;^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$&quot;,</div><div class="line">            &quot;file&quot;: 1,</div><div class="line">            &quot;line&quot;: 2,</div><div class="line">            &quot;column&quot;: 3,</div><div class="line">            &quot;severity&quot;: 4,</div><div class="line">            &quot;message&quot;: 5</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>在.vscode目录下新建文件c_cpp_properties.json，编辑并保存：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;configurations&quot;: [</div><div class="line">        &#123;</div><div class="line">            &quot;name&quot;: &quot;Win32&quot;,</div><div class="line">            &quot;includePath&quot;: [</div><div class="line">                &quot;D:/Program Files/TDM-GCC-64/include&quot;,</div><div class="line">                &quot;D:/Program Files/TDM-GCC-64/x86_64-w64-mingw32/include&quot;,</div><div class="line">                &quot;D:/Program Files/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/5.1.0/include&quot;,</div><div class="line">                &quot;D:/Program Files/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++&quot;</div><div class="line">            ],</div><div class="line">            &quot;browse&quot;: &#123;</div><div class="line">                &quot;limitSymbolsToIncludedHeaders&quot;: true,</div><div class="line">                &quot;databaseFilename&quot;: &quot;&quot;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    &quot;clang_format&quot;: &#123;</div><div class="line">        &quot;style&quot;: &quot;file&quot;,</div><div class="line">        &quot;fallback-style&quot;: &quot;LLVM&quot;,</div><div class="line">        &quot;sort-includes&quot;: false</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>按F5进行调试，结果如下</p>
-</blockquote>
-<p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/VSCode配置-1.png" alt="image"></p>
-<p><a href="http://dreamlikes.cn/archives/724" target="_blank" rel="external">参见Dreamlike博客</a></p>
-
+<p>图1.<br><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/VSCode配置-2.png" alt="image"><br>
+        
+          <a class="article-more-a" href="/2017/04/19/VSCode配置/#more">more >></a>
+        
       
 
             
@@ -444,19 +404,19 @@
 
 
   
-    <article id="post-存储相关-2-RAID、虚拟磁盘、卷和文件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-存储相关-1-总线与存储器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">存储相关-2-RAID、虚拟磁盘、卷和文件系统</a>
+      <a class="article-title" href="/2017/04/03/存储相关-1-总线与存储器/">存储相关-1-总线与存储器</a>
     </h1>
   
 
         
-        <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" class="archive-article-date">
+        <a href="/2017/04/03/存储相关-1-总线与存储器/" class="archive-article-date">
   	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
 </a>
         
@@ -479,11 +439,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">RAID</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文件系统</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总线</a>
         		</li>
       		
 		</ul>
@@ -496,9 +452,19 @@
       <br/><br/>
 
       
-        <h1 id="七种RAID"><a href="#七种RAID" class="headerlink" title="七种RAID"></a>七种RAID</h1><p>RAID以4个扇区组成的块作为基本单位，不同磁盘的相同偏移处的块组成Stripe，也就是条带.对于RAID 0 磁盘组，如果有大块数据写入时，则数据在很大几率上可以以条带为单位写入，并行写入能大大提高写入速度.</p>
+        <h1 id="1-IO总线"><a href="#1-IO总线" class="headerlink" title="1 IO总线"></a>1 IO总线</h1><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li>仲裁总线（控制总线）</li>
+<li>地址总线</li>
+<li>数据总线</li>
+</ul>
+<h3 id="PCI总线"><a href="#PCI总线" class="headerlink" title="PCI总线"></a>PCI总线</h3><ul>
+<li>PCI总线是目前普遍使用的一种连接南桥与外设的总线技术.</li>
+<li>PCI总线式数据与地址总线分时复用的.</li>
+<li>PCI总线所有时序的产生与控制都由Master发起，同一时刻只能供一对设备完成传输.</li>
+<li>PCI总线共享：硬件上使用三极管的物理特性实现，软件上通过中断链的方法实现.</li>
+</ul>
         
-          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/#more">more >></a>
+          <a class="article-more-a" href="/2017/04/03/存储相关-1-总线与存储器/#more">more >></a>
         
       
 
@@ -511,7 +477,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">查看全文 >></a>
+          <a class="article-more-a" href="/2017/04/03/存储相关-1-总线与存储器/">查看全文 >></a>
         </p>
       
 
@@ -626,19 +592,19 @@
 
 
   
-    <article id="post-存储相关-1-总线与存储器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-存储相关-2-RAID、虚拟磁盘、卷和文件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/存储相关-1-总线与存储器/">存储相关-1-总线与存储器</a>
+      <a class="article-title" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">存储相关-2-RAID、虚拟磁盘、卷和文件系统</a>
     </h1>
   
 
         
-        <a href="/2017/04/03/存储相关-1-总线与存储器/" class="archive-article-date">
+        <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" class="archive-article-date">
   	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
 </a>
         
@@ -661,101 +627,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">总线</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <h1 id="1-IO总线"><a href="#1-IO总线" class="headerlink" title="1 IO总线"></a>1 IO总线</h1><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
-<li>仲裁总线（控制总线）</li>
-<li>地址总线</li>
-<li>数据总线</li>
-</ul>
-<h3 id="PCI总线"><a href="#PCI总线" class="headerlink" title="PCI总线"></a>PCI总线</h3><ul>
-<li>PCI总线是目前普遍使用的一种连接南桥与外设的总线技术.</li>
-<li>PCI总线式数据与地址总线分时复用的.</li>
-<li>PCI总线所有时序的产生与控制都由Master发起，同一时刻只能供一对设备完成传输.</li>
-<li>PCI总线共享：硬件上使用三极管的物理特性实现，软件上通过中断链的方法实现.</li>
-</ul>
-        
-          <a class="article-more-a" href="/2017/04/03/存储相关-1-总线与存储器/#more">more >></a>
-        
-      
-
-            
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/存储相关-1-总线与存储器/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-排队论在ad hoc无线网中的应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/排队论在ad hoc无线网中的应用/">排队论在ad hoc无线网中的应用</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/03/排队论在ad hoc无线网中的应用/" class="archive-article-date">
-  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">排队论</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">RAID</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ad hoc无线网</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文件系统</a>
         		</li>
       		
 		</ul>
@@ -768,12 +644,9 @@
       <br/><br/>
 
       
-        <h1 id="Applications-in-Analysis-of-Ad-Hoc-Networks-using-Queuing-Theory"><a href="#Applications-in-Analysis-of-Ad-Hoc-Networks-using-Queuing-Theory" class="headerlink" title="Applications in Analysis of Ad Hoc Networks using Queuing Theory"></a>Applications in Analysis of Ad Hoc Networks using Queuing Theory</h1><blockquote>
-<p>Yu Zhang</p>
-</blockquote>
-<h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><p> Queuing problems are common scenarios in our daily life. From industrial manufacture to daily queuing, we can never leave this topic. Ad Hoc wireless networks are new kinds of networks. It has the advantages of high flexibility and extensibility, which are applied to our daily life gradually. The paper lists the applications in performance analysis of Ad Hoc networks via using queuing theory, and discusses their pros and cons as well as their development directions. At the end of the article, we reproduce some of the experiments via using MATLAB simulators and give a detailed discussion on the results.</p>
+        <h1 id="七种RAID"><a href="#七种RAID" class="headerlink" title="七种RAID"></a>七种RAID</h1><p>RAID以4个扇区组成的块作为基本单位，不同磁盘的相同偏移处的块组成Stripe，也就是条带.对于RAID 0 磁盘组，如果有大块数据写入时，则数据在很大几率上可以以条带为单位写入，并行写入能大大提高写入速度.</p>
         
-          <a class="article-more-a" href="/2017/04/03/排队论在ad hoc无线网中的应用/#more">more >></a>
+          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/#more">more >></a>
         
       
 
@@ -786,7 +659,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/排队论在ad hoc无线网中的应用/">查看全文 >></a>
+          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">查看全文 >></a>
         </p>
       
 
@@ -879,6 +752,93 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/04/03/存储相关-4-虚拟化与系统IO路径优化/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-排队论在ad hoc无线网中的应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/03/排队论在ad hoc无线网中的应用/">排队论在ad hoc无线网中的应用</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/03/排队论在ad hoc无线网中的应用/" class="archive-article-date">
+  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">排队论</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ad hoc无线网</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <h1 id="Applications-in-Analysis-of-Ad-Hoc-Networks-using-Queuing-Theory"><a href="#Applications-in-Analysis-of-Ad-Hoc-Networks-using-Queuing-Theory" class="headerlink" title="Applications in Analysis of Ad Hoc Networks using Queuing Theory"></a>Applications in Analysis of Ad Hoc Networks using Queuing Theory</h1><blockquote>
+<p>Yu Zhang</p>
+</blockquote>
+<h4 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h4><p> Queuing problems are common scenarios in our daily life. From industrial manufacture to daily queuing, we can never leave this topic. Ad Hoc wireless networks are new kinds of networks. It has the advantages of high flexibility and extensibility, which are applied to our daily life gradually. The paper lists the applications in performance analysis of Ad Hoc networks via using queuing theory, and discusses their pros and cons as well as their development directions. At the end of the article, we reproduce some of the experiments via using MATLAB simulators and give a detailed discussion on the results.</p>
+        
+          <a class="article-more-a" href="/2017/04/03/排队论在ad hoc无线网中的应用/#more">more >></a>
+        
+      
+
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/03/排队论在ad hoc无线网中的应用/">查看全文 >></a>
         </p>
       
 
@@ -1018,11 +978,7 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">vs code</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">编辑器</a>
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1042,11 +998,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1058,15 +1010,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1075,6 +1023,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
               </li>
             
             <div class="clearfix"></div>
