@@ -54,7 +54,7 @@ $(function(){
  	}else{
  		$("#photo_div").html('');
 		var pages = '<br/><br/><img class="scrollLoading"  data-url="/photos/timg.jpg" '+
-				'src="http://onx1obrfu.bkt.clouddn.com/joystorage/photos/毕业3 .jpg"/>'+
+				'src="http://onx1obrfu.bkt.clouddn.com/joystorage/photos/毕业3.jpg"/>'+
 				'<br/><h5>提示：点击图片查看原图</h5><br/>';
 		$("#photo_div").append(pages);
 		pages = '<section class="archives album" id="myphoto"></section>';
