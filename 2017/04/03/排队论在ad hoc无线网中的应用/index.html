@@ -60,7 +60,11 @@ Abstract Queuing problems are common scenarios in our daily life. From industria
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
-<div class="overlay" style="background: #4d4d4d"></div>
+<div class="overlay" style="background: #4d4d4d">
+	
+	  <div align="center" style="margin-top:6px"><p style="color:#FFFFFF;font-size:90%">您是第<img border="0" style="height:16px;margin-top:-6px" src="http://cc.amazingcounters.com/counter.php?i=3213753&c=9641572">位访客</p></div>
+	
+</div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
@@ -69,6 +73,10 @@ Abstract Queuing problems are common scenarios in our daily life. From industria
 		<hgroup>
 		  <h1 class="header-author"><a href="/">张煜</a></h1>
 		</hgroup>
+
+		<h3 class="header-subtitle">早起 | 独处 | 自律</h3>
+		<p class="header-subtitle">yuzhang2016@hust.edu.cn</p>
+		
 		
 
 		<nav class="header-menu">
@@ -110,9 +118,72 @@ Abstract Queuing problems are common scenarios in our daily life. From industria
 		        
 			</div>
 		</nav>
-	</header>		
+	</header>
 </div>
 
+<!--百度地图容器-->
+<!--div style="width:300px;height:15%;border:#ccc solid 1px;font-size:12px;bottom:0;position:fixed;" id="map"></div-->
+
+<!--引用百度地图API
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4ybAVROAC7MtW5Qa1RRFGVbkM7apvly5"></script>
+<script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap(){
+      createMap();//创建地图
+      setMapEvent();//设置地图事件
+      addMapControl();//向地图添加控件
+      addMapOverlay();//向地图添加覆盖物
+    }
+    function createMap(){ 
+      map = new BMap.Map("map"); 
+      map.centerAndZoom(new BMap.Point(114.43236,30.514428),14);
+    }
+    function setMapEvent(){
+      map.enableScrollWheelZoom();
+      map.enableKeyboard();
+      map.enableDragging();
+      map.enableDoubleClickZoom()
+    }
+    function addClickHandler(target,window){
+      target.addEventListener("click",function(){
+        target.openInfoWindow(window);
+      });
+    }
+    function addMapOverlay(){
+      var markers = [
+        {content:"我的备注",title:"武汉光电国家实验室",imageOffset: {width:0,height:3},position:{lat:30.516232,lng:114.431677}}
+      ];
+      for(var index = 0; index < markers.length; index++ ){
+        var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
+        var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png",new BMap.Size(20,25),{
+          imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
+        })});
+        var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
+        var opts = {
+          width: 200,
+          title: markers[index].title,
+          enableMessage: false
+        };
+        var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
+        marker.setLabel(label);
+        addClickHandler(marker,infoWindow);
+        map.addOverlay(marker);
+      };
+    }
+    //向地图添加控件
+    function addMapControl(){
+      var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+      scaleControl.setUnit(BMAP_UNIT_METRIC);
+      map.addControl(scaleControl);
+      var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+      map.addControl(navControl);
+      var overviewControl = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:false});
+      map.addControl(overviewControl);
+    }
+    var map;
+      initMap();
+  </script>
+  -->
     </div>
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
@@ -193,9 +264,37 @@ Abstract Queuing problems are common scenarios in our daily life. From industria
   	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
 </a>
         
+ 
+     
+
       </header>
+
     
     <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">排队论</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ad hoc无线网</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
       
         <h1 id="Applications-in-Analysis-of-Ad-Hoc-Networks-using-Queuing-Theory"><a href="#Applications-in-Analysis-of-Ad-Hoc-Networks-using-Queuing-Theory" class="headerlink" title="Applications in Analysis of Ad Hoc Networks using Queuing Theory"></a>Applications in Analysis of Ad Hoc Networks using Queuing Theory</h1><blockquote>
 <p>Yu Zhang</p>
@@ -295,25 +394,15 @@ Abstract Queuing problems are common scenarios in our daily life. From industria
           </div>
           </a>
         </div>
-      
+        <center>
+          <p class="copyright">
+            本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+          </p>
+        </center>
+            
     </div>
+
     <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">排队论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ad hoc无线网</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
       
 
@@ -373,28 +462,25 @@ Abstract Queuing problems are common scenarios in our daily life. From industria
       
       <div class="clearfix"></div>
     </div>
+
   </div>
 </article>
 
   
 <nav id="article-nav">
   
-    <a href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/04/03/存储相关-4-虚拟化与系统IO路径优化/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)
+          存储相关-4-虚拟化与系统IO路径优化
         
       </div>
     </a>
   
   
-    <a href="/2017/04/03/存储相关-1-总线与存储器/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">存储相关-1-总线与存储器</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
 </nav>
+
 
 
 
@@ -421,12 +507,10 @@ Abstract Queuing problems are common scenarios in our daily life. From industria
 </div>
 
   
-  
-  
 
-  
 
-  
+
+
 
 
           </div>
@@ -556,11 +640,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,15 +652,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,6 +665,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
               </li>
             
             <div class="clearfix"></div>
