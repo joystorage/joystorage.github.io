@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: ad hoc无线网 | Yu Zhang&#39;s Blog</title>
+  <title>flashcache-1-入门与安装 | Yu Zhang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Yu Zhang's Blog">
-<meta property="og:url" content="http://yoursite.com/tags/ad-hoc无线网/index.html">
+  <meta name="description" content="最近，由于项目需要，在做关于flashcache的一些工作，主要涉及模块组织、元数据管理及数据分布、读写流程分析、数据在磁盘和cache(SSD)之间的调度、缺点及可优化方向等一些方面的分析研究。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flashcache-1-入门与安装">
+<meta property="og:url" content="http://yoursite.com/2017/05/23/flashcache-1-入门与安装/index.html">
 <meta property="og:site_name" content="Yu Zhang's Blog">
+<meta property="og:description" content="最近，由于项目需要，在做关于flashcache的一些工作，主要涉及模块组织、元数据管理及数据分布、读写流程分析、数据在磁盘和cache(SSD)之间的调度、缺点及可优化方向等一些方面的分析研究。">
+<meta property="og:updated_time" content="2017-05-23T07:07:06.414Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yu Zhang's Blog">
+<meta name="twitter:title" content="flashcache-1-入门与安装">
+<meta name="twitter:description" content="最近，由于项目需要，在做关于flashcache的一些工作，主要涉及模块组织、元数据管理及数据分布、读写流程分析、数据在磁盘和cache(SSD)之间的调度、缺点及可优化方向等一些方面的分析研究。">
   
     <link rel="alternative" href="/atom.xml" title="Yu Zhang&#39;s Blog" type="application/atom+xml">
   
@@ -238,64 +242,257 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-flashcache-1-入门与安装" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/03/排队论在ad hoc无线网中的应用/" class="archive-article-date">
-  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/03/排队论在ad hoc无线网中的应用/">排队论在ad hoc无线网中的应用</a>
+    <h1 class="article-title" itemprop="name">
+      flashcache-1-入门与安装
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/05/23/flashcache-1-入门与安装/" class="archive-article-date">
+  	<time datetime="2017-05-23T07:07:40.406Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-23</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
 	<div class="article-tag tagcloud">
 		<!--i class="icon-price-tags icon"></i-->
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">排队论</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">flashcache</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ad hoc无线网</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">块存储</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+        
 
+      </div>
+
+      <br/><br/>
+
+      
+        <p>最近，由于项目需要，在做关于flashcache的一些工作，主要涉及模块组织、元数据管理及数据分布、读写流程分析、数据在磁盘和cache(SSD)之间的调度、缺点及可优化方向等一些方面的分析研究。</p>
+<a id="more"></a>
+<p>特别是，要深入下去的话，会涉及到整个Linux系统栈的各个层次，从文件系统、磁盘缓存、通用块层、驱动层，以及DM的工作流程（细节），也遇到了很多问题，像DM层基于split_bio如何做拆分，在拆分中的边界问题等，不可能一下子解决，也趁此机会，记录下心里的困惑。</p>
+<p> flashcache，是facebook技术团队开发的新开源项目，主要目的是用SSD硬盘来缓存数据以加速MySQL的一个内核模块。可以看到，它最初是用来做数据库加速，但同时，它也被作为通用的缓存模块而设计，能够用于任何搭建在块设备上的应用程序。</p>
+<h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><p>基于Device Mapper，它将快速的SSD硬盘和普通的硬盘映射成一个带缓存的逻辑块设备，作为用户操作的接口。用户直接对这个逻辑设备执行读写操作，而不直接对底层的SSD或者普通硬盘操作。如果对底层的这些块设备操作，那么会失去作为一个整体提供的缓存功能。</p>
+<h4 id="内核层次"><a href="#内核层次" class="headerlink" title="内核层次"></a>内核层次</h4><p>flashcache，它是通过在文件系统和块设备驱动层中间增加一缓存层次实现的，这里不得不提到DM层的映射机制。由于DM是作为虚拟的块设备驱动在内核中被注册的，它不是一个真实的设备驱动，不能完成bio的处理，因此，它主要是基于映射表对bio进行分解、克隆和重映射，然后，bio到达底层真实的设备驱动，启动数据传输。在Devicemapper中，引入了target_driver，每个target_driver由target_type类型描述，代表了一类映射，它们分别用来具体实现块设备的映射过程。通过调用某一target_driver的map方法，来映射从上层分发下来的bio，也即是，找到正确的目标设备，并将bio转发到目标设备的请求队列，完成操作。flashcache_target就是这样一个新的target_driver（作为一个新的映射类 型，target_type是必须的），以模块化的方式加入到了DM层。</p>
+<h4 id="逻辑架构"><a href="#逻辑架构" class="headerlink" title="逻辑架构"></a>逻辑架构</h4><p>从源代码层次分析，可以将flashcache分为这个四个模块，调度模块（也称‘读写模块’）、逻辑处理模块（也称“读写后处理模块”）、底层存储模块、以及后台清理模块，它们都是基于SSD Layout实现的，构建在SSD布局（后面会分析）之上。</p>
+<p>其中，<strong>调度模块</strong>，在代码中对应flashcache_map映射函数，它是flashcache缓存层次数据入口，所以到达逻辑设备的读写请求，最终都会经过DM层的处理，通过flashcache_map进入调度模块。称之为“调度”，主要是指，接收到数据后，它会根据bio请求的读写类型、是否命中缓存等因素，选择不同的处理分支，如flashcache_read/write或者flashcache_uncached_io，在read和write中会选择是flashcache_read_hit/miss还是flashcache_write_hit/miss。经过不同分支的读写，会调用底层存储模块来完成磁盘或cache的数据读写。</p>
+<p><strong>逻辑处理模块</strong>，在代码中对应flashcache_io_callback，它在调度模块通过底层存储模块执行数据读写 操作完成后回调执行，所以说它是“读写后处理模块”，它是采用状态机实现的，根据调度模块中的读写类型进行后续的处理，如读未命中情况下，磁盘读完成后，回调到逻辑处理模块，由它负责将从磁盘读取的数据写回到SSD，或者写未命中情况下，写SSD完成后，回调到逻辑处理模块执行元数据的更新，再有就是对调度模块中读写操作的错误进行处理。</p>
+<p><strong>底层存储模块</strong>，主要提供了两种方式来完成真实的数据读写，一是由DM提供的dm_io函数，它最终还是通过submit_bio的方式，将由调度模块处理过的bio提交到通用块层，进行转发到真实的设备驱动，完成数据读写；另外，一种方式，kcopyd，是由内核提供的一种底层拷贝函数，主要负责脏块的写回（从SSD到磁盘），会引起元数据的更新。</p>
+<p>而<strong>后台清理模块</strong>，是针对每个set进行数据清理，它会基于两种策略对脏块做回收：（1）set内脏块超过了阈值；（2）脏块超过了设定的空闲时间，即fallow_delay，一般是15分钟，在15分钟没有被操作 则会被优先回收。要注意的是，并没有单独的线程在后台做定期空闲块回收，必须由IO操作触发，如果长时间没有对某set操作，则其中的脏数据很长期保持， 容易危害数据安全。</p>
+<h4 id="源代码布局"><a href="#源代码布局" class="headerlink" title="源代码布局"></a>源代码布局</h4><p>两个工作队列。结合devicemapper代码，特别是dm.c可以知道，在调用flashcache_create工具创建flashcache设备时，会调用flashcache_ctl函数，执行创建工具，它会创建一工作队列_delay_clean，主要负责对整个cache设备的脏块清理，由flashcache_clean_set在特定条件下调用（见代码），通过flashcache_clean_all执行对所有sets的扫描与清理。 另外一个工作队列，_kq_xxx(记不清了)，在flashcache_init中，由flashcache模块加载时执行，通过对5个job链表进行处理，执行元数据的更新与完成处理函数、读磁盘后的SSD写入、以及对等待队列的处理，主要就是负责读写后的处理工作隶属于逻辑处理模块，即“读写后处理 模块”，由磁盘或SSD读写后不同情况下被调度。</p>
+<p>调度的时机可以看flashcache_map函数，处理逻辑则主要在函数flashcache_io_callback内部判断，the same block的等待队列是否为空，如果不为空，则同样会调用flashcache_do_handler，执行对等待队列的处理。</p>
+<h4 id="数据调度"><a href="#数据调度" class="headerlink" title="数据调度"></a>数据调度</h4><p>对读，接收到bio，首先，根据bio-&gt;bi_sector，即硬盘的扇区号，得到SSD上的set。其次，在set内查找是否命中，如果命中，则将硬盘的扇区号转换为SSD的扇区号，然后将此bio向SSD提交，进行读取；如果未命中，则首先向硬盘驱动提交bio，从硬盘读数据，读取完成后，由回调函数启动回写SSD操作，将bio的扇区号转换为SSD的=扇区号，然后向SSD驱动程序提交，将硬盘读取的数据写入SSD。对写，同文件系统页缓冲，并不直接写入硬盘，而是写入 SSD，同时，保持一个阀值，一般为20%，在脏块数目达到此数值时，写回磁盘。</p>
+<h4 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h4><h4 id="模拟实验"><a href="#模拟实验" class="headerlink" title="模拟实验"></a>模拟实验</h4><p><a href="https://my.oschina.net/renguijiayi/blog/303747?p=%7B%7BcurrentPage-1%7D%7D" target="_blank" rel="external">转载自壬癸甲乙博客</a></p>
+<p>不是每个人都有SSD/PCI-EFlash的硬件，所以这里可以给大家一个构建虚拟混合存储设备的小技巧，这样即使是在自己的笔记本上，也可以轻松的模拟Flashcache的试验环境，而且随便折腾。</p>
+<p>首先，我们可以用内存来模拟一个性能很好的Flash设备，当然这有一个缺点，就是主机重启后就啥都没了，不过用于实验测试这应该不是什么大问题。用内存来模拟块设备有两种方法，ramdisk或者tmpfs+loop device。由于ramdisk要调整大小需要修改grub并重启，这里我们用tmpfs来实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 限制tmpfs最大不超过10G，避免耗尽内存(测试机器有24G物理内存)</div><div class="line">$sudo mount tmpfs /dev/shm -t tmpfs -o size=10240m</div><div class="line"># 创建一个2G的文件，用来模拟2G的flash设备</div><div class="line">$dd if=/dev/zero of=/dev/shm/ssd.img bs=1024k count=2048</div><div class="line"># 将文件模拟成块设备</div><div class="line">$sudo losetup /dev/loop0 /dev/shm/ssd.img</div></pre></td></tr></table></figure>
+<blockquote>
+<p>tmpfs,临时文件系统，是一种基于内存的文件系统，它和虚拟磁盘ramdisk比较类似像，但不完全相同，和ramdisk一样，tmpfs可以使用RAM，但它也可以使用swap分区来存储。而且传统的ramdisk是个块设备，要用mkfs来格式化它，才能真正地使用它；而tmpfs是一个文件系统，并不是块设备，只是安装它，就可以使用了。tmpfs是最好的基于RAM的文件系统。因为tmpfs是直接建立在VM之上的，您用一个简单的mount命令就可以创建tmpfs文件系统了。</p>
+</blockquote>
+<p>解决了cache设备，还需要有disk持久设备。同样的，可使用普通磁盘上的文件来虚拟成一个loop device。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># 在普通磁盘的文件系统中创建一个4G的文件，用来模拟4G的disk设备</div><div class="line">$dd if=/dev/zero of=/u01/jiangfeng/disk.img bs=1024k count=4096</div><div class="line">$sudo losetup /dev/loop1 /u01/jiangfeng/disk.img</div></pre></td></tr></table></figure>
+<p>这样我们就有了一个快速的设备/dev/loop0，一个慢速的磁盘设备/dev/loop1，可以开始创建一个Flashcache混合存储设备了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">$sudo flashcache_create -p back cachedev /dev/loop0 /dev/loop1</div><div class="line">cachedev cachedev, ssd_devname /dev/loop0, disk_devname /dev/loop1 cache mode WRITE_BACK</div><div class="line">block_size 8, md_block_size 8, cache_size 0</div><div class="line">Flashcache metadata will use 8MB of your 48384MB main memory</div><div class="line"></div><div class="line">$sudo mkfs.ext3 /dev/mapper/cachedev</div><div class="line">mke2fs 1.41.12 (17-May-2010)</div><div class="line">Filesystem label=</div><div class="line">OS type: Linux</div><div class="line">Block size=4096 (log=2)</div><div class="line">Fragment size=4096 (log=2)</div><div class="line">Stride=0 blocks, Stripe width=0 blocks</div><div class="line">262144 inodes, 1048576 blocks</div><div class="line">52428 blocks (5.00%) reserved for the super user</div><div class="line">First data block=0</div><div class="line">Maximum filesystem blocks=1073741824</div><div class="line">32 block groups</div><div class="line">32768 blocks per group, 32768 fragments per group</div><div class="line">8192 inodes per group</div><div class="line">Superblock backups stored on blocks:</div><div class="line">        32768, 98304, 163840, 229376, 294912, 819200, 884736</div><div class="line"></div><div class="line">Writing inode tables: done</div><div class="line">Creating journal (32768 blocks): done</div><div class="line">Writing superblocks and filesystem accounting information: done</div><div class="line"></div><div class="line">This filesystem will be automatically checked every 28 mounts or</div><div class="line">180 days, whichever comes first.  Use tune2fs -c or -i to override.</div><div class="line"></div><div class="line">$sudo mount /dev/mapper/cachedev /u03</div></pre></td></tr></table></figure>
+<p>Ok，检查一下，就可以开始做一些模拟测试啦。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">$sudo dmsetup table</div><div class="line">cachedev: 0 8388608 flashcache conf:</div><div class="line">        ssd dev (/dev/loop0), disk dev (/dev/loop1) cache mode(WRITE_BACK)</div><div class="line">        capacity(2038M), associativity(512), data block size(4K) metadata block size(4096b)</div><div class="line">        skip sequential thresh(0K)</div><div class="line">        total blocks(521728), cached blocks(83), cache percent(0)</div><div class="line">        dirty blocks(0), dirty percent(0)</div><div class="line">        nr_queued(0)</div><div class="line">Size Hist: 4096:84 </div><div class="line"></div><div class="line">$sudo dmsetup status</div><div class="line">cachedev: 0 8388608 flashcache stats:</div><div class="line">        reads(84), writes(0)</div><div class="line">        read hits(1), read hit percent(1)</div><div class="line">        write hits(0) write hit percent(0)</div><div class="line">        dirty write hits(0) dirty write hit percent(0)</div><div class="line">        replacement(0), write replacement(0)</div><div class="line">        write invalidates(0), read invalidates(0)</div><div class="line">        pending enqueues(0), pending inval(0)</div><div class="line">        metadata dirties(0), metadata cleans(0)</div><div class="line">        metadata batch(0) metadata ssd writes(0)</div><div class="line">        cleanings(0) fallow cleanings(0)</div><div class="line">        no room(0) front merge(0) back merge(0)</div><div class="line">        disk reads(83), disk writes(0) ssd reads(1) ssd writes(83)</div><div class="line">        uncached reads(0), uncached writes(0), uncached IO requeue(0)</div><div class="line">        uncached sequential reads(0), uncached sequential writes(0)</div><div class="line">        pid_adds(0), pid_dels(0), pid_drops(0) pid_expiry(0)</div><div class="line"></div><div class="line">$sudo sysctl -a | grep flashcache</div><div class="line">dev.flashcache.loop0+loop1.io_latency_hist = 0</div><div class="line">dev.flashcache.loop0+loop1.do_sync = 0</div><div class="line">dev.flashcache.loop0+loop1.stop_sync = 0</div><div class="line">dev.flashcache.loop0+loop1.dirty_thresh_pct = 20</div><div class="line">dev.flashcache.loop0+loop1.max_clean_ios_total = 4</div><div class="line">dev.flashcache.loop0+loop1.max_clean_ios_set = 2</div><div class="line">dev.flashcache.loop0+loop1.do_pid_expiry = 0</div><div class="line">dev.flashcache.loop0+loop1.max_pids = 100</div><div class="line">dev.flashcache.loop0+loop1.pid_expiry_secs = 60</div><div class="line">dev.flashcache.loop0+loop1.reclaim_policy = 0</div><div class="line">dev.flashcache.loop0+loop1.zero_stats = 0</div><div class="line">dev.flashcache.loop0+loop1.fast_remove = 0</div><div class="line">dev.flashcache.loop0+loop1.cache_all = 1</div><div class="line">dev.flashcache.loop0+loop1.fallow_clean_speed = 2</div><div class="line">dev.flashcache.loop0+loop1.fallow_delay = 900</div><div class="line">dev.flashcache.loop0+loop1.skip_seq_thresh_kb = 0</div></pre></td></tr></table></figure>
+<blockquote>
+<p>sysctl命令被用于在内核运行时动态地修改内核的运行参数，可用的内核参数在目录/proc/sys中。它包含一些TCP/ip堆栈和虚拟内存系统的高级选项， 这可以让有经验的管理员提高引人注目的系统性能。用sysctl可以读取设置超过五百个系统变量。</p>
+<p>-n：打印值时不打印关键字； </p>
+<p>-e：忽略未知关键字错误； </p>
+<p>-N：仅打印名称； </p>
+<p>-w：当改变sysctl设置时使用此项； </p>
+<p>-p：从配置文件“/etc/sysctl.conf”加载内核参数设置； </p>
+<p>-a：打印当前所有可用的内核参数变量和值； </p>
+<p>-A：以表格方式打印当前所有可用的内核参数变量和值。</p>
+</blockquote>
+<p>来自: <a href="http://man.linuxde.net/sysctl" target="_blank" rel="external">http://man.linuxde.net/sysctl</a></p>
+<p>我是dd一个ssd.img和一个disk.img，然后fio进行测试，效果比非flashcache设备提高3-4倍。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>嘘寒问暖不如来笔巨款<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+        <center>
+          <p class="copyright">
+            本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+          </p>
+
+          <div style="font-size:12px;border-bottom: #ddd 1px solid; BORDER-LEFT: #ddd 1px solid; background-color: #deebf7; BORDER-TOP: #ddd 1px solid; BORDER-RIGHT: #ddd 1px solid;font-size:15px;width:90%">
+            <div style="margin-top:25px">
+	            <p>
+		            本文由&nbsp;<b>Yu Zhang</b>&nbsp;发表于&nbsp;<a href="https://joystorage.github.io/">Yu Zhang's Blog</a>&nbsp;,采用<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">署名-非商业性使用-禁止演绎 3.0</a>进行许可。<br/>
+		            非商业转载请注明作者及出处。商业转载请联系作者本人。
+	            </p>
+            </div>
+          </div>
+        </center>
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/23/flashcache-1-入门与安装/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/05/23/flashcache-2-底层存储模块/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">flashcache-2-底层存储模块</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="flashcache-1-入门与安装" data-title="flashcache-1-入门与安装" data-url="http://yoursite.com/2017/05/23/flashcache-1-入门与安装/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
+
+
 
 
           </div>
@@ -320,9 +517,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

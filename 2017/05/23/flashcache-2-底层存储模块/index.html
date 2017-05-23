@@ -6,14 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: ad hoc无线网 | Yu Zhang&#39;s Blog</title>
+  <title>flashcache-2-底层存储模块 | Yu Zhang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Yu Zhang's Blog">
-<meta property="og:url" content="http://yoursite.com/tags/ad-hoc无线网/index.html">
+  <meta name="description" content="转载自Jessica程序猿博客
+flashcache中跟底层存储模块分为以下两类：
+1）磁盘跟内存的交互
+2）磁盘跟磁盘之前的交互
+比如说读不命中时就是直接从磁盘读，属于第1种情况，那读命中呢？也是属于第1种情况，不过这时候是从SSD读。磁盘跟磁盘之间交互是用于写脏数据，将SSD中脏cache块拷贝到磁盘上去。现在介绍下两种情况使用的接口函数，这样后面在看读写流程时看到这两个函数就十分亲切了，并且">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flashcache-2-底层存储模块">
+<meta property="og:url" content="http://yoursite.com/2017/05/23/flashcache-2-底层存储模块/index.html">
 <meta property="og:site_name" content="Yu Zhang's Blog">
+<meta property="og:description" content="转载自Jessica程序猿博客
+flashcache中跟底层存储模块分为以下两类：
+1）磁盘跟内存的交互
+2）磁盘跟磁盘之前的交互
+比如说读不命中时就是直接从磁盘读，属于第1种情况，那读命中呢？也是属于第1种情况，不过这时候是从SSD读。磁盘跟磁盘之间交互是用于写脏数据，将SSD中脏cache块拷贝到磁盘上去。现在介绍下两种情况使用的接口函数，这样后面在看读写流程时看到这两个函数就十分亲切了，并且">
+<meta property="og:updated_time" content="2017-05-23T07:06:12.296Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yu Zhang's Blog">
+<meta name="twitter:title" content="flashcache-2-底层存储模块">
+<meta name="twitter:description" content="转载自Jessica程序猿博客
+flashcache中跟底层存储模块分为以下两类：
+1）磁盘跟内存的交互
+2）磁盘跟磁盘之前的交互
+比如说读不命中时就是直接从磁盘读，属于第1种情况，那读命中呢？也是属于第1种情况，不过这时候是从SSD读。磁盘跟磁盘之间交互是用于写脏数据，将SSD中脏cache块拷贝到磁盘上去。现在介绍下两种情况使用的接口函数，这样后面在看读写流程时看到这两个函数就十分亲切了，并且">
   
     <link rel="alternative" href="/atom.xml" title="Yu Zhang&#39;s Blog" type="application/atom+xml">
   
@@ -238,64 +254,276 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-flashcache-2-底层存储模块" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/03/排队论在ad hoc无线网中的应用/" class="archive-article-date">
-  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/03/排队论在ad hoc无线网中的应用/">排队论在ad hoc无线网中的应用</a>
+    <h1 class="article-title" itemprop="name">
+      flashcache-2-底层存储模块
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/05/23/flashcache-2-底层存储模块/" class="archive-article-date">
+  	<time datetime="2017-05-23T07:06:31.450Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-23</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
 	<div class="article-tag tagcloud">
 		<!--i class="icon-price-tags icon"></i-->
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">排队论</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">flashcache</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">ad hoc无线网</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">块存储</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+        
 
+      </div>
+
+      <br/><br/>
+
+      
+        <p><a href="http://www.cnblogs.com/wuchanming/p/3813491.html/" target="_blank" rel="external">转载自Jessica程序猿博客</a></p>
+<p>flashcache中跟底层存储模块分为以下两类：</p>
+<p>1）磁盘跟内存的交互</p>
+<p>2）磁盘跟磁盘之前的交互</p>
+<p>比如说读不命中时就是直接从磁盘读，属于第1种情况，那读命中呢？也是属于第1种情况，不过这时候是从SSD读。磁盘跟磁盘之间交互是用于写脏数据，将SSD中脏cache块拷贝到磁盘上去。现在介绍下两种情况使用的接口函数，这样后面在看读写流程时看到这两个函数就十分亲切了，并且清楚地知道数据是从哪里流向哪里。</p>
+<a id="more"></a>
+<h3 id="底层存储调用的两种方法"><a href="#底层存储调用的两种方法" class="headerlink" title="底层存储调用的两种方法"></a>底层存储调用的两种方法</h3><h4 id="对于情况1"><a href="#对于情况1" class="headerlink" title="对于情况1"></a>对于情况1</h4><p>主要是两个函数dm_io_async_bvec和flashcache_dm_io_async_vm。</p>
+<blockquote>
+<p>dm_io_async_bvec 在文件flashcache_main.c中</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">#if LINUX_VERSION_CODE &gt;= KERNEL_VERSION(2,6,22)</div><div class="line">int dm_io_async_bvec(unsigned int num_regions, </div><div class="line">#if LINUX_VERSION_CODE &gt;= KERNEL_VERSION(2,6,26)</div><div class="line">		     struct dm_io_region *where, </div><div class="line">#else</div><div class="line">		     struct io_region *where, </div><div class="line">#endif</div><div class="line">		     int rw, </div><div class="line">		     struct bio *bio, </div><div class="line">		     io_notify_fn fn, </div><div class="line">		     void *context)</div><div class="line">&#123;</div><div class="line">	struct dm_io_request iorq;</div><div class="line"></div><div class="line">	iorq.bi_rw = rw;</div><div class="line">#if LINUX_VERSION_CODE &gt;= KERNEL_VERSION(3,14,0)</div><div class="line">	iorq.mem.type = DM_IO_BIO;</div><div class="line">	iorq.mem.ptr.bio = bio;	</div><div class="line">#else</div><div class="line">	iorq.mem.type = DM_IO_BVEC;</div><div class="line">	iorq.mem.ptr.bvec = bio-&gt;bi_io_vec + bio-&gt;bi_idx;</div><div class="line">#endif</div><div class="line">	iorq.notify.fn = fn;</div><div class="line">	iorq.notify.context = context;</div><div class="line">	iorq.client = flashcache_io_client;</div><div class="line">	return dm_io(&amp;iorq, num_regions, where, NULL);</div><div class="line">&#125;</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<blockquote>
+<p>flashcache_dm_io_async_vm在文件flashcache_subr.c中</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#if LINUX_VERSION_CODE &gt;= KERNEL_VERSION(2,6,22)</div><div class="line">int </div><div class="line">flashcache_dm_io_async_vm(struct cache_c *dmc, unsigned int num_regions, </div><div class="line">#if LINUX_VERSION_CODE &lt; KERNEL_VERSION(2,6,26)</div><div class="line">			  struct io_region *where, </div><div class="line">#else</div><div class="line">			  struct dm_io_region *where, </div><div class="line">#endif</div><div class="line">			  int rw,</div><div class="line">			  void *data, io_notify_fn fn, void *context)</div><div class="line">&#123;</div><div class="line">	unsigned long error_bits = 0;</div><div class="line">	int error;</div><div class="line">	struct dm_io_request io_req = &#123;</div><div class="line">		.bi_rw = rw,</div><div class="line">		.mem.type = DM_IO_VMA,</div><div class="line">		.mem.ptr.vma = data,</div><div class="line">		.mem.offset = 0,</div><div class="line">		.notify.fn = fn,</div><div class="line">		.notify.context = context,</div><div class="line">		.client = flashcache_io_client,</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	error = dm_io(&amp;io_req, 1, where, &amp;error_bits);</div><div class="line">	if (error)</div><div class="line">		return error;</div><div class="line">	if (error_bits)</div><div class="line">		return error_bits;</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<p>上面两个函数都使用struct dm_io_request 来包装了请求，其中的只有两种请求的类型是不一样的，第一个函数对应的是DM_IO_BVEC，第二个函数是DM_IO_VMA。</p>
+<p>其实我开始一直不明白，为什么要使用这两个函数让硬盘与内存打交道，不过后来看了dm_io发现其中的io服务类型有多种不同类型，这两个函数的调用分别对应不同的io类型。下面先看一下dm_io相关的数据结构。</p>
+<h3 id="dm-io"><a href="#dm-io" class="headerlink" title="dm_io"></a>dm_io</h3><p>以上种方法都调用了更底层的dm_io函数，dm-io为device mapper提供同步或者异步的io服务。</p>
+<p>使用dm-io必须设置dm_io_region结构（2.6.26版本以前叫io_region），该结构定义了io操作的区域，读一般针对一个dm_io_region区，而写可以针对一组dm_io_region区。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//2.6.26版本以后</div><div class="line">struct dm_io_region &#123;</div><div class="line">    struct block_device *bdev;</div><div class="line">    sector_t sector;</div><div class="line">    sector_t count;         /* If this is zero the region is ignored. */</div><div class="line">&#125;;</div><div class="line"></div><div class="line">//2.6.26版本以前</div><div class="line">struct io_region &#123;</div><div class="line">  struct block_device *bdev;</div><div class="line">  sector_t sector;</div><div class="line">  sector_t count;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>Dm-io 可以从一个io_region中读取或者写入到一个或者多个io_region中去。一个io_region结构数组指定了写入到多个区域。</p>
+<h3 id="dm-io-mem-type类型"><a href="#dm-io-mem-type类型" class="headerlink" title="dm_io_mem_type类型"></a>dm_io_mem_type类型</h3><p>dm-io一共有四种dm_io_mem_type类型（老一点的内核版本只有前面三种，Flashcache主要使用DM_IO_BVEC）:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">enum dm_io_mem_type &#123;</div><div class="line">    DM_IO_PAGE_LIST,/* Page list */</div><div class="line">    DM_IO_BVEC,     /* Bio vector */</div><div class="line">    DM_IO_VMA,      /* Virtual memory area */</div><div class="line">    DM_IO_KMEM,     /* Kernel memory */</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct dm_io_memory &#123;</div><div class="line">    enum dm_io_mem_type type;</div><div class="line">    union &#123;</div><div class="line">            struct page_list *pl;</div><div class="line">            struct bio_vec *bvec;</div><div class="line">            void *vma;</div><div class="line">            void *addr;</div><div class="line">    &#125; ptr;</div><div class="line"></div><div class="line">    unsigned offset;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>Dm-io 提供同步和异步I/O服务。老一点的内核它提供了3种I/O服务，每种服务都有一个同步和一个异步的版本。</p>
+<h5 id="DM-IO-PAGE-LIST"><a href="#DM-IO-PAGE-LIST" class="headerlink" title="DM_IO_PAGE_LIST"></a>DM_IO_PAGE_LIST</h5><p>第一个I/O服务类型使用了一串内存页作为缓冲区，伴随着一个首页面的偏移。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">struct page_list &#123;</div><div class="line">  struct page_list *next;</div><div class="line">  struct page *page;</div><div class="line">&#125;;</div><div class="line">int dm_io_sync(unsigned int num_regions, struct io_region *where, int rw,</div><div class="line">              struct page_list *pl, unsigned int offset,</div><div class="line">              unsigned long *error_bits);</div><div class="line">int dm_io_async(unsigned int num_regions, struct io_region *where, int rw,</div><div class="line">               struct page_list *pl, unsigned int offset,</div><div class="line">               io_notify_fn fn, void *context);</div></pre></td></tr></table></figure>
+<h5 id="DM-IO-BVEC"><a href="#DM-IO-BVEC" class="headerlink" title="DM_IO_BVEC"></a>DM_IO_BVEC</h5><p>第二种I/O服务类型把一组bio载体当着I/O的数据缓冲。如果调用者提前拼装了bio，这个服务可以很顺利地完成。但是需要将不同的bio页指向不同的设备。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int dm_io_sync_bvec(unsigned int num_regions, struct io_region *where,</div><div class="line">                   int rw, struct bio_vec *bvec,</div><div class="line">                   unsigned long *error_bits);</div><div class="line">int dm_io_async_bvec(unsigned int num_regions, struct io_region *where,</div><div class="line">                    int rw, struct bio_vec *bvec,</div><div class="line">                    io_notify_fn fn, void *context);</div></pre></td></tr></table></figure>
+<h5 id="DM-IO-VMA"><a href="#DM-IO-VMA" class="headerlink" title="DM_IO_VMA"></a>DM_IO_VMA</h5><p>第三种I/O服务类型把一个指向虚拟动态内存缓冲区的的指针当作I/O的数据缓冲。如果调用者需要在很大的块设备上进行I/O操作又不想分配大量的个人内存页，那么这种服务可以胜任。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int dm_io_sync_vm(unsigned int num_regions, struct io_region *where, int rw,</div><div class="line">                 void *data, unsigned long *error_bits);</div><div class="line">int dm_io_async_vm(unsigned int num_regions, struct io_region *where, int rw,</div><div class="line">                  void *data, io_notify_fn fn, void *context);</div></pre></td></tr></table></figure>
+<p>异步I/O服务的调用者必须包含一个完成的回调函数和一个指向一些这个I/O内容数据的指针。</p>
+<p>typedef void (<em>io_notify_fn)(unsigned long error, void </em>context);</p>
+<p>这个”error”参数，就像这个”*error”参数在任何同步版本中一样，在这个回调函数中就象一个位集合（而不是一个简单的错误值）。</p>
+<p>在写I/O到多个目标区域的情况下，这个位集合允许dm-io说明在每个单独的区域上的成功或者失败。<br>在使用任何dm-io服务之前，用户必须调用dm_io_get()、同时指定他们想要的页数来执行I/O.<br>DM-io将尝试着更改自己的内存池的大小来确认在执行i/o时为了避免不必要的等待而有足够的页面来供给。<br>当用户完成了使用I/O服务，他们将调用dm_io_put(),并指定和给dm_io_get()的相同数量的页面。</p>
+<p>dm-io通过dm_io_request结构来封装请求的类型，如果设置了dm_io_notify.fn则是异步IO，否则是同步IO。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">struct dm_io_request &#123;</div><div class="line">    int bi_rw;                      /* READ|WRITE - not READA */</div><div class="line">    struct dm_io_memory mem;        /* Memory to use for io */</div><div class="line">    struct dm_io_notify notify;     /* Synchronous if notify.fn is NULL */</div><div class="line">    struct dm_io_client *client;    /* Client memory handler */</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>使用dm_io服务前前需要通过dm_io_client_create函数（在2.6.22版本前是dm_io_get）先创建dm_io_client结构，为dm-io的执行过程中分配内存池。使用dm-io服务完毕后，则需要调用dm_io_client_destroy函数（在2.6.22版本前是dm_io_put）释放内存池。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">struct dm_io_client &#123;</div><div class="line">    mempool_t *pool;</div><div class="line">    struct bio_set *bios;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在flashcache中，首先在flashcache_conf.c文件中的flashcache_init函数中使用flashcache_io_client = dm_io_client_create()新建，然后再在dm_io_async_bvec等函数中将flashcache_io_client传给struct dm_io_request iorq的client成员。</p>
+</blockquote>
+<p>dm-io函数执行具体的io请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">int dm_io(struct dm_io_request *io_req, unsigned num_regions,</div><div class="line">      struct dm_io_region *where, unsigned long *sync_error_bits)</div><div class="line">&#123;</div><div class="line">    int r;</div><div class="line">    struct dpages dp;</div><div class="line"></div><div class="line">    r = dp_init(io_req, &amp;dp);</div><div class="line">    if (r)</div><div class="line">            return r;</div><div class="line"></div><div class="line">    if (!io_req-&gt;notify.fn)</div><div class="line">            return sync_io(io_req-&gt;client, num_regions, where,</div><div class="line">                           io_req-&gt;bi_rw, &amp;dp, sync_error_bits);</div><div class="line"></div><div class="line">    return async_io(io_req-&gt;client, num_regions, where, io_req-&gt;bi_rw,</div><div class="line">                    &amp;dp, io_req-&gt;notify.fn, io_req-&gt;notify.context);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="对于情况2"><a href="#对于情况2" class="headerlink" title="对于情况2"></a>对于情况2</h4><p>磁盘跟磁盘之前的交互。这种情况只用于将ssd中脏块写入disk中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int dm_kcopyd_copy(struct dm_kcopyd_client *kc, struct dm_io_region *from,</div><div class="line">                   unsigned int num_dests, struct dm_io_region *dests,</div><div class="line">                   unsigned int flags, dm_kcopyd_notify_fn fn, void *context)</div></pre></td></tr></table></figure>
+<p>第一个参数dm_kcopyd_client，在使用kcopyd异步拷贝服务时，必须先创建一个对应的client，首先要分配“kcopyd客户端”结构，调用函数如下：</p>
+<p>kcopyd_client_create(FLASHCACHE_COPY_PAGES, &amp;flashcache_kcp_client);</p>
+<p>创建dm_kcopyd_client结构(在flashcache_conf.c文件中的flashcache_init函数中使用)。</p>
+<p>第二个参数dm_io_region是源地址，第四个参数是目的地址，定义如下<br>struct dm_io_region {<br>     struct block_device <em>bdev;<br>     sector_t sector;<br>     sector_t count;          /</em> If this is zero the region is ignored. */<br>};<br>dm_kcopyd_notify_fn fn是kcopyd处理完请求的回调函数<br>context 是回调函数参数，在flashcache都设置对应的kcached_job。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>嘘寒问暖不如来笔巨款<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/zhifubao.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+        <center>
+          <p class="copyright">
+            本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
+          </p>
+
+          <div style="font-size:12px;border-bottom: #ddd 1px solid; BORDER-LEFT: #ddd 1px solid; background-color: #deebf7; BORDER-TOP: #ddd 1px solid; BORDER-RIGHT: #ddd 1px solid;font-size:15px;width:90%">
+            <div style="margin-top:25px">
+	            <p>
+		            本文由&nbsp;<b>Yu Zhang</b>&nbsp;发表于&nbsp;<a href="https://joystorage.github.io/">Yu Zhang's Blog</a>&nbsp;,采用<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">署名-非商业性使用-禁止演绎 3.0</a>进行许可。<br/>
+		            非商业转载请注明作者及出处。商业转载请联系作者本人。
+	            </p>
+            </div>
+          </div>
+        </center>
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/23/flashcache-2-底层存储模块/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/05/23/flashcache-1-入门与安装/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          flashcache-1-入门与安装
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/05/22/linux设备驱动-1-hello world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">linux设备驱动-1-hello world</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="flashcache-2-底层存储模块" data-title="flashcache-2-底层存储模块" data-url="http://yoursite.com/2017/05/23/flashcache-2-底层存储模块/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
+
+
 
 
           </div>
@@ -320,9 +548,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
