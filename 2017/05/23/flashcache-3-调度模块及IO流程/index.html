@@ -11,11 +11,7 @@
   <meta name="description" content="device mapper调度模块得先说说Device Mapper
 device mapper简介
 Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。
-Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念
-
-
-mapped device 
- 逻辑抽象,内核向外提供的逻辑设备，它通过映射表">
+Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念">
 <meta property="og:type" content="article">
 <meta property="og:title" content="flashcache-3-调度模块及IO流程">
 <meta property="og:url" content="http://yoursite.com/2017/05/23/flashcache-3-调度模块及IO流程/index.html">
@@ -23,11 +19,7 @@ mapped device
 <meta property="og:description" content="device mapper调度模块得先说说Device Mapper
 device mapper简介
 Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。
-Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念
-
-
-mapped device 
- 逻辑抽象,内核向外提供的逻辑设备，它通过映射表">
+Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念">
 <meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-1.jpg">
 <meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-2.jpg">
 <meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-3.jpg">
@@ -35,17 +27,13 @@ mapped device
 <meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-5.jpg">
 <meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-6.jpg">
 <meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-7.jpg">
-<meta property="og:updated_time" content="2017-05-23T11:05:25.455Z">
+<meta property="og:updated_time" content="2017-05-23T11:10:08.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flashcache-3-调度模块及IO流程">
 <meta name="twitter:description" content="device mapper调度模块得先说说Device Mapper
 device mapper简介
 Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。
-Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念
-
-
-mapped device 
- 逻辑抽象,内核向外提供的逻辑设备，它通过映射表">
+Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念">
 <meta name="twitter:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Yu Zhang&#39;s Blog" type="application/atom+xml">
@@ -328,6 +316,7 @@ mapped device
 <li>Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。</li>
 <li>Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念</li>
 </ul>
+<a id="more"></a>
 <ol>
 <li><p>mapped device </p>
 <p> 逻辑抽象,内核向外提供的逻辑设备，它通过映射表描述的映射关系和target device建立映射。</p>
@@ -658,14 +647,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flashcache</a>
               </li>
              
@@ -682,6 +663,18 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
@@ -690,11 +683,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -703,10 +696,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
