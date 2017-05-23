@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/23/flashcache-1-入门与安装/index.html">
 <meta property="og:site_name" content="Yu Zhang's Blog">
 <meta property="og:description" content="最近，由于项目需要，在做关于flashcache的一些工作，主要涉及模块组织、元数据管理及数据分布、读写流程分析、数据在磁盘和cache(SSD)之间的调度、缺点及可优化方向等一些方面的分析研究。">
-<meta property="og:updated_time" content="2017-05-23T07:07:06.414Z">
+<meta property="og:updated_time" content="2017-05-23T11:08:18.255Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flashcache-1-入门与安装">
 <meta name="twitter:description" content="最近，由于项目需要，在做关于flashcache的一些工作，主要涉及模块组织、元数据管理及数据分布、读写流程分析、数据在磁盘和cache(SSD)之间的调度、缺点及可优化方向等一些方面的分析研究。">
@@ -312,7 +312,7 @@
 <h4 id="源代码布局"><a href="#源代码布局" class="headerlink" title="源代码布局"></a>源代码布局</h4><p>两个工作队列。结合devicemapper代码，特别是dm.c可以知道，在调用flashcache_create工具创建flashcache设备时，会调用flashcache_ctl函数，执行创建工具，它会创建一工作队列_delay_clean，主要负责对整个cache设备的脏块清理，由flashcache_clean_set在特定条件下调用（见代码），通过flashcache_clean_all执行对所有sets的扫描与清理。 另外一个工作队列，_kq_xxx(记不清了)，在flashcache_init中，由flashcache模块加载时执行，通过对5个job链表进行处理，执行元数据的更新与完成处理函数、读磁盘后的SSD写入、以及对等待队列的处理，主要就是负责读写后的处理工作隶属于逻辑处理模块，即“读写后处理 模块”，由磁盘或SSD读写后不同情况下被调度。</p>
 <p>调度的时机可以看flashcache_map函数，处理逻辑则主要在函数flashcache_io_callback内部判断，the same block的等待队列是否为空，如果不为空，则同样会调用flashcache_do_handler，执行对等待队列的处理。</p>
 <h4 id="数据调度"><a href="#数据调度" class="headerlink" title="数据调度"></a>数据调度</h4><p>对读，接收到bio，首先，根据bio-&gt;bi_sector，即硬盘的扇区号，得到SSD上的set。其次，在set内查找是否命中，如果命中，则将硬盘的扇区号转换为SSD的扇区号，然后将此bio向SSD提交，进行读取；如果未命中，则首先向硬盘驱动提交bio，从硬盘读数据，读取完成后，由回调函数启动回写SSD操作，将bio的扇区号转换为SSD的=扇区号，然后向SSD驱动程序提交，将硬盘读取的数据写入SSD。对写，同文件系统页缓冲，并不直接写入硬盘，而是写入 SSD，同时，保持一个阀值，一般为20%，在脏块数目达到此数值时，写回磁盘。</p>
-<h4 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h4><h4 id="模拟实验"><a href="#模拟实验" class="headerlink" title="模拟实验"></a>模拟实验</h4><p><a href="https://my.oschina.net/renguijiayi/blog/303747?p=%7B%7BcurrentPage-1%7D%7D" target="_blank" rel="external">转载自壬癸甲乙博客</a></p>
+<h4 id="模拟实验"><a href="#模拟实验" class="headerlink" title="模拟实验"></a>模拟实验</h4><p><a href="https://my.oschina.net/renguijiayi/blog/303747?p=%7B%7BcurrentPage-1%7D%7D" target="_blank" rel="external">转载自壬癸甲乙博客</a></p>
 <p>不是每个人都有SSD/PCI-EFlash的硬件，所以这里可以给大家一个构建虚拟混合存储设备的小技巧，这样即使是在自己的笔记本上，也可以轻松的模拟Flashcache的试验环境，而且随便折腾。</p>
 <p>首先，我们可以用内存来模拟一个性能很好的Flash设备，当然这有一个缺点，就是主机重启后就啥都没了，不过用于实验测试这应该不是什么大问题。用内存来模拟块设备有两种方法，ramdisk或者tmpfs+loop device。由于ramdisk要调整大小需要修改grub并重启，这里我们用tmpfs来实现。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 限制tmpfs最大不超过10G，避免耗尽内存(测试机器有24G物理内存)</div><div class="line">$sudo mount tmpfs /dev/shm -t tmpfs -o size=10240m</div><div class="line"># 创建一个2G的文件，用来模拟2G的flash设备</div><div class="line">$dd if=/dev/zero of=/dev/shm/ssd.img bs=1024k count=2048</div><div class="line"># 将文件模拟成块设备</div><div class="line">$sudo losetup /dev/loop0 /dev/shm/ssd.img</div></pre></td></tr></table></figure>
@@ -454,6 +454,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2017/05/23/flashcache-3-调度模块及IO流程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          flashcache-3-调度模块及IO流程
+        
+      </div>
+    </a>
   
   
     <a href="/2017/05/23/flashcache-2-底层存储模块/" id="article-nav-older" class="article-nav-link-wrap">
@@ -614,6 +623,22 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">月总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">自我管理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flashcache</a>
               </li>
              
@@ -638,23 +663,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">月总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">自我管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -663,6 +676,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -695,14 +712,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">缓存</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
               </li>
             
             <div class="clearfix"></div>
