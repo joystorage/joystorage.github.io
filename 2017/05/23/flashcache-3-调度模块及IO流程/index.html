@@ -6,35 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>flashcache-3-调度模块及IO流程 | Yu Zhang&#39;s Blog</title>
+  <title>Yu Zhang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="device mapper调度模块得先说说Device Mapper
-device mapper简介
-Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。
-Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念">
-<meta property="og:type" content="article">
-<meta property="og:title" content="flashcache-3-调度模块及IO流程">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Yu Zhang's Blog">
 <meta property="og:url" content="http://yoursite.com/2017/05/23/flashcache-3-调度模块及IO流程/index.html">
 <meta property="og:site_name" content="Yu Zhang's Blog">
-<meta property="og:description" content="device mapper调度模块得先说说Device Mapper
-device mapper简介
-Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。
-Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念">
-<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-1.jpg">
-<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-2.jpg">
-<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-3.jpg">
-<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-4.jpg">
-<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-5.jpg">
-<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-6.jpg">
-<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-7.jpg">
-<meta property="og:updated_time" content="2017-05-23T11:16:13.047Z">
+<meta property="og:updated_time" content="2017-05-24T01:30:55.937Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="flashcache-3-调度模块及IO流程">
-<meta name="twitter:description" content="device mapper调度模块得先说说Device Mapper
-device mapper简介
-Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。
-Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念">
-<meta name="twitter:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-1.jpg">
+<meta name="twitter:title" content="Yu Zhang's Blog">
   
     <link rel="alternative" href="/atom.xml" title="Yu Zhang&#39;s Blog" type="application/atom+xml">
   
@@ -262,48 +242,10 @@ Device mapper在内核中作为一个块设备驱动被注册,包含三个重要
             <article id="post-flashcache-3-调度模块及IO流程" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      flashcache-3-调度模块及IO流程
-    </h1>
-  
-
-        
-        <a href="/2017/05/23/flashcache-3-调度模块及IO流程/" class="archive-article-date">
-  	<time datetime="2017-05-23T11:08:07.787Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-23</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
     <div class="article-entry" itemprop="articleBody">
    
       <div style="margin-left:-5px">
         
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">flashcache</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">块存储</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
         
 
       </div>
@@ -311,105 +253,9 @@ Device mapper在内核中作为一个块设备驱动被注册,包含三个重要
       <br/><br/>
 
       
-        <h2 id="device-mapper"><a href="#device-mapper" class="headerlink" title="device mapper"></a>device mapper</h2><p>调度模块得先说说Device Mapper</p>
-<h3 id="device-mapper简介"><a href="#device-mapper简介" class="headerlink" title="device mapper简介"></a>device mapper简介</h3><ul>
-<li>Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。</li>
-<li>Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念</li>
-</ul>
-<a id="more"></a>
-<ol>
-<li><p>mapped device </p>
-<p> 逻辑抽象,内核向外提供的逻辑设备，它通过映射表描述的映射关系和target device建立映射。</p>
-</li>
-<li><p>target device</p>
-<p>Target device 表示的是mapped device所映射的物理空间段，对mapped device所表示的逻辑设备来说，就是该逻辑设备映射到的一个物理设备。</p>
-</li>
-<li><p>映射表</p>
-<p> 从Mapped device到一个target device的映射表由一个多元组表示，该多元组由表示mappeddevice逻辑的起始地址、范围、和表示在targetdevice所在物理设备的地址偏移量以及target类型等变量组成</p>
-</li>
-</ol>
-<p>具体如下图<br><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-1.jpg" alt="image"></p>
-<h3 id="device-mapper创建过程"><a href="#device-mapper创建过程" class="headerlink" title="device mapper创建过程"></a>device mapper创建过程</h3><p>1、根据内核向用户空间提供的ioctl 接口传来的参数，用dm-ioctl.c文件中的dev_create函数创建相应的mapped device结构。这个过程很简单，主要是向内核申请必要的内存资源，包括mapped device和为进行IO操作预申请的内存池，通过内核提供的blk_queue_make_request函数注册该mapped device对应的请求队列dm_request。并将该mapped device作为磁盘块设备注册到内核中。</p>
-<p>2、调用dm_hash_insert将创建好的mapped device插入到device mapper中的一个全局hash表中，该表中保存了内核中当前创建的所有mapped device。</p>
-<p>3、用户空间命令通过ioctl调用table_load函数，该函数根据用户空间传来的参数构建指定mapped device的映射表和所映射的target device。该函数先构建相应的dm_table、dm_target结构，再调用dm-table.c中的dm_table_add_target函数根据用户传入的参数初始化这些结构，并且根据参数所指定的target类型，调用相应的target类型的构建函数ctr在内存中构建target device对应的结构，然后再根据所建立的dm_target结构更新dm_table中维护的B树。上述过程完毕后，再将建立好的dm_table添加到mapped device的全局hash表对应的hash_cell结构中。</p>
-<p>4、最后通过ioctl调用do_resume函数建立mapped device和映射表之间的绑定关系，事实上该过程就是通过dm_swap_table函数将当前dm_table结构指针值赋予mapped_device相应的map域中，然后再修改mapped_device表示当前状态的域。<br>通过上述的4个主要步骤，device mapper在内核中就建立一个可以提供给用户使用的mapped device逻辑块设备。</p>
-<p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-2.jpg" alt="image"></p>
-<h3 id="device-mapper具体结构"><a href="#device-mapper具体结构" class="headerlink" title="device mapper具体结构"></a>device mapper具体结构</h3><p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-3.jpg" alt="image"></p>
-<p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-4.jpg" alt="image"></p>
-<h2 id="IO流程"><a href="#IO流程" class="headerlink" title="IO流程"></a>IO流程</h2><p><a href="http://blog.donghao.org/2013/03/20/flashcache%E5%8E%9F%E7%90%86/" target="_blank" rel="external">下面这一段转载自斯巴达第二季博客</a></p>
-<p>一般来说，我们对磁盘的read和write最后都会走到kernel里的submit_bio函数，也就是把io请求变成一个个的bio（bio的介绍看这里），bio是linux内核里文件系统层和block层之间沟通的数据结构（有点像sk_buffer之于网络），到了block层以后，一般是先做generic_make_request把bio变成request，怎么个变法？如果几个bio要读写的区域是连续的，就攒成一个request（一个request下挂多个连续bio，就是通常说的“合并bio请求”）；如果这个bio跟其它bio都连不上，那它自己就创建一个新的request，把自己挂到这个request下。合并bio请求也是有限度的，如果这些连续bio的访问区域加起来超过了一定的大小（在/sys/block/xxx/queue/max_sectors_kb里设置）,那么就不能再合并成一个request了。</p>
-<p>合并后的request会放入每个device对应的queue（一个机械硬盘即使有多个分区，也只有一个queue），之后，磁盘设备驱动程序通过调用peek_request从queue里取出request，进行下一步的处理。</p>
-<p>之所以要把多个bio合并成一个request，是因为机械硬盘在顺序读写时吞吐最大。如果我们换成SSD盘，合并这事儿就没那么必要了，这一点是可选的，在实现设备驱动时，厂商可以选择从kernel的queue里取request，也可以选择自己实现queue的make_request_fn方法，直接拿文件系统层传过来的bio来进行处理（fusionio好像就是这么做的）。</p>
-<p>我曾经弱弱的问过涛哥：既然bio有bio_vec结构指向多个page，那么为什么不干脆把多个bio合并成一个bio呢？何必要多一个request数据结构那么麻烦？<br>涛哥答曰：每个bio有自己的end_io回调，一个bio结束，就会做自己对应的收尾工作，如果你合并成一个bio了，就丧失了这种灵活性。</p>
-<p>linux kernel有一个device mapper框架（以下简称dm框架），linux上的软RAID、multipath等都是通过此框架实现的。dm可以将多个设备聚合成一个虚拟设备提供给用户使用，其原理就是把这个虚拟设备的make_request_fn方法实现成了自己的dm_request，这样所有发往这个虚拟设备的bio都会走进dm_request，然后dm通过判断这个虚拟设备是基于request（request based）的还是基于bio（bio based）的来分别处理：</p>
-<p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-5.jpg" alt="image"></p>
-<p>如果虚拟设备是request based，则和磁盘设备一样走generic_make_request把bio合并成request（如上），注意这些request最后放到的是虚拟设备的queue里，等到虚拟设备通过kblockd调用dm_request_fn时，dm_request_fn里会调用peek_request，从虚拟设备的queue里拿出request，将其clone（clone后的request里的bio指向的page是同一个page，只是分配了新的bio和新的request），然后调用map_request对request做映射（map_request里把map_rq接口暴露给了使用dm框架的开发者），最后把clone后的request发向低层的真实设备。</p>
-<p>如果虚拟设备是bio based，就更简单了，调用_dm_request函数，一样要clone bio，然后调用<strong>map_bio对bio做映射（</strong>map_bio里把map暴露给了使用dm框架的开发者），最后把clone后的bio也是通过generic_make_request发向低层的真实设备，这次generic_make_request生成的request就是放在真实设备的queue里了，这是与request based的不同之处。</p>
-<p>flashcache是基于dm框架实现的，很自然的，是把一个SSD盘和一个机械硬盘聚合成一个虚拟设备供用户使用。<br>flashcache把cache（指SSD盘）分为多个set，每个set里有多个block（默认一个block是4KB，一个set包含512个block，即2MB），set里的block是用lru链表组织起来的，每个block还记录了自己存放的是disk的哪个sector起始的位置里对应的内容（这个起始的sector编号在flashcache的文档里被称为dbn）。<br>disk（这里指机械硬盘）也虚拟的分为多个set只是为了方便做hash。hash算法非常简单，先看访问的是disk的什么位置，相当于在disk的哪个set里，然后模上cache里的set数，结果就是在cache里对应的set编号了。找到cache对应的set后，继续在set的lru表里挨个儿block的比对dbn号，对上了就成功，对不上说明cache里没有缓存要读取的disk内容。<br>例如cache大小为10G，disk大小为100G，用户要读取磁盘上偏移54321MB处的2K内容，那么首先对54321MB这个位置做hash，2MB一个set，对应的set number是27160，cache的总set数为5120，那么 27160 mod 5120 结果为1560，也就是说应该去cache的第1560个cache去找，然后来到cache的1560 set里用 dbn 28479848448 遍历查找lru。</p>
-<p>flashcache主要是实现了dm框架暴露出来的map接口（参考flashcache_map函数），收到bio后，先做hash，然后在cache（这里指SSD盘）里查找:</p>
-<p>A. 如果是读bio<br>1 如果查找成功，直接将结果返回<br>2 如果查找失败，则找set内空闲的block（如果没有空闲的，则用最“旧”的block），直接读取disk里对应的内容返回给用户，返给用户后设置延时任务将读取的内容放入这个空闲block里</p>
-<p>B. 如果是写bio（我们仅列举writeback情况）<br>1 如果查找成功，拿到对应的block<br>2 如果查找失败，拿到对应set里最“旧”的block<br>直接将数据写入此block，返回给用户（用户的write系统调用就可以返回了），完成后将该block的状态设为DIRTY并设置延时任务，任务内容为将cache里的内容写往disk（这样既能让用户的写请求迅速完成，又能一定程度保证数据最终被写往disk）。延时任务完成后，便可以去掉DIRTY标记了。</p>
-<p>flashcache还会不时的将cache的set里长期没被访问的DIRTY的block写往disk，以保证有足够多的干净的block供以后使用。这个“不时的”不是靠定时器实现的，而是通过在flashcache_write_miss、flashcache_read_miss等函数里调用flashcache_clean_set来做到的。</p>
-<h2 id="补充两个问题"><a href="#补充两个问题" class="headerlink" title="补充两个问题"></a>补充两个问题</h2><p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-6.jpg" alt="image"><br><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-7.jpg" alt="image"></p>
-<h2 id="最后补充一下相关的代码"><a href="#最后补充一下相关的代码" class="headerlink" title="最后补充一下相关的代码"></a>最后补充一下相关的代码</h2><ul>
-<li><a href="http://elixir.free-electrons.com/linux/v3.9/source/drivers/md/dm.c#L1354" target="_blank" rel="external">dm.c 代码可以参见</a></li>
-<li>dm-io.h、bio.h以及device-mapper.h等头文件一般在<br><strong>/usr/src/$(shell uname -r)/include/linux</strong>文件夹下</li>
-</ul>
-<p>我们进一步看一下上述三个对象在代码中的具体实现，dm.c 文件定义的 mapped_device 结构用于表示 mapped device，它主要包括该 mapped device 相关的锁，注册的请求队列和一些内存池以及指向它所对应映射表的指针等域。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * Work processed by per-device workqueue.</div><div class="line"> */</div><div class="line">struct mapped_device &#123;</div><div class="line">	struct rw_semaphore io_lock;</div><div class="line">	struct mutex suspend_lock;</div><div class="line">	rwlock_t map_lock;</div><div class="line">	atomic_t holders;</div><div class="line">	atomic_t open_count;</div><div class="line"></div><div class="line">	unsigned long flags;</div><div class="line"></div><div class="line">	struct request_queue *queue;</div><div class="line">	unsigned type;</div><div class="line">	/* Protect queue and type against concurrent access. */</div><div class="line">	struct mutex type_lock;</div><div class="line"></div><div class="line">	struct target_type *immutable_target_type;</div><div class="line"></div><div class="line">	struct gendisk *disk;</div><div class="line">	char name[16];</div><div class="line"></div><div class="line">	void *interface_ptr;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * A list of ios that arrived while we were suspended.</div><div class="line">	 */</div><div class="line">	atomic_t pending[2];</div><div class="line">	wait_queue_head_t wait;</div><div class="line">	struct work_struct work;</div><div class="line">	struct bio_list deferred;</div><div class="line">	spinlock_t deferred_lock;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * Processing queue (flush)</div><div class="line">	 */</div><div class="line">	struct workqueue_struct *wq;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * The current mapping.</div><div class="line">	 */</div><div class="line">	struct dm_table *map;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * io objects are allocated from here.</div><div class="line">	 */</div><div class="line">	mempool_t *io_pool;</div><div class="line"></div><div class="line">	struct bio_set *bs;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * Event handling.</div><div class="line">	 */</div><div class="line">	atomic_t event_nr;</div><div class="line">	wait_queue_head_t eventq;</div><div class="line">	atomic_t uevent_seq;</div><div class="line">	struct list_head uevent_list;</div><div class="line">	spinlock_t uevent_lock; /* Protect access to uevent_list */</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * freeze/thaw support require holding onto a super block</div><div class="line">	 */</div><div class="line">	struct super_block *frozen_sb;</div><div class="line">	struct block_device *bdev;</div><div class="line"></div><div class="line">	/* forced geometry settings */</div><div class="line">	struct hd_geometry geometry;</div><div class="line"></div><div class="line">	/* sysfs handle */</div><div class="line">	struct kobject kobj;</div><div class="line"></div><div class="line">	/* zero-length flush that will be cloned and submitted to targets */</div><div class="line">	struct bio flush_bio;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>Mapped device 对应的映射表是由 dm_table.c 文件中定义的 dm_table 结构表示的，该结构中包含一个 dm_target结构数组，在 dm_table 结构中将这些dm_target 按照 B 树的方式组织起来方便 IO 请求映射时的查找操作。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">struct dm_table &#123;  </div><div class="line">    struct mapped_device *md;  </div><div class="line">    atomic_t holders;  </div><div class="line">    unsigned type;  </div><div class="line">  </div><div class="line">    /* btree table */  </div><div class="line">    unsigned int depth;  </div><div class="line">    unsigned int counts[MAX_DEPTH]; /* in nodes */  </div><div class="line">    sector_t *index[MAX_DEPTH];  </div><div class="line">  </div><div class="line">    unsigned int num_targets;  </div><div class="line">    unsigned int num_allocated;  </div><div class="line">    sector_t *highs;  </div><div class="line">    struct dm_target *targets;  </div><div class="line">  </div><div class="line">    /* </div><div class="line">     * Indicates the rw permissions for the new logical </div><div class="line">     * device.  This should be a combination of FMODE_READ </div><div class="line">     * and FMODE_WRITE. </div><div class="line">     */  </div><div class="line">    fmode_t mode;  </div><div class="line">  </div><div class="line">    /* a list of devices used by this table */  </div><div class="line">    struct list_head devices;  </div><div class="line">  </div><div class="line">    /* events get handed up using this callback */  </div><div class="line">    void (*event_fn)(void *);  </div><div class="line">    void *event_context;  </div><div class="line">  </div><div class="line">    struct dm_md_mempools *mempools;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>dm_target 结构描述了 mapped_device 到它某个 target device 的映射关系，具体记录该结构对应 target device 所映射的 mapped device 逻辑区域的开始地址和范围，同时还包含指向具体 target device 相关操作的 target_type 结构的指针。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">struct dm_target &#123;  </div><div class="line">    struct dm_table *table;  </div><div class="line">    struct target_type *type;  </div><div class="line">  </div><div class="line">    /* target limits */  </div><div class="line">    sector_t begin;  </div><div class="line">    sector_t len;  </div><div class="line">  </div><div class="line">    /* Always a power of 2 */  </div><div class="line">    sector_t split_io;  </div><div class="line">  </div><div class="line">    /* </div><div class="line">     * A number of zero-length barrier requests that will be submitted </div><div class="line">     * to the target for the purpose of flushing cache. </div><div class="line">     * </div><div class="line">     * The request number will be placed in union map_info-&gt;flush_request. </div><div class="line">     * It is a responsibility of the target driver to remap these requests </div><div class="line">     * to the real underlying devices. </div><div class="line">     */  </div><div class="line">    unsigned num_flush_requests;  </div><div class="line">  </div><div class="line">    /* target specific data */  </div><div class="line">    void *private;  </div><div class="line">  </div><div class="line">    /* Used to provide an error string from the ctr */  </div><div class="line">    char *error;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>flashcache中target类型对应target device的结构是struct cache_c</p>
-
+        
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>嘘寒问暖不如来笔巨款<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/zhifubao.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/weixin.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-        <center>
-          <p class="copyright">
-            本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次
-          </p>
-
-          <div style="font-size:12px;border-bottom: #ddd 1px solid; BORDER-LEFT: #ddd 1px solid; background-color: #deebf7; BORDER-TOP: #ddd 1px solid; BORDER-RIGHT: #ddd 1px solid;font-size:15px;width:90%">
-            <div style="margin-top:25px">
-	            <p>
-		            本文由&nbsp;<b>Yu Zhang</b>&nbsp;发表于&nbsp;<a href="https://joystorage.github.io/">Yu Zhang's Blog</a>&nbsp;,采用<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">署名-非商业性使用-禁止演绎 3.0</a>进行许可。<br/>
-		            非商业转载请注明作者及出处。商业转载请联系作者本人。
-	            </p>
-            </div>
-          </div>
-        </center>
             
     </div>
 
@@ -496,7 +342,7 @@ Device mapper在内核中作为一个块设备驱动被注册,包含三个重要
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="flashcache-3-调度模块及IO流程" data-title="flashcache-3-调度模块及IO流程" data-url="http://yoursite.com/2017/05/23/flashcache-3-调度模块及IO流程/"></div>
+	<div class="ds-thread" data-thread-key="flashcache-3-调度模块及IO流程" data-title="" data-url="http://yoursite.com/2017/05/23/flashcache-3-调度模块及IO流程/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -647,14 +493,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flashcache</a>
               </li>
              
@@ -668,6 +506,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">转载</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -691,14 +537,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
               </li>
              
@@ -707,11 +545,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -720,6 +558,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">缓存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
               </li>
              
               <li class="article-tag-list-item">
