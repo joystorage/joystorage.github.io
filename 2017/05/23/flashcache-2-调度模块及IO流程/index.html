@@ -6,30 +6,35 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS) | Yu Zhang&#39;s Blog</title>
+  <title>flashcache-2-调度模块及IO流程 | Yu Zhang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="磁盘阵列多个磁盘通过RAID卡组合起来,组成JBOD（just a bound of Disks,一串磁盘）.JBOD称为磁盘柜,凡是自带RAID控制器的盘柜就叫做磁盘阵列或者盘阵.
-双控制器常用两个控制器来保证磁盘阵列的安全性
-
-Active-Standby热备份  一个作为备份，只有当主控制器故障时副控制器才工作
-Dual-Active双控制器同时工作两个同时工作，当其中一个故障时，另一个仍能">
+  <meta name="description" content="device mapper调度模块得先说说Device Mapper
+device mapper简介
+Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。
+Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念">
 <meta property="og:type" content="article">
-<meta property="og:title" content="存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)">
-<meta property="og:url" content="http://yoursite.com/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/index.html">
+<meta property="og:title" content="flashcache-2-调度模块及IO流程">
+<meta property="og:url" content="http://yoursite.com/2017/05/23/flashcache-2-调度模块及IO流程/index.html">
 <meta property="og:site_name" content="Yu Zhang's Blog">
-<meta property="og:description" content="磁盘阵列多个磁盘通过RAID卡组合起来,组成JBOD（just a bound of Disks,一串磁盘）.JBOD称为磁盘柜,凡是自带RAID控制器的盘柜就叫做磁盘阵列或者盘阵.
-双控制器常用两个控制器来保证磁盘阵列的安全性
-
-Active-Standby热备份  一个作为备份，只有当主控制器故障时副控制器才工作
-Dual-Active双控制器同时工作两个同时工作，当其中一个故障时，另一个仍能">
-<meta property="og:updated_time" content="2017-04-06T07:02:41.791Z">
+<meta property="og:description" content="device mapper调度模块得先说说Device Mapper
+device mapper简介
+Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。
+Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念">
+<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-1.jpg">
+<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-2.jpg">
+<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-3.jpg">
+<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-4.jpg">
+<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-5.jpg">
+<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-6.jpg">
+<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-7.jpg">
+<meta property="og:updated_time" content="2017-05-24T01:36:45.422Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)">
-<meta name="twitter:description" content="磁盘阵列多个磁盘通过RAID卡组合起来,组成JBOD（just a bound of Disks,一串磁盘）.JBOD称为磁盘柜,凡是自带RAID控制器的盘柜就叫做磁盘阵列或者盘阵.
-双控制器常用两个控制器来保证磁盘阵列的安全性
-
-Active-Standby热备份  一个作为备份，只有当主控制器故障时副控制器才工作
-Dual-Active双控制器同时工作两个同时工作，当其中一个故障时，另一个仍能">
+<meta name="twitter:title" content="flashcache-2-调度模块及IO流程">
+<meta name="twitter:description" content="device mapper调度模块得先说说Device Mapper
+device mapper简介
+Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。
+Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念">
+<meta name="twitter:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Yu Zhang&#39;s Blog" type="application/atom+xml">
   
@@ -254,20 +259,20 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-flashcache-2-调度模块及IO流程" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)
+      flashcache-2-调度模块及IO流程
     </h1>
   
 
         
-        <a href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/" class="archive-article-date">
-  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
+        <a href="/2017/05/23/flashcache-2-调度模块及IO流程/" class="archive-article-date">
+  	<time datetime="2017-05-23T11:08:07.787Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-23</time>
 </a>
         
  
@@ -285,15 +290,15 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">flashcache</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">存储阵列</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">存储系统</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">块存储</a>
         		</li>
       		
 		</ul>
@@ -306,76 +311,59 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
       <br/><br/>
 
       
-        <h1 id="磁盘阵列"><a href="#磁盘阵列" class="headerlink" title="磁盘阵列"></a>磁盘阵列</h1><p>多个磁盘通过RAID卡组合起来,组成JBOD（just a bound of Disks,一串磁盘）.<strong>JBOD称为磁盘柜,凡是自带RAID控制器的盘柜就叫做磁盘阵列或者盘阵.</strong></p>
-<h4 id="双控制器"><a href="#双控制器" class="headerlink" title="双控制器"></a>双控制器</h4><p>常用两个控制器来保证磁盘阵列的安全性</p>
-<ul>
-<li>Active-Standby热备份<br>  一个作为备份，只有当主控制器故障时副控制器才工作</li>
-<li>Dual-Active双控制器同时工作<br>两个同时工作，当其中一个故障时，另一个仍能正常接管整个阵列的管理.</li>
-<li>Split Brain脑分裂<br>其中一个控制器检测不到另一个控制器的存在,则向电源控制器发送信号，重启对方并进入Standby状态.</li>
+        <h2 id="device-mapper"><a href="#device-mapper" class="headerlink" title="device mapper"></a>device mapper</h2><p>调度模块得先说说Device Mapper</p>
+<h3 id="device-mapper简介"><a href="#device-mapper简介" class="headerlink" title="device mapper简介"></a>device mapper简介</h3><ul>
+<li>Device Mapper（DM）是Linux2.6全面引入的块设备新构架，通过DM可以灵活地管理系统中所有的真实或虚拟的块设备。</li>
+<li>Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念</li>
 </ul>
 <a id="more"></a>
-<h1 id="DAS、SAN和NAS"><a href="#DAS、SAN和NAS" class="headerlink" title="DAS、SAN和NAS"></a>DAS、SAN和NAS</h1><h3 id="DAS-Direct-Attached-Storage-直接附加网络"><a href="#DAS-Direct-Attached-Storage-直接附加网络" class="headerlink" title="DAS (Direct Attached  Storage)直接附加网络"></a>DAS (Direct Attached  Storage)直接附加网络</h3><p>直连式存储与服务器主机之间的连接通道通常采用SCSI连接，随着服务器CPU的处理能力越来越强，存储硬盘空间越来越大，阵列的硬盘数量越来越多，SCSI通道将会成为IO瓶颈；服务器主机SCSI ID资源有限，能够建立的SCSI通道连接有限。<br><strong>由于存储设备通过电缆直接与计算机相连，系统存取访问I/O请求直接在计算机和存储设备之间进行，故会受如下因素制约</strong></p>
-<ul>
-<li>硬盘</li>
-<li>内存缓存</li>
-<li>虚拟内存</li>
-<li>存储控制器</li>
-<li>RAID级别以及读写模式</li>
-<li>总线长度</li>
-</ul>
-<p><strong>DAS面临的挑战</strong></p>
-<ul>
-<li>存储与主机必须直连</li>
-<li>数据可用性<ul>
-<li>单节点故障</li>
-<li>数据资源的共享</li>
-</ul>
+<ol>
+<li><p>mapped device </p>
+<p> 逻辑抽象,内核向外提供的逻辑设备，它通过映射表描述的映射关系和target device建立映射。</p>
 </li>
-<li>可扩展性有限<ul>
-<li>连接的端口和主机有限</li>
-<li>有限的可寻址范围（即容量有上限）</li>
-<li>距离限制</li>
-</ul>
+<li><p>target device</p>
+<p>Target device 表示的是mapped device所映射的物理空间段，对mapped device所表示的逻辑设备来说，就是该逻辑设备映射到的一个物理设备。</p>
 </li>
-<li>需要停机维护</li>
-</ul>
-<h3 id="NAS-Network-Attached-Storage-附网存储"><a href="#NAS-Network-Attached-Storage-附网存储" class="headerlink" title="NAS(Network Attached Storage)附网存储"></a>NAS(Network Attached Storage)附网存储</h3><p>由于DAS存在上述的一系列限制,网络存储渐渐浮出水面,并得到了广泛应用.</p>
-<ul>
-<li><strong>网络存储的本质是通过网络建立用户与存储设备之间的连接，通过网络传输数据.</strong></li>
-<li>技术上通过软件提供高性能的文件服务.</li>
-<li><strong>NAS本质是一个专用的文件服务器，NAS不一定是盘阵，一台主机只要它有自己的磁盘和文件系统，并向外提供访问文件系统的接口（如NFS、CIFS等），就可以做成NAS.</strong></li>
-<li><strong>NAS其实就是处于以太网上的一台利用NFS、CIFS等网络文件系统的文件共享服务器.</strong></li>
-<li>一种瘦服务器方式的存储设备</li>
-</ul>
-<h3 id="NAS传输协议"><a href="#NAS传输协议" class="headerlink" title="NAS传输协议"></a>NAS传输协议</h3><ul>
-<li>CIFS(Common Internet File System)<ul>
-<li>微软定义的一套规范</li>
-<li>基于Windows NT的公共互联网文件系统</li>
-<li>使用TCP协议</li>
-<li>在服务器端验证用户身份，比NFS安全</li>
-</ul>
+<li><p>映射表</p>
+<p> 从Mapped device到一个target device的映射表由一个多元组表示，该多元组由表示mappeddevice逻辑的起始地址、范围、和表示在targetdevice所在物理设备的地址偏移量以及target类型等变量组成</p>
 </li>
-<li>NFS(Network File System)<ul>
-<li>Unix/Linux使用的协议</li>
-<li>底层使用TCP或者UDP协议</li>
-<li>开销远远小于CIFS</li>
-<li>在用户端安全登录</li>
+</ol>
+<p>具体如下图<br><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-1.jpg" alt="image"></p>
+<h3 id="device-mapper创建过程"><a href="#device-mapper创建过程" class="headerlink" title="device mapper创建过程"></a>device mapper创建过程</h3><p>1、根据内核向用户空间提供的ioctl 接口传来的参数，用dm-ioctl.c文件中的dev_create函数创建相应的mapped device结构。这个过程很简单，主要是向内核申请必要的内存资源，包括mapped device和为进行IO操作预申请的内存池，通过内核提供的blk_queue_make_request函数注册该mapped device对应的请求队列dm_request。并将该mapped device作为磁盘块设备注册到内核中。</p>
+<p>2、调用dm_hash_insert将创建好的mapped device插入到device mapper中的一个全局hash表中，该表中保存了内核中当前创建的所有mapped device。</p>
+<p>3、用户空间命令通过ioctl调用table_load函数，该函数根据用户空间传来的参数构建指定mapped device的映射表和所映射的target device。该函数先构建相应的dm_table、dm_target结构，再调用dm-table.c中的dm_table_add_target函数根据用户传入的参数初始化这些结构，并且根据参数所指定的target类型，调用相应的target类型的构建函数ctr在内存中构建target device对应的结构，然后再根据所建立的dm_target结构更新dm_table中维护的B树。上述过程完毕后，再将建立好的dm_table添加到mapped device的全局hash表对应的hash_cell结构中。</p>
+<p>4、最后通过ioctl调用do_resume函数建立mapped device和映射表之间的绑定关系，事实上该过程就是通过dm_swap_table函数将当前dm_table结构指针值赋予mapped_device相应的map域中，然后再修改mapped_device表示当前状态的域。<br>通过上述的4个主要步骤，device mapper在内核中就建立一个可以提供给用户使用的mapped device逻辑块设备。</p>
+<p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-2.jpg" alt="image"></p>
+<h3 id="device-mapper具体结构"><a href="#device-mapper具体结构" class="headerlink" title="device mapper具体结构"></a>device mapper具体结构</h3><p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-3.jpg" alt="image"></p>
+<p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-4.jpg" alt="image"></p>
+<h2 id="IO流程"><a href="#IO流程" class="headerlink" title="IO流程"></a>IO流程</h2><p><a href="http://blog.donghao.org/2013/03/20/flashcache%E5%8E%9F%E7%90%86/" target="_blank" rel="external">下面这一段转载自斯巴达第二季博客</a></p>
+<p>一般来说，我们对磁盘的read和write最后都会走到kernel里的submit_bio函数，也就是把io请求变成一个个的bio（bio的介绍看这里），bio是linux内核里文件系统层和block层之间沟通的数据结构（有点像sk_buffer之于网络），到了block层以后，一般是先做generic_make_request把bio变成request，怎么个变法？如果几个bio要读写的区域是连续的，就攒成一个request（一个request下挂多个连续bio，就是通常说的“合并bio请求”）；如果这个bio跟其它bio都连不上，那它自己就创建一个新的request，把自己挂到这个request下。合并bio请求也是有限度的，如果这些连续bio的访问区域加起来超过了一定的大小（在/sys/block/xxx/queue/max_sectors_kb里设置）,那么就不能再合并成一个request了。</p>
+<p>合并后的request会放入每个device对应的queue（一个机械硬盘即使有多个分区，也只有一个queue），之后，磁盘设备驱动程序通过调用peek_request从queue里取出request，进行下一步的处理。</p>
+<p>之所以要把多个bio合并成一个request，是因为机械硬盘在顺序读写时吞吐最大。如果我们换成SSD盘，合并这事儿就没那么必要了，这一点是可选的，在实现设备驱动时，厂商可以选择从kernel的queue里取request，也可以选择自己实现queue的make_request_fn方法，直接拿文件系统层传过来的bio来进行处理（fusionio好像就是这么做的）。</p>
+<p>我曾经弱弱的问过涛哥：既然bio有bio_vec结构指向多个page，那么为什么不干脆把多个bio合并成一个bio呢？何必要多一个request数据结构那么麻烦？<br>涛哥答曰：每个bio有自己的end_io回调，一个bio结束，就会做自己对应的收尾工作，如果你合并成一个bio了，就丧失了这种灵活性。</p>
+<p>linux kernel有一个device mapper框架（以下简称dm框架），linux上的软RAID、multipath等都是通过此框架实现的。dm可以将多个设备聚合成一个虚拟设备提供给用户使用，其原理就是把这个虚拟设备的make_request_fn方法实现成了自己的dm_request，这样所有发往这个虚拟设备的bio都会走进dm_request，然后dm通过判断这个虚拟设备是基于request（request based）的还是基于bio（bio based）的来分别处理：</p>
+<p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-5.jpg" alt="image"></p>
+<p>如果虚拟设备是request based，则和磁盘设备一样走generic_make_request把bio合并成request（如上），注意这些request最后放到的是虚拟设备的queue里，等到虚拟设备通过kblockd调用dm_request_fn时，dm_request_fn里会调用peek_request，从虚拟设备的queue里拿出request，将其clone（clone后的request里的bio指向的page是同一个page，只是分配了新的bio和新的request），然后调用map_request对request做映射（map_request里把map_rq接口暴露给了使用dm框架的开发者），最后把clone后的request发向低层的真实设备。</p>
+<p>如果虚拟设备是bio based，就更简单了，调用_dm_request函数，一样要clone bio，然后调用<strong>map_bio对bio做映射（</strong>map_bio里把map暴露给了使用dm框架的开发者），最后把clone后的bio也是通过generic_make_request发向低层的真实设备，这次generic_make_request生成的request就是放在真实设备的queue里了，这是与request based的不同之处。</p>
+<p>flashcache是基于dm框架实现的，很自然的，是把一个SSD盘和一个机械硬盘聚合成一个虚拟设备供用户使用。<br>flashcache把cache（指SSD盘）分为多个set，每个set里有多个block（默认一个block是4KB，一个set包含512个block，即2MB），set里的block是用lru链表组织起来的，每个block还记录了自己存放的是disk的哪个sector起始的位置里对应的内容（这个起始的sector编号在flashcache的文档里被称为dbn）。<br>disk（这里指机械硬盘）也虚拟的分为多个set只是为了方便做hash。hash算法非常简单，先看访问的是disk的什么位置，相当于在disk的哪个set里，然后模上cache里的set数，结果就是在cache里对应的set编号了。找到cache对应的set后，继续在set的lru表里挨个儿block的比对dbn号，对上了就成功，对不上说明cache里没有缓存要读取的disk内容。</p>
+<p>例如cache大小为10G，disk大小为100G，用户要读取磁盘上偏移54321MB处的2K内容，那么首先对54321MB这个位置做hash，2MB一个set，对应的set number是27160，cache的总set数为5120，那么 27160 mod 5120 结果为1560，也就是说应该去cache的第1560个set中去找，然后来到cache的1560 set里用 dbn 111249408 遍历查找lru。<br>其实，新版本的flashcache在组相联算法上做了改进，如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * Map a block from the source device to a block in the cache device.</div><div class="line"> */</div><div class="line">unsigned long </div><div class="line">hash_block(struct cache_c *dmc, sector_t dbn)</div><div class="line">&#123;</div><div class="line">	unsigned long set_number, value;</div><div class="line">        int num_cache_sets = dmc-&gt;size &gt;&gt; dmc-&gt;assoc_shift;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * Starting in Flashcache SSD Version 3 :</div><div class="line">	 * We map a sequential cluster of disk_assoc blocks onto a given set.</div><div class="line">	 * But each disk_assoc cluster can be randomly placed in any set.</div><div class="line">	 * But if we are running on an older on-ssd cache, we preserve old</div><div class="line">	 * behavior.</div><div class="line">	 */</div><div class="line">	if (dmc-&gt;on_ssd_version &lt; 3 || dmc-&gt;disk_assoc == 0) &#123;</div><div class="line">		value = (unsigned long)</div><div class="line">			(dbn &gt;&gt; (dmc-&gt;block_shift + dmc-&gt;assoc_shift));</div><div class="line">	&#125; else &#123;//新版本对flashcache组相联的改进</div><div class="line">		/* Shift out the low disk_assoc bits */</div><div class="line">		value = (unsigned long) (dbn &gt;&gt; dmc-&gt;disk_assoc_shift);</div><div class="line">		/* Then place it in a random set */</div><div class="line">		value = jhash_1word(value, 0xbeef);</div><div class="line">	&#125;</div><div class="line">	set_number = value % num_cache_sets;</div><div class="line">	DPRINTK(&quot;Hash: %llu(%lu)-&gt;%lu&quot;, dbn, value, set_number);</div><div class="line">	return set_number;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>flashcache主要是实现了dm框架暴露出来的map接口（参考flashcache_map函数），收到bio后，先做hash，然后在cache（这里指SSD盘）里查找:</p>
+<p>A. 如果是读bio<br>1 如果查找成功，直接将结果返回<br>2 如果查找失败，则找set内空闲的block（如果没有空闲的，则用最“旧”的block），直接读取disk里对应的内容返回给用户，返给用户后设置延时任务将读取的内容放入这个空闲block里</p>
+<p>B. 如果是写bio（我们仅列举writeback情况）<br>1 如果查找成功，拿到对应的block<br>2 如果查找失败，拿到对应set里最“旧”的block<br>直接将数据写入此block，返回给用户（用户的write系统调用就可以返回了），完成后将该block的状态设为DIRTY并设置延时任务，任务内容为将cache里的内容写往disk（这样既能让用户的写请求迅速完成，又能一定程度保证数据最终被写往disk）。延时任务完成后，便可以去掉DIRTY标记了。</p>
+<p>flashcache还会不时的将cache的set里长期没被访问的DIRTY的block写往disk，以保证有足够多的干净的block供以后使用。这个“不时的”不是靠定时器实现的，而是通过在flashcache_write_miss、flashcache_read_miss等函数里调用flashcache_clean_set来做到的。</p>
+<h2 id="补充两个问题"><a href="#补充两个问题" class="headerlink" title="补充两个问题"></a>补充两个问题</h2><p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-6.jpg" alt="image"><br><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-3-7.jpg" alt="image"></p>
+<h2 id="最后补充一下相关的代码"><a href="#最后补充一下相关的代码" class="headerlink" title="最后补充一下相关的代码"></a>最后补充一下相关的代码</h2><ul>
+<li><a href="http://elixir.free-electrons.com/linux/v3.9/source/drivers/md/dm.c#L1354" target="_blank" rel="external">dm.c 代码可以参见</a></li>
+<li>dm-io.h、bio.h以及device-mapper.h等头文件一般在<br><strong>/usr/src/$(shell uname -r)/include/linux</strong>文件夹下</li>
 </ul>
-</li>
-</ul>
-<h3 id="SAN（Storage-Area-Net）存储局域网"><a href="#SAN（Storage-Area-Net）存储局域网" class="headerlink" title="SAN（Storage Area Net）存储局域网"></a>SAN（Storage Area Net）存储局域网</h3><ul>
-<li>SAN采用网络互连的存储区域网.</li>
-<li>FC-SAN得到了广泛应用，使用FC协议网络通讯.</li>
-<li>SAN只支持SCSI协议，SCSI语言及数据可以用FC协议传递。</li>
-</ul>
-<h3 id="NAS和SAN对比"><a href="#NAS和SAN对比" class="headerlink" title="NAS和SAN对比"></a>NAS和SAN对比</h3><ul>
-<li>速度对比<br>除非NAS使用快于内存的网络方式与主机通讯，否则其速度永远无法超过SAN架构。但是如果后端磁盘有瓶颈，那么<strong>NAS用网络代替内存的方法产生的性能降低</strong>就可以忽略。</li>
-<li>成本对比<br>NAS比SAN成本低很多</li>
-<li>可扩展性<br>NAS可扩展性强于SAN，只要有IP的地方，NAS 就可以提供服务，且容易部署和配置。NAS设备一般都可以提供多种协议访问数据，而SAN只能使用SCSI协议访问。</li>
-<li>数据共享<br>NAS可以被多个客户端访问，SAN除非安装了专门的集群管理系统或集群文件系统模块，否则不能共享某个LUN.</li>
-<li>SAN和NAS的选择<br>CPU不密集但是大块连续IO密集的应用选择SAN比较合适<br>对于IO不密集的随机小块IO场景选择NAS，<strong>NAS的根本瓶颈是底层链路的速度，若为高速以太网,首选NAS.</strong></li>
-<li>备注<br>目前普遍的架构是文件系统和磁盘控制器驱动程序都运行在应用服务器主机上。文件系统向卷发送的请求是通过内存来传递的，而主机向磁盘（LUN）发送的请求是通过FC网络来传递的。（SAN）</li>
-</ul>
+<p>我们进一步看一下上述三个对象在代码中的具体实现，dm.c 文件定义的 mapped_device 结构用于表示 mapped device，它主要包括该 mapped device 相关的锁，注册的请求队列和一些内存池以及指向它所对应映射表的指针等域。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line"> * Work processed by per-device workqueue.</div><div class="line"> */</div><div class="line">struct mapped_device &#123;</div><div class="line">	struct rw_semaphore io_lock;</div><div class="line">	struct mutex suspend_lock;</div><div class="line">	rwlock_t map_lock;</div><div class="line">	atomic_t holders;</div><div class="line">	atomic_t open_count;</div><div class="line"></div><div class="line">	unsigned long flags;</div><div class="line"></div><div class="line">	struct request_queue *queue;</div><div class="line">	unsigned type;</div><div class="line">	/* Protect queue and type against concurrent access. */</div><div class="line">	struct mutex type_lock;</div><div class="line"></div><div class="line">	struct target_type *immutable_target_type;</div><div class="line"></div><div class="line">	struct gendisk *disk;</div><div class="line">	char name[16];</div><div class="line"></div><div class="line">	void *interface_ptr;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * A list of ios that arrived while we were suspended.</div><div class="line">	 */</div><div class="line">	atomic_t pending[2];</div><div class="line">	wait_queue_head_t wait;</div><div class="line">	struct work_struct work;</div><div class="line">	struct bio_list deferred;</div><div class="line">	spinlock_t deferred_lock;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * Processing queue (flush)</div><div class="line">	 */</div><div class="line">	struct workqueue_struct *wq;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * The current mapping.</div><div class="line">	 */</div><div class="line">	struct dm_table *map;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * io objects are allocated from here.</div><div class="line">	 */</div><div class="line">	mempool_t *io_pool;</div><div class="line"></div><div class="line">	struct bio_set *bs;</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * Event handling.</div><div class="line">	 */</div><div class="line">	atomic_t event_nr;</div><div class="line">	wait_queue_head_t eventq;</div><div class="line">	atomic_t uevent_seq;</div><div class="line">	struct list_head uevent_list;</div><div class="line">	spinlock_t uevent_lock; /* Protect access to uevent_list */</div><div class="line"></div><div class="line">	/*</div><div class="line">	 * freeze/thaw support require holding onto a super block</div><div class="line">	 */</div><div class="line">	struct super_block *frozen_sb;</div><div class="line">	struct block_device *bdev;</div><div class="line"></div><div class="line">	/* forced geometry settings */</div><div class="line">	struct hd_geometry geometry;</div><div class="line"></div><div class="line">	/* sysfs handle */</div><div class="line">	struct kobject kobj;</div><div class="line"></div><div class="line">	/* zero-length flush that will be cloned and submitted to targets */</div><div class="line">	struct bio flush_bio;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>Mapped device 对应的映射表是由 dm_table.c 文件中定义的 dm_table 结构表示的，该结构中包含一个 dm_target结构数组，在 dm_table 结构中将这些dm_target 按照 B 树的方式组织起来方便 IO 请求映射时的查找操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">struct dm_table &#123;  </div><div class="line">    struct mapped_device *md;  </div><div class="line">    atomic_t holders;  </div><div class="line">    unsigned type;  </div><div class="line">  </div><div class="line">    /* btree table */  </div><div class="line">    unsigned int depth;  </div><div class="line">    unsigned int counts[MAX_DEPTH]; /* in nodes */  </div><div class="line">    sector_t *index[MAX_DEPTH];  </div><div class="line">  </div><div class="line">    unsigned int num_targets;  </div><div class="line">    unsigned int num_allocated;  </div><div class="line">    sector_t *highs;  </div><div class="line">    struct dm_target *targets;  </div><div class="line">  </div><div class="line">    /* </div><div class="line">     * Indicates the rw permissions for the new logical </div><div class="line">     * device.  This should be a combination of FMODE_READ </div><div class="line">     * and FMODE_WRITE. </div><div class="line">     */  </div><div class="line">    fmode_t mode;  </div><div class="line">  </div><div class="line">    /* a list of devices used by this table */  </div><div class="line">    struct list_head devices;  </div><div class="line">  </div><div class="line">    /* events get handed up using this callback */  </div><div class="line">    void (*event_fn)(void *);  </div><div class="line">    void *event_context;  </div><div class="line">  </div><div class="line">    struct dm_md_mempools *mempools;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>dm_target 结构描述了 mapped_device 到它某个 target device 的映射关系，具体记录该结构对应 target device 所映射的 mapped device 逻辑区域的开始地址和范围，同时还包含指向具体 target device 相关操作的 target_type 结构的指针。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">struct dm_target &#123;  </div><div class="line">    struct dm_table *table;  </div><div class="line">    struct target_type *type;  </div><div class="line">  </div><div class="line">    /* target limits */  </div><div class="line">    sector_t begin;  </div><div class="line">    sector_t len;  </div><div class="line">  </div><div class="line">    /* Always a power of 2 */  </div><div class="line">    sector_t split_io;  </div><div class="line">  </div><div class="line">    /* </div><div class="line">     * A number of zero-length barrier requests that will be submitted </div><div class="line">     * to the target for the purpose of flushing cache. </div><div class="line">     * </div><div class="line">     * The request number will be placed in union map_info-&gt;flush_request. </div><div class="line">     * It is a responsibility of the target driver to remap these requests </div><div class="line">     * to the real underlying devices. </div><div class="line">     */  </div><div class="line">    unsigned num_flush_requests;  </div><div class="line">  </div><div class="line">    /* target specific data */  </div><div class="line">    void *private;  </div><div class="line">  </div><div class="line">    /* Used to provide an error string from the ctr */  </div><div class="line">    char *error;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>flashcache中target类型对应target device的结构是struct cache_c</p>
 
       
 
@@ -479,7 +467,7 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/23/flashcache-2-调度模块及IO流程/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -494,18 +482,18 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
   
 <nav id="article-nav">
   
-    <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/05/24/flashcache-3-底层存储模块/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          存储相关-2-RAID、虚拟磁盘、卷和文件系统
+          flashcache-3-底层存储模块
         
       </div>
     </a>
   
   
-    <a href="/2017/04/03/存储相关-4-虚拟化与系统IO路径优化/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">存储相关-4-虚拟化与系统IO路径优化</div>
+    <a href="/2017/05/23/flashcache-1-入门与安装/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">flashcache-1-入门与安装</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -519,7 +507,7 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)" data-title="存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)" data-url="http://yoursite.com/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/"></div>
+	<div class="ds-thread" data-thread-key="flashcache-2-调度模块及IO流程" data-title="flashcache-2-调度模块及IO流程" data-url="http://yoursite.com/2017/05/23/flashcache-2-调度模块及IO流程/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

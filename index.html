@@ -240,19 +240,115 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-flashcache-3-调度模块及IO流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-flashcache-3-底层存储模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/23/flashcache-3-调度模块及IO流程/">flashcache-3-调度模块及IO流程</a>
+      <a class="article-title" href="/2017/05/24/flashcache-3-底层存储模块/">flashcache-3-底层存储模块</a>
     </h1>
   
 
         
-        <a href="/2017/05/23/flashcache-3-调度模块及IO流程/" class="archive-article-date">
+        <a href="/2017/05/24/flashcache-3-底层存储模块/" class="archive-article-date">
+  	<time datetime="2017-05-24T01:37:39.432Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">flashcache</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">块存储</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <p><a href="http://www.cnblogs.com/wuchanming/p/3813491.html/">转载自Jessica程序猿博客</a></p>
+<p>flashcache中跟底层存储模块分为以下两类：</p>
+<p>1）磁盘跟内存的交互</p>
+<p>2）磁盘跟磁盘之前的交互</p>
+<p>比如说读不命中时就是直接从磁盘读，属于第1种情况，那读命中呢？也是属于第1种情况，不过这时候是从SSD读。磁盘跟磁盘之间交互是用于写脏数据，将SSD中脏cache块拷贝到磁盘上去。现在介绍下两种情况使用的接口函数，这样后面在看读写流程时看到这两个函数就十分亲切了，并且清楚地知道数据是从哪里流向哪里。</p>
+        
+          <a class="article-more-a" href="/2017/05/24/flashcache-3-底层存储模块/#more">more >></a>
+        
+      
+
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/24/flashcache-3-底层存储模块/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flashcache-2-调度模块及IO流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/23/flashcache-2-调度模块及IO流程/">flashcache-2-调度模块及IO流程</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/23/flashcache-2-调度模块及IO流程/" class="archive-article-date">
   	<time datetime="2017-05-23T11:08:07.787Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-23</time>
 </a>
         
@@ -298,7 +394,7 @@
 <li>Device mapper在内核中作为一个块设备驱动被注册,包含三个重要的对象概念</li>
 </ul>
         
-          <a class="article-more-a" href="/2017/05/23/flashcache-3-调度模块及IO流程/#more">more >></a>
+          <a class="article-more-a" href="/2017/05/23/flashcache-2-调度模块及IO流程/#more">more >></a>
         
       
 
@@ -311,7 +407,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/23/flashcache-3-调度模块及IO流程/">查看全文 >></a>
+          <a class="article-more-a" href="/2017/05/23/flashcache-2-调度模块及IO流程/">查看全文 >></a>
         </p>
       
 
@@ -404,102 +500,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/05/23/flashcache-1-入门与安装/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flashcache-2-底层存储模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/23/flashcache-2-底层存储模块/">flashcache-2-底层存储模块</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/23/flashcache-2-底层存储模块/" class="archive-article-date">
-  	<time datetime="2017-05-23T07:06:31.450Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-23</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">flashcache</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">块存储</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <p><a href="http://www.cnblogs.com/wuchanming/p/3813491.html/">转载自Jessica程序猿博客</a></p>
-<p>flashcache中跟底层存储模块分为以下两类：</p>
-<p>1）磁盘跟内存的交互</p>
-<p>2）磁盘跟磁盘之前的交互</p>
-<p>比如说读不命中时就是直接从磁盘读，属于第1种情况，那读命中呢？也是属于第1种情况，不过这时候是从SSD读。磁盘跟磁盘之间交互是用于写脏数据，将SSD中脏cache块拷贝到磁盘上去。现在介绍下两种情况使用的接口函数，这样后面在看读写流程时看到这两个函数就十分亲切了，并且清楚地知道数据是从哪里流向哪里。</p>
-        
-          <a class="article-more-a" href="/2017/05/23/flashcache-2-底层存储模块/#more">more >></a>
-        
-      
-
-            
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/23/flashcache-2-底层存储模块/">查看全文 >></a>
         </p>
       
 
@@ -1278,6 +1278,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flashcache</a>
               </li>
              
@@ -1291,14 +1299,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1318,15 +1318,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">RAID</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">

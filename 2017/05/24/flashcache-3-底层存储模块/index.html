@@ -6,30 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS) | Yu Zhang&#39;s Blog</title>
+  <title>flashcache-3-底层存储模块 | Yu Zhang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="磁盘阵列多个磁盘通过RAID卡组合起来,组成JBOD（just a bound of Disks,一串磁盘）.JBOD称为磁盘柜,凡是自带RAID控制器的盘柜就叫做磁盘阵列或者盘阵.
-双控制器常用两个控制器来保证磁盘阵列的安全性
-
-Active-Standby热备份  一个作为备份，只有当主控制器故障时副控制器才工作
-Dual-Active双控制器同时工作两个同时工作，当其中一个故障时，另一个仍能">
+  <meta name="description" content="转载自Jessica程序猿博客
+flashcache中跟底层存储模块分为以下两类：
+1）磁盘跟内存的交互
+2）磁盘跟磁盘之前的交互
+比如说读不命中时就是直接从磁盘读，属于第1种情况，那读命中呢？也是属于第1种情况，不过这时候是从SSD读。磁盘跟磁盘之间交互是用于写脏数据，将SSD中脏cache块拷贝到磁盘上去。现在介绍下两种情况使用的接口函数，这样后面在看读写流程时看到这两个函数就十分亲切了，并且">
 <meta property="og:type" content="article">
-<meta property="og:title" content="存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)">
-<meta property="og:url" content="http://yoursite.com/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/index.html">
+<meta property="og:title" content="flashcache-3-底层存储模块">
+<meta property="og:url" content="http://yoursite.com/2017/05/24/flashcache-3-底层存储模块/index.html">
 <meta property="og:site_name" content="Yu Zhang's Blog">
-<meta property="og:description" content="磁盘阵列多个磁盘通过RAID卡组合起来,组成JBOD（just a bound of Disks,一串磁盘）.JBOD称为磁盘柜,凡是自带RAID控制器的盘柜就叫做磁盘阵列或者盘阵.
-双控制器常用两个控制器来保证磁盘阵列的安全性
-
-Active-Standby热备份  一个作为备份，只有当主控制器故障时副控制器才工作
-Dual-Active双控制器同时工作两个同时工作，当其中一个故障时，另一个仍能">
-<meta property="og:updated_time" content="2017-04-06T07:02:41.791Z">
+<meta property="og:description" content="转载自Jessica程序猿博客
+flashcache中跟底层存储模块分为以下两类：
+1）磁盘跟内存的交互
+2）磁盘跟磁盘之前的交互
+比如说读不命中时就是直接从磁盘读，属于第1种情况，那读命中呢？也是属于第1种情况，不过这时候是从SSD读。磁盘跟磁盘之间交互是用于写脏数据，将SSD中脏cache块拷贝到磁盘上去。现在介绍下两种情况使用的接口函数，这样后面在看读写流程时看到这两个函数就十分亲切了，并且">
+<meta property="og:updated_time" content="2017-05-24T01:37:14.360Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)">
-<meta name="twitter:description" content="磁盘阵列多个磁盘通过RAID卡组合起来,组成JBOD（just a bound of Disks,一串磁盘）.JBOD称为磁盘柜,凡是自带RAID控制器的盘柜就叫做磁盘阵列或者盘阵.
-双控制器常用两个控制器来保证磁盘阵列的安全性
-
-Active-Standby热备份  一个作为备份，只有当主控制器故障时副控制器才工作
-Dual-Active双控制器同时工作两个同时工作，当其中一个故障时，另一个仍能">
+<meta name="twitter:title" content="flashcache-3-底层存储模块">
+<meta name="twitter:description" content="转载自Jessica程序猿博客
+flashcache中跟底层存储模块分为以下两类：
+1）磁盘跟内存的交互
+2）磁盘跟磁盘之前的交互
+比如说读不命中时就是直接从磁盘读，属于第1种情况，那读命中呢？也是属于第1种情况，不过这时候是从SSD读。磁盘跟磁盘之间交互是用于写脏数据，将SSD中脏cache块拷贝到磁盘上去。现在介绍下两种情况使用的接口函数，这样后面在看读写流程时看到这两个函数就十分亲切了，并且">
   
     <link rel="alternative" href="/atom.xml" title="Yu Zhang&#39;s Blog" type="application/atom+xml">
   
@@ -254,20 +254,20 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-flashcache-3-底层存储模块" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)
+      flashcache-3-底层存储模块
     </h1>
   
 
         
-        <a href="/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/" class="archive-article-date">
-  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
+        <a href="/2017/05/24/flashcache-3-底层存储模块/" class="archive-article-date">
+  	<time datetime="2017-05-24T01:37:39.432Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
 </a>
         
  
@@ -285,15 +285,19 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">flashcache</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">存储阵列</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">块存储</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">存储系统</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
         		</li>
       		
 		</ul>
@@ -306,76 +310,55 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
       <br/><br/>
 
       
-        <h1 id="磁盘阵列"><a href="#磁盘阵列" class="headerlink" title="磁盘阵列"></a>磁盘阵列</h1><p>多个磁盘通过RAID卡组合起来,组成JBOD（just a bound of Disks,一串磁盘）.<strong>JBOD称为磁盘柜,凡是自带RAID控制器的盘柜就叫做磁盘阵列或者盘阵.</strong></p>
-<h4 id="双控制器"><a href="#双控制器" class="headerlink" title="双控制器"></a>双控制器</h4><p>常用两个控制器来保证磁盘阵列的安全性</p>
-<ul>
-<li>Active-Standby热备份<br>  一个作为备份，只有当主控制器故障时副控制器才工作</li>
-<li>Dual-Active双控制器同时工作<br>两个同时工作，当其中一个故障时，另一个仍能正常接管整个阵列的管理.</li>
-<li>Split Brain脑分裂<br>其中一个控制器检测不到另一个控制器的存在,则向电源控制器发送信号，重启对方并进入Standby状态.</li>
-</ul>
+        <p><a href="http://www.cnblogs.com/wuchanming/p/3813491.html/" target="_blank" rel="external">转载自Jessica程序猿博客</a></p>
+<p>flashcache中跟底层存储模块分为以下两类：</p>
+<p>1）磁盘跟内存的交互</p>
+<p>2）磁盘跟磁盘之前的交互</p>
+<p>比如说读不命中时就是直接从磁盘读，属于第1种情况，那读命中呢？也是属于第1种情况，不过这时候是从SSD读。磁盘跟磁盘之间交互是用于写脏数据，将SSD中脏cache块拷贝到磁盘上去。现在介绍下两种情况使用的接口函数，这样后面在看读写流程时看到这两个函数就十分亲切了，并且清楚地知道数据是从哪里流向哪里。</p>
 <a id="more"></a>
-<h1 id="DAS、SAN和NAS"><a href="#DAS、SAN和NAS" class="headerlink" title="DAS、SAN和NAS"></a>DAS、SAN和NAS</h1><h3 id="DAS-Direct-Attached-Storage-直接附加网络"><a href="#DAS-Direct-Attached-Storage-直接附加网络" class="headerlink" title="DAS (Direct Attached  Storage)直接附加网络"></a>DAS (Direct Attached  Storage)直接附加网络</h3><p>直连式存储与服务器主机之间的连接通道通常采用SCSI连接，随着服务器CPU的处理能力越来越强，存储硬盘空间越来越大，阵列的硬盘数量越来越多，SCSI通道将会成为IO瓶颈；服务器主机SCSI ID资源有限，能够建立的SCSI通道连接有限。<br><strong>由于存储设备通过电缆直接与计算机相连，系统存取访问I/O请求直接在计算机和存储设备之间进行，故会受如下因素制约</strong></p>
-<ul>
-<li>硬盘</li>
-<li>内存缓存</li>
-<li>虚拟内存</li>
-<li>存储控制器</li>
-<li>RAID级别以及读写模式</li>
-<li>总线长度</li>
-</ul>
-<p><strong>DAS面临的挑战</strong></p>
-<ul>
-<li>存储与主机必须直连</li>
-<li>数据可用性<ul>
-<li>单节点故障</li>
-<li>数据资源的共享</li>
-</ul>
-</li>
-<li>可扩展性有限<ul>
-<li>连接的端口和主机有限</li>
-<li>有限的可寻址范围（即容量有上限）</li>
-<li>距离限制</li>
-</ul>
-</li>
-<li>需要停机维护</li>
-</ul>
-<h3 id="NAS-Network-Attached-Storage-附网存储"><a href="#NAS-Network-Attached-Storage-附网存储" class="headerlink" title="NAS(Network Attached Storage)附网存储"></a>NAS(Network Attached Storage)附网存储</h3><p>由于DAS存在上述的一系列限制,网络存储渐渐浮出水面,并得到了广泛应用.</p>
-<ul>
-<li><strong>网络存储的本质是通过网络建立用户与存储设备之间的连接，通过网络传输数据.</strong></li>
-<li>技术上通过软件提供高性能的文件服务.</li>
-<li><strong>NAS本质是一个专用的文件服务器，NAS不一定是盘阵，一台主机只要它有自己的磁盘和文件系统，并向外提供访问文件系统的接口（如NFS、CIFS等），就可以做成NAS.</strong></li>
-<li><strong>NAS其实就是处于以太网上的一台利用NFS、CIFS等网络文件系统的文件共享服务器.</strong></li>
-<li>一种瘦服务器方式的存储设备</li>
-</ul>
-<h3 id="NAS传输协议"><a href="#NAS传输协议" class="headerlink" title="NAS传输协议"></a>NAS传输协议</h3><ul>
-<li>CIFS(Common Internet File System)<ul>
-<li>微软定义的一套规范</li>
-<li>基于Windows NT的公共互联网文件系统</li>
-<li>使用TCP协议</li>
-<li>在服务器端验证用户身份，比NFS安全</li>
-</ul>
-</li>
-<li>NFS(Network File System)<ul>
-<li>Unix/Linux使用的协议</li>
-<li>底层使用TCP或者UDP协议</li>
-<li>开销远远小于CIFS</li>
-<li>在用户端安全登录</li>
-</ul>
-</li>
-</ul>
-<h3 id="SAN（Storage-Area-Net）存储局域网"><a href="#SAN（Storage-Area-Net）存储局域网" class="headerlink" title="SAN（Storage Area Net）存储局域网"></a>SAN（Storage Area Net）存储局域网</h3><ul>
-<li>SAN采用网络互连的存储区域网.</li>
-<li>FC-SAN得到了广泛应用，使用FC协议网络通讯.</li>
-<li>SAN只支持SCSI协议，SCSI语言及数据可以用FC协议传递。</li>
-</ul>
-<h3 id="NAS和SAN对比"><a href="#NAS和SAN对比" class="headerlink" title="NAS和SAN对比"></a>NAS和SAN对比</h3><ul>
-<li>速度对比<br>除非NAS使用快于内存的网络方式与主机通讯，否则其速度永远无法超过SAN架构。但是如果后端磁盘有瓶颈，那么<strong>NAS用网络代替内存的方法产生的性能降低</strong>就可以忽略。</li>
-<li>成本对比<br>NAS比SAN成本低很多</li>
-<li>可扩展性<br>NAS可扩展性强于SAN，只要有IP的地方，NAS 就可以提供服务，且容易部署和配置。NAS设备一般都可以提供多种协议访问数据，而SAN只能使用SCSI协议访问。</li>
-<li>数据共享<br>NAS可以被多个客户端访问，SAN除非安装了专门的集群管理系统或集群文件系统模块，否则不能共享某个LUN.</li>
-<li>SAN和NAS的选择<br>CPU不密集但是大块连续IO密集的应用选择SAN比较合适<br>对于IO不密集的随机小块IO场景选择NAS，<strong>NAS的根本瓶颈是底层链路的速度，若为高速以太网,首选NAS.</strong></li>
-<li>备注<br>目前普遍的架构是文件系统和磁盘控制器驱动程序都运行在应用服务器主机上。文件系统向卷发送的请求是通过内存来传递的，而主机向磁盘（LUN）发送的请求是通过FC网络来传递的。（SAN）</li>
-</ul>
+<h3 id="底层存储调用的两种方法"><a href="#底层存储调用的两种方法" class="headerlink" title="底层存储调用的两种方法"></a>底层存储调用的两种方法</h3><h4 id="对于情况1"><a href="#对于情况1" class="headerlink" title="对于情况1"></a>对于情况1</h4><p>主要是两个函数dm_io_async_bvec和flashcache_dm_io_async_vm。</p>
+<blockquote>
+<p>dm_io_async_bvec 在文件flashcache_main.c中</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">#if LINUX_VERSION_CODE &gt;= KERNEL_VERSION(2,6,22)</div><div class="line">int dm_io_async_bvec(unsigned int num_regions, </div><div class="line">#if LINUX_VERSION_CODE &gt;= KERNEL_VERSION(2,6,26)</div><div class="line">		     struct dm_io_region *where, </div><div class="line">#else</div><div class="line">		     struct io_region *where, </div><div class="line">#endif</div><div class="line">		     int rw, </div><div class="line">		     struct bio *bio, </div><div class="line">		     io_notify_fn fn, </div><div class="line">		     void *context)</div><div class="line">&#123;</div><div class="line">	struct dm_io_request iorq;</div><div class="line"></div><div class="line">	iorq.bi_rw = rw;</div><div class="line">#if LINUX_VERSION_CODE &gt;= KERNEL_VERSION(3,14,0)</div><div class="line">	iorq.mem.type = DM_IO_BIO;</div><div class="line">	iorq.mem.ptr.bio = bio;	</div><div class="line">#else</div><div class="line">	iorq.mem.type = DM_IO_BVEC;</div><div class="line">	iorq.mem.ptr.bvec = bio-&gt;bi_io_vec + bio-&gt;bi_idx;</div><div class="line">#endif</div><div class="line">	iorq.notify.fn = fn;</div><div class="line">	iorq.notify.context = context;</div><div class="line">	iorq.client = flashcache_io_client;</div><div class="line">	return dm_io(&amp;iorq, num_regions, where, NULL);</div><div class="line">&#125;</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<blockquote>
+<p>flashcache_dm_io_async_vm在文件flashcache_subr.c中</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#if LINUX_VERSION_CODE &gt;= KERNEL_VERSION(2,6,22)</div><div class="line">int </div><div class="line">flashcache_dm_io_async_vm(struct cache_c *dmc, unsigned int num_regions, </div><div class="line">#if LINUX_VERSION_CODE &lt; KERNEL_VERSION(2,6,26)</div><div class="line">			  struct io_region *where, </div><div class="line">#else</div><div class="line">			  struct dm_io_region *where, </div><div class="line">#endif</div><div class="line">			  int rw,</div><div class="line">			  void *data, io_notify_fn fn, void *context)</div><div class="line">&#123;</div><div class="line">	unsigned long error_bits = 0;</div><div class="line">	int error;</div><div class="line">	struct dm_io_request io_req = &#123;</div><div class="line">		.bi_rw = rw,</div><div class="line">		.mem.type = DM_IO_VMA,</div><div class="line">		.mem.ptr.vma = data,</div><div class="line">		.mem.offset = 0,</div><div class="line">		.notify.fn = fn,</div><div class="line">		.notify.context = context,</div><div class="line">		.client = flashcache_io_client,</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	error = dm_io(&amp;io_req, 1, where, &amp;error_bits);</div><div class="line">	if (error)</div><div class="line">		return error;</div><div class="line">	if (error_bits)</div><div class="line">		return error_bits;</div><div class="line">	return 0;</div><div class="line">&#125;</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<p>上面两个函数都使用struct dm_io_request 来包装了请求，其中的只有两种请求的类型是不一样的，第一个函数对应的是DM_IO_BVEC，第二个函数是DM_IO_VMA。</p>
+<p>其实我开始一直不明白，为什么要使用这两个函数让硬盘与内存打交道，不过后来看了dm_io发现其中的io服务类型有多种不同类型，这两个函数的调用分别对应不同的io类型。下面先看一下dm_io相关的数据结构。</p>
+<h3 id="dm-io"><a href="#dm-io" class="headerlink" title="dm_io"></a>dm_io</h3><p>以上种方法都调用了更底层的dm_io函数，dm-io为device mapper提供同步或者异步的io服务。</p>
+<p>使用dm-io必须设置dm_io_region结构（2.6.26版本以前叫io_region），该结构定义了io操作的区域，读一般针对一个dm_io_region区，而写可以针对一组dm_io_region区。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//2.6.26版本以后</div><div class="line">struct dm_io_region &#123;</div><div class="line">    struct block_device *bdev;</div><div class="line">    sector_t sector;</div><div class="line">    sector_t count;         /* If this is zero the region is ignored. */</div><div class="line">&#125;;</div><div class="line"></div><div class="line">//2.6.26版本以前</div><div class="line">struct io_region &#123;</div><div class="line">  struct block_device *bdev;</div><div class="line">  sector_t sector;</div><div class="line">  sector_t count;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>Dm-io 可以从一个io_region中读取或者写入到一个或者多个io_region中去。一个io_region结构数组指定了写入到多个区域。</p>
+<h3 id="dm-io-mem-type类型"><a href="#dm-io-mem-type类型" class="headerlink" title="dm_io_mem_type类型"></a>dm_io_mem_type类型</h3><p>dm-io一共有四种dm_io_mem_type类型（老一点的内核版本只有前面三种，Flashcache主要使用DM_IO_BVEC）:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">enum dm_io_mem_type &#123;</div><div class="line">    DM_IO_PAGE_LIST,/* Page list */</div><div class="line">    DM_IO_BVEC,     /* Bio vector */</div><div class="line">    DM_IO_VMA,      /* Virtual memory area */</div><div class="line">    DM_IO_KMEM,     /* Kernel memory */</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct dm_io_memory &#123;</div><div class="line">    enum dm_io_mem_type type;</div><div class="line">    union &#123;</div><div class="line">            struct page_list *pl;</div><div class="line">            struct bio_vec *bvec;</div><div class="line">            void *vma;</div><div class="line">            void *addr;</div><div class="line">    &#125; ptr;</div><div class="line"></div><div class="line">    unsigned offset;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>Dm-io 提供同步和异步I/O服务。老一点的内核它提供了3种I/O服务，每种服务都有一个同步和一个异步的版本。</p>
+<h5 id="DM-IO-PAGE-LIST"><a href="#DM-IO-PAGE-LIST" class="headerlink" title="DM_IO_PAGE_LIST"></a>DM_IO_PAGE_LIST</h5><p>第一个I/O服务类型使用了一串内存页作为缓冲区，伴随着一个首页面的偏移。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">struct page_list &#123;</div><div class="line">  struct page_list *next;</div><div class="line">  struct page *page;</div><div class="line">&#125;;</div><div class="line">int dm_io_sync(unsigned int num_regions, struct io_region *where, int rw,</div><div class="line">              struct page_list *pl, unsigned int offset,</div><div class="line">              unsigned long *error_bits);</div><div class="line">int dm_io_async(unsigned int num_regions, struct io_region *where, int rw,</div><div class="line">               struct page_list *pl, unsigned int offset,</div><div class="line">               io_notify_fn fn, void *context);</div></pre></td></tr></table></figure>
+<h5 id="DM-IO-BVEC"><a href="#DM-IO-BVEC" class="headerlink" title="DM_IO_BVEC"></a>DM_IO_BVEC</h5><p>第二种I/O服务类型把一组bio载体当着I/O的数据缓冲。如果调用者提前拼装了bio，这个服务可以很顺利地完成。但是需要将不同的bio页指向不同的设备。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int dm_io_sync_bvec(unsigned int num_regions, struct io_region *where,</div><div class="line">                   int rw, struct bio_vec *bvec,</div><div class="line">                   unsigned long *error_bits);</div><div class="line">int dm_io_async_bvec(unsigned int num_regions, struct io_region *where,</div><div class="line">                    int rw, struct bio_vec *bvec,</div><div class="line">                    io_notify_fn fn, void *context);</div></pre></td></tr></table></figure>
+<h5 id="DM-IO-VMA"><a href="#DM-IO-VMA" class="headerlink" title="DM_IO_VMA"></a>DM_IO_VMA</h5><p>第三种I/O服务类型把一个指向虚拟动态内存缓冲区的的指针当作I/O的数据缓冲。如果调用者需要在很大的块设备上进行I/O操作又不想分配大量的个人内存页，那么这种服务可以胜任。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int dm_io_sync_vm(unsigned int num_regions, struct io_region *where, int rw,</div><div class="line">                 void *data, unsigned long *error_bits);</div><div class="line">int dm_io_async_vm(unsigned int num_regions, struct io_region *where, int rw,</div><div class="line">                  void *data, io_notify_fn fn, void *context);</div></pre></td></tr></table></figure>
+<p>异步I/O服务的调用者必须包含一个完成的回调函数和一个指向一些这个I/O内容数据的指针。</p>
+<p>typedef void (<em>io_notify_fn)(unsigned long error, void </em>context);</p>
+<p>这个”error”参数，就像这个”*error”参数在任何同步版本中一样，在这个回调函数中就象一个位集合（而不是一个简单的错误值）。</p>
+<p>在写I/O到多个目标区域的情况下，这个位集合允许dm-io说明在每个单独的区域上的成功或者失败。<br>在使用任何dm-io服务之前，用户必须调用dm_io_get()、同时指定他们想要的页数来执行I/O.<br>DM-io将尝试着更改自己的内存池的大小来确认在执行i/o时为了避免不必要的等待而有足够的页面来供给。<br>当用户完成了使用I/O服务，他们将调用dm_io_put(),并指定和给dm_io_get()的相同数量的页面。</p>
+<p>dm-io通过dm_io_request结构来封装请求的类型，如果设置了dm_io_notify.fn则是异步IO，否则是同步IO。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">struct dm_io_request &#123;</div><div class="line">    int bi_rw;                      /* READ|WRITE - not READA */</div><div class="line">    struct dm_io_memory mem;        /* Memory to use for io */</div><div class="line">    struct dm_io_notify notify;     /* Synchronous if notify.fn is NULL */</div><div class="line">    struct dm_io_client *client;    /* Client memory handler */</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>使用dm_io服务前前需要通过dm_io_client_create函数（在2.6.22版本前是dm_io_get）先创建dm_io_client结构，为dm-io的执行过程中分配内存池。使用dm-io服务完毕后，则需要调用dm_io_client_destroy函数（在2.6.22版本前是dm_io_put）释放内存池。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">struct dm_io_client &#123;</div><div class="line">    mempool_t *pool;</div><div class="line">    struct bio_set *bios;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在flashcache中，首先在flashcache_conf.c文件中的flashcache_init函数中使用flashcache_io_client = dm_io_client_create()新建，然后再在dm_io_async_bvec等函数中将flashcache_io_client传给struct dm_io_request iorq的client成员。</p>
+</blockquote>
+<p>dm-io函数执行具体的io请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">int dm_io(struct dm_io_request *io_req, unsigned num_regions,</div><div class="line">      struct dm_io_region *where, unsigned long *sync_error_bits)</div><div class="line">&#123;</div><div class="line">    int r;</div><div class="line">    struct dpages dp;</div><div class="line"></div><div class="line">    r = dp_init(io_req, &amp;dp);</div><div class="line">    if (r)</div><div class="line">            return r;</div><div class="line"></div><div class="line">    if (!io_req-&gt;notify.fn)</div><div class="line">            return sync_io(io_req-&gt;client, num_regions, where,</div><div class="line">                           io_req-&gt;bi_rw, &amp;dp, sync_error_bits);</div><div class="line"></div><div class="line">    return async_io(io_req-&gt;client, num_regions, where, io_req-&gt;bi_rw,</div><div class="line">                    &amp;dp, io_req-&gt;notify.fn, io_req-&gt;notify.context);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="对于情况2"><a href="#对于情况2" class="headerlink" title="对于情况2"></a>对于情况2</h4><p>磁盘跟磁盘之前的交互。这种情况只用于将ssd中脏块写入disk中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">int dm_kcopyd_copy(struct dm_kcopyd_client *kc, struct dm_io_region *from,</div><div class="line">                   unsigned int num_dests, struct dm_io_region *dests,</div><div class="line">                   unsigned int flags, dm_kcopyd_notify_fn fn, void *context)</div></pre></td></tr></table></figure>
+<p>第一个参数dm_kcopyd_client，在使用kcopyd异步拷贝服务时，必须先创建一个对应的client，首先要分配“kcopyd客户端”结构，调用函数如下：</p>
+<p>kcopyd_client_create(FLASHCACHE_COPY_PAGES, &amp;flashcache_kcp_client);</p>
+<p>创建dm_kcopyd_client结构(在flashcache_conf.c文件中的flashcache_init函数中使用)。</p>
+<p>第二个参数dm_io_region是源地址，第四个参数是目的地址，定义如下<br>struct dm_io_region {<br>     struct block_device <em>bdev;<br>     sector_t sector;<br>     sector_t count;          /</em> If this is zero the region is ignored. */<br>};<br>dm_kcopyd_notify_fn fn是kcopyd处理完请求的回调函数<br>context 是回调函数参数，在flashcache都设置对应的kcached_job。</p>
 
       
 
@@ -479,7 +462,7 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/24/flashcache-3-底层存储模块/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -494,18 +477,9 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
   
 <nav id="article-nav">
   
-    <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          存储相关-2-RAID、虚拟磁盘、卷和文件系统
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/04/03/存储相关-4-虚拟化与系统IO路径优化/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">存储相关-4-虚拟化与系统IO路径优化</div>
+    <a href="/2017/05/23/flashcache-2-调度模块及IO流程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">flashcache-2-调度模块及IO流程</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -519,7 +493,7 @@ Dual-Active双控制器同时工作两个同时工作，当其中一个故障时
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)" data-title="存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)" data-url="http://yoursite.com/2017/04/03/存储相关-3-磁盘阵列以及存储系统(DAS、SAN和NAS)/"></div>
+	<div class="ds-thread" data-thread-key="flashcache-3-底层存储模块" data-title="flashcache-3-底层存储模块" data-url="http://yoursite.com/2017/05/24/flashcache-3-底层存储模块/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
