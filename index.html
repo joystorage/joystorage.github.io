@@ -240,6 +240,130 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-shell脚本循环" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/shell脚本循环/">shell脚本循环</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/11/shell脚本循环/" class="archive-article-date">
+  	<time datetime="2017-07-11T07:56:18.525Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-11</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <p>shell语法真是头疼！！每次都忘，每次都要去查！！</p>
+<p>转载自<a href="http://kling.blog.51cto.com/3320545/1252952" target="_blank" rel="external">Shell脚本中循环语句for,while,until用法</a></p>
+<p>Bash Shell中主要提供了三种循环方式：for、while和until。</p>
+<h1 id="一、for循环"><a href="#一、for循环" class="headerlink" title="一、for循环"></a>一、for循环</h1><p>   for循环的运作方式，是讲串行的元素意义取出，依序放入指定的变量中，然后重复执行含括的命令区域（在do和done 之间），直到所有元素取尽为止。<br>  其中，串行是一些字符串的组合，彼此用$IFS所定义的分隔符（如空格符）隔开，这些字符串称为字段。<br>for的语法结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for 变量 in 串行</div><div class="line">do</div><div class="line">   执行命令</div><div class="line">done</div></pre></td></tr></table></figure>
+<ul>
+<li><p>用例1</p>
+<p>用for循环在家目录下创建aaa1-aaa10，然后在aaa1-aaa10创建bbb1-bbb10的目录</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">for k in $( seq 1 10 )</div><div class="line">do</div><div class="line">   mkdir /home/kuangl/aaa$&#123;k&#125;</div><div class="line">   cd /home/kuangl/aaa$&#123;k&#125;</div><div class="line">   for l in $( seq 1 10 )</div><div class="line">   do</div><div class="line">   mkdir bbb$&#123;l&#125;</div><div class="line">   cd /home/kuangl/aaa$&#123;k&#125;</div><div class="line">   done</div><div class="line">   cd ..</div><div class="line">done</div></pre></td></tr></table></figure>
+<ul>
+<li>用例2</li>
+</ul>
+<p>列出var目录下各子目录占用磁盘空间的大小。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">DIR=&quot;/var&quot;</div><div class="line">cd $DIR</div><div class="line">for k in $(ls $DIR)</div><div class="line">do</div><div class="line">  [ -d $k ] &amp;&amp; du -sh $k</div><div class="line">done</div></pre></td></tr></table></figure></p>
+<h1 id="二、while循环"><a href="#二、while循环" class="headerlink" title="二、while循环"></a>二、while循环</h1><p>while循环的语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">while 条件测试</div><div class="line">do</div><div class="line">  执行命令</div><div class="line">done</div></pre></td></tr></table></figure>
+<ul>
+<li><p>用例1</p>
+<p>while循环，经典的用法是搭配转向输入，读取文件的内容，做法如下：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">while read kuangl</div><div class="line">do</div><div class="line">  echo $&#123;kuangl&#125;</div><div class="line">done &lt; /home/kuangl/scripts/testfile</div></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：<br> 行2，使用read有标准输入读取数据，放入变量kuangl中，如果读到的数据非空，就进入循环。<br> 行4，把改行数据显示出来<br> 行5，将/home/kuangl/scripts/testfile的内容转向输入将给read读取。</p>
+</blockquote>
+<ul>
+<li>用例2：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">declare -i i=1</div><div class="line">declare -i sum=0</div><div class="line">while ((i&lt;=10))</div><div class="line">do</div><div class="line">  let sum+=i</div><div class="line">  let ++i</div><div class="line">done</div><div class="line">echo $sum</div></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：<br> 行2-3，声明i和sum为整数型<br> 行4，如果条件测试：只要i值小于或者等于10，就执行循环。<br> 行6，sum+=i和sum=sum+i是一样的，sum累加上i。<br> 行7，i的值递增1，此行是改变条件测试的命令，一旦i大于10，可终止循环。<br> 行8，遇到done，回到行6去执行条件测试<br> 行9，显示sum的值为55</p>
+</blockquote>
+<h1 id="三、until循环"><a href="#三、until循环" class="headerlink" title="三、until循环"></a>三、until循环</h1><p>while循环的条件测试是测真值，until循环则是测假值。<br>until循环的语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">until 条件测试</div><div class="line">do</div><div class="line"> 执行命令</div><div class="line">done</div></pre></td></tr></table></figure>
+<ul>
+<li>用例1：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">declare -i i=10</div><div class="line">declare -i sum=0</div><div class="line">until ((i&gt;10))</div><div class="line">do</div><div class="line">  let sum+=i</div><div class="line">  let ++i</div><div class="line">done</div><div class="line">echo $sum</div></pre></td></tr></table></figure>
+
+      
+
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/11/shell脚本循环/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-flashcache-3-底层存储模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1028,90 +1152,6 @@
 
 
   
-    <article id="post-在github pages上建站" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/在github pages上建站/">在github pages上建站</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/03/在github pages上建站/" class="archive-article-date">
-  	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">github pages</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <p>好记性不如烂笔头，计算机科学日新月异，养成写博客的习惯对于程序猿来说尤为关键，于是便搭了自己的博客！</p>
-        
-          <a class="article-more-a" href="/2017/04/03/在github pages上建站/#more">more >></a>
-        
-      
-
-            
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/在github pages上建站/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1250,15 +1290,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1270,11 +1310,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1286,14 +1338,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
               </li>
              
@@ -1302,15 +1346,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">排队论</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
