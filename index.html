@@ -240,6 +240,641 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-机器学习 scikit_learn使用-1-安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/20/机器学习 scikit_learn使用-1-安装/">机器学习 scikit_learn使用-1-安装</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/20/机器学习 scikit_learn使用-1-安装/" class="archive-article-date">
+  	<time datetime="2017-07-20T14:29:23.885Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">scikit_learn</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <h2 id="机器学习分类"><a href="#机器学习分类" class="headerlink" title="机器学习分类"></a>机器学习分类</h2><p>通常，一个学习问题是通过一系列的n个样本数据来学习然后尝试预测未知数据的属性。如果每一个样本超过一个单一的数值，例如多维输入（也叫做多维数据），那么它就拥有了多个特征。 </p>
+        
+          <a class="article-more-a" href="/2017/07/20/机器学习 scikit_learn使用-1-安装/#more">more >></a>
+        
+      
+
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/20/机器学习 scikit_learn使用-1-安装/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-机器学习 scikit_learn使用-2-demo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/20/机器学习 scikit_learn使用-2-demo/">机器学习 scikit_learn使用-2-demo</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/20/机器学习 scikit_learn使用-2-demo/" class="archive-article-date">
+  	<time datetime="2017-07-20T14:29:23.884Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">scikit_learn</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <h2 id="加载样本数据集"><a href="#加载样本数据集" class="headerlink" title="加载样本数据集"></a>加载样本数据集</h2><p>scikit-learn带有一些标准的数据集，例如用于分类的iris和digit数据集和用于回归的 boston house prices dataset .</p>
+<p>下面，我们打开Python编译器，然后载入iris和digits数据集。我们的符号’$’表示shell提示，’&gt;&gt;&gt;’表示python编译器提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ python</div><div class="line">&gt;&gt;&gt; from sklearn import datasets</div><div class="line">&gt;&gt;&gt; iris = datasets.load_iris()</div><div class="line">&gt;&gt;&gt; digits = datasets.load_digits()</div></pre></td></tr></table></figure>
+<p>在digits数据集情况下，digits.data提供了可用于分类数字样本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(digits.data)</div></pre></td></tr></table></figure>
+<p>并且digits.target给出了digit数据集的真实结果，这些数字是和我们正在学习的每个数字图像相关的数字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">digits.target</div></pre></td></tr></table></figure>
+<p>数据总是一些2D数组，shape(n_samples,n_features),尽管原始数据也许有一个不同的形状，就这个digits而言，每一个原始样例是一个shape(8,8)的图像，并且能被访问使用:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">digits.images[0]</div></pre></td></tr></table></figure></p>
+<h2 id="学习和预测"><a href="#学习和预测" class="headerlink" title="学习和预测"></a>学习和预测</h2><p>在digits数据集中，给定一幅手写数字的数字图像，任务是预测结果。我们给定的样本有10种类别（是数字0到9），基于此我们建立一个估计方法能够预测我们没有见过的样本属于哪一类。</p>
+<p>在scikit-learn中，用于分类的估计模型是一个实现了fit(x,y)方法和predict(T)方法的Python对象。</p>
+<p>估计模型的例子是在实现了support vector classification支持向量机的类 sklearn.svm.SVC。估计模型的构造函数带有模型参数，但是目前，我们将估计模型当做一个黑盒子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">from sklearn import svm  </div><div class="line">clf = svm.SVC(gamma=0.001, C=100.)</div></pre></td></tr></table></figure>
+<h3 id="选择模型参数"><a href="#选择模型参数" class="headerlink" title="选择模型参数"></a>选择模型参数</h3><p>在这个例子中，我们这设定了gamma值。可以通过使用网格搜索和交叉验证自动的找出最好的参数值</p>
+<p>我们把我们的评估模型命名为clf，作为一个分类器，它现在必须拟合这个模型，也就是它必须从这个模型学习。我们通过将数据集传递给fit函数完成。作为训练集，除了最后一个样本，我们选择其余的所有样本。通过python语句[:-1]选择样本，这条语句将从digits.data中产生一个除了最后一个样本的新数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">clf.fit(digits.data[:-1], digits.target[:-1])</div></pre></td></tr></table></figure>
+<p>现在，我们可以预测新值，尤其是我们可以问分类器在digits数据集中的用来训练分类器时没有使用的最后一个数据是数字几</p>
+<p>一个完整的分类问题实例可以通过下面的链接下载，用来作为你运行并且学习的例子 <a href="http://scikit-learn.org/dev/auto_examples/classification/plot_digits_classification.html#example-classification-plot-digits-classification-py" target="_blank" rel="external">Recognizing hand-written digits</a></p>
+<h3 id="模型持久化"><a href="#模型持久化" class="headerlink" title="模型持久化"></a>模型持久化</h3><p>可以通过使用python的built-in持久化模型在scikit中保存一个模型，命名pickle:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; from sklearn import svm</div><div class="line">&gt;&gt;&gt; from sklearn import datasets</div><div class="line">&gt;&gt;&gt; clf = svm.SVC()</div><div class="line">&gt;&gt;&gt; iris = datasets.load_iris()</div><div class="line">&gt;&gt;&gt; X, y = iris.data, iris.target</div><div class="line">&gt;&gt;&gt; clf.fit(X, y)  </div><div class="line">SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,</div><div class="line">  decision_function_shape=None, degree=3, gamma=&apos;auto&apos;, kernel=&apos;rbf&apos;,</div><div class="line">  max_iter=-1, probability=False, random_state=None, shrinking=True,</div><div class="line">  tol=0.001, verbose=False)</div><div class="line"></div><div class="line">&gt;&gt;&gt; import pickle</div><div class="line">&gt;&gt;&gt; s = pickle.dumps(clf)</div><div class="line">&gt;&gt;&gt; clf2 = pickle.loads(s)</div><div class="line">&gt;&gt;&gt; clf2.predict(X[0])</div><div class="line">array([0])</div><div class="line">&gt;&gt;&gt; y[0]</div><div class="line">0</div></pre></td></tr></table></figure></p>
+<p>在scikit的特别情况下，使用joblib替换pickle(joblib.dump &amp; joblib.load)会更有趣,它在大数据上是更有效的，但是仅仅只能存入的是字典而不是字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; from sklearn.externals import joblib</div><div class="line">&gt;&gt;&gt; joblib.dump(clf, &apos;filename.pkl&apos;)</div></pre></td></tr></table></figure>
+<p>然后你就可以读取上面的pickled模型使用了（通常是在其它的Python程序中）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; clf = joblib.load(&apos;filename.pkl&apos;)</div></pre></td></tr></table></figure>
+
+      
+
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/20/机器学习 scikit_learn使用-2-demo/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-kmeans聚类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/20/kmeans聚类/">kmeans聚类</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/20/kmeans聚类/" class="archive-article-date">
+  	<time datetime="2017-07-20T14:29:23.882Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">kmeans聚类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <p>聚类算法有很多种，比如K-Means，AP聚类，层次聚类(Hierarchical clustering)等等，主要说一下K-Means.</p>
+<h2 id="kmeans简介"><a href="#kmeans简介" class="headerlink" title="kmeans简介"></a>kmeans简介</h2><p>K-Means之所以很受欢迎，就是其速度很快并且有很好的可扩展性。K-Means算法是一个重复移动类中心点的过程，把类的中心点，也称重心（centroids），移动到其包含成员的平均位置，然后重新划分其内部成员。</p>
+<p>在博文<a href="http://imyin.xyz/2016/10/08/K-Means/" target="_blank" rel="external">K-Means聚类</a>中有一个很好的里子说明了kmeans的具体工作原理。</p>
+<h2 id="kmeans库的使用"><a href="#kmeans库的使用" class="headerlink" title="kmeans库的使用"></a>kmeans库的使用</h2><p>在scikit_learn库中就有kmeans算法的具体实现，官方说明见连接<a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html" target="_blank" rel="external">sklearn.cluster.KMeans</a></p>
+<p>下面代码是具体的使用的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"># -*- coding:UTF-8 -*-</div><div class="line">import sys   ##加载sys这个模块</div><div class="line">import pickle, subprocess, pwd</div><div class="line">import numpy as np</div><div class="line">from sklearn.cluster import KMeans</div><div class="line"></div><div class="line">#定义类别数目，参数通过shell指令参数输入</div><div class="line">cn = sys.argv[1];</div><div class="line">#print int(cn);</div><div class="line"></div><div class="line">#通过numpy库的方法导入测试向量</div><div class="line">#测试向量的行数表示样本数</div><div class="line">#测试向量的列数表示参数的维度</div><div class="line">X=np.loadtxt(&apos;test_vec&apos;)</div><div class="line"></div><div class="line"></div><div class="line">#kmeans算法学习</div><div class="line">print(&apos;starting learning...&apos;)</div><div class="line">kmeans  = KMeans(n_clusters=int(cn), random_state=0).fit(X)</div><div class="line"></div><div class="line">#持久化模型</div><div class="line">print(&apos;model dumping begin...&apos;)</div><div class="line">pickle.dump(kmeans , open(&apos;model.pkl&apos;, &apos;wb&apos;))</div><div class="line">print(&apos;model dumping end...&apos;)</div><div class="line"></div><div class="line">#读取模型</div><div class="line">kmeans  = pickle.load(open(&apos;model.pkl&apos;, &apos;rb&apos;))</div><div class="line"></div><div class="line">#输出学习的样本都属于哪个类别</div><div class="line">M =  kmeans.predict(X)</div><div class="line">for j in M:</div><div class="line">	print j</div><div class="line"></div><div class="line">#输出各类别的聚类中心</div><div class="line">cc = kmeans.cluster_centers_;</div><div class="line">for i in cc:</div><div class="line">	for j in i:</div><div class="line">		print(&apos;%lf\t&apos;%j)</div><div class="line">	print &apos;\n&apos;</div><div class="line">print cc[0];</div><div class="line"></div><div class="line">#输出样本到各距离中心的距离总和</div><div class="line">#结合肘部法则，可以确定最佳的K</div><div class="line">dis = kmeans.inertia_ ;</div><div class="line">print dis;</div></pre></td></tr></table></figure>
+
+      
+
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/20/kmeans聚类/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-ssdsim学习1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/20/ssdsim学习1/">ssdsim学习1</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/20/ssdsim学习1/" class="archive-article-date">
+  	<time datetime="2017-07-20T14:29:23.880Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ssdsim</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssd</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <blockquote>
+<p>说明：==下文内容摘自胡洋博士毕业论文。引文通过特殊格式标出==</p>
+<p>本章介绍一个自主开发的高准确性、模块化、可配置的固态盘模拟器SSDsim，它能够对高级命令、能耗进行模拟，最终要的一点是它的模拟结果经过了基本的验证。</p>
+</blockquote>
+<p>源码请参见<a href="http://storage.hust.edu.cn/SSDsim/" target="_blank" rel="external">ssdsim</a></p>
+<h2 id="时间模拟"><a href="#时间模拟" class="headerlink" title="时间模拟"></a>时间模拟</h2><p>事件驱动的模拟器是根据系统内部各个部件的状态改变来修改系统时间，SSDsim就是采用的这种方式的驱动方法；</p>
+<blockquote>
+<p>在高性能固态盘中，存在三类主要的部件，既固态盘中的嵌入式处理器，内存颗粒，和闪存颗粒。处理器的时钟通常大于100MHz，既单个时钟的时间为10纳秒甚至更短；内存的读写操作时间是纳秒级；与此形成对比的是，闪存颗粒的读写时间是微秒级。因此在SSDsim中，只考虑对闪存的读写擦除操作的时间开销，内存的读写时间开销取一个平均值，忽略处理器的时间开销。对于一个独立的读、写、擦除操作，可以根据公式5.1、5.2、5.3获得准确的时间开销。表5.1中介绍了三个公式中出现的变量，表中所列参数具体值取自具体的闪存芯片的数据手册</p>
+<p>读操作： 7×tWC+tR+PS×tRC                公式1</p>
+<p>写操作：7×tWC +PS×tWC+tPROG               公式2</p>
+<p>擦除操作：5×tWC+tERASE                  公式3</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>简称</th>
+<th>含义</th>
+<th>时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tR</td>
+<td>数据从目标物理页中读到分组的寄存器所消耗的时间</td>
+<td>20微妙</td>
+</tr>
+<tr>
+<td>tPROG</td>
+<td>数据从分组的寄存器写到目标物理页所消耗的时间</td>
+<td>200微妙</td>
+</tr>
+<tr>
+<td>tERASE</td>
+<td>目标物理块的擦除时间</td>
+<td>1.5毫秒</td>
+</tr>
+<tr>
+<td>tWC</td>
+<td>通过数据总线上向寄存器传输一个字节的数据所消耗的时间</td>
+<td>25纳秒</td>
+</tr>
+<tr>
+<td>tRC</td>
+<td>通过数据总线从寄存器向外传输一个字节的数据所消耗的时间</td>
+<td>25纳秒</td>
+</tr>
+<tr>
+<td>PS</td>
+<td>传输的数据量</td>
+</tr>
+</tbody>
+</table>
+<h2 id="能耗模拟"><a href="#能耗模拟" class="headerlink" title="能耗模拟"></a>能耗模拟</h2><blockquote>
+<p>因为不同的固态盘所使用的处理器不一样，不管采用什么样硬件结构和软件算法，处理器的能耗基本相同，所以在SSDsim中，不考虑处理器的能耗，只考虑内存和闪存的能耗。</p>
+<p>固态盘中需要一定的内存空间存储映射关系和缓存数据，通常采用两种类型的内存，DRAM或者SRAM。SRAM成本较高，容量较低，一般集成在处理器中；DRAM的成本较低，容量较大，一般是独立存在的。DRAM有三种工作状态，激活状态（active）、低功耗状态（standby）、刷新状态（refresh），在对DRAM进行读写操作时，DRAM处于激活状态；当短时间内没有对DRAM进行读写操作时，DRAM进入低功耗状态；当长时间内没有对DRAM有读写操作，DRAM就进入周期性刷新状态。在SSDsim中，每次对内存的操作的时间可以根据读写的数据量计算获得，所以DRAM处于激活状态的能耗可以根据所使用的内存颗粒的电压电流以及内存操作时间计算获得；当DRAM服务完一个读写操作后，随即进入低功耗状态，这段时间是两次读写操作之间的间隔时间，也可以计算获得；DRAM的刷新过程与所服务的负载的时间跨度有关，特定DRAM芯片的刷新周期是一定的，例如64毫秒，在SSDsim中可以根据负载的时间跨度，DRAM的刷新周期，以及DRAM的大小既DRAM刷新单位计算获得DRAM的刷新操作所消耗的能耗。<br>SSDsim通过采用上述的方法，分别获得闪存的能耗和内存的能耗，最终获得所模拟的固态盘服务某个负载所耗费的能量。</p>
+</blockquote>
+<h2 id="模块划分"><a href="#模块划分" class="headerlink" title="模块划分"></a>模块划分</h2><blockquote>
+<p>SSDsim用来模拟固态盘的硬件结构（包括闪存颗粒，固态盘内部通道等），闪存转换层（包括数据缓存区、地址映射、垃圾回收及损耗均衡等）。SSDsim分成三个逻辑模块，既硬件行为模拟层，闪存转换层，和数据缓存层，这三个模块也是固态盘中标准的三个组成部分。</p>
+</blockquote>
+<h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/ssdsim学习1.jpg" alt="image"></p>
+
+      
+
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/20/ssdsim学习1/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-linux设备驱动-3-基本数据结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/20/linux设备驱动-3-基本数据结构/">linux设备驱动-3-基本数据结构</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/20/linux设备驱动-3-基本数据结构/" class="archive-article-date">
+  	<time datetime="2017-07-20T14:29:23.879Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设备驱动</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>内核中使用的数据结构有双向链表、hash链表和单向链表，另外，红黑树和基树(radix数)也是内核使用的数据结构。</p>
+<p>container是Linux中很重要的一个概念，使用container能实现对象封装。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#define offsetof(TYPE,MEMBER) ((size_t)&amp;((TYPE *)0)-&gt;MEMBER)</div><div class="line"></div><div class="line">#define container_of(ptr,type,member)(&#123;\</div><div class="line">    const typeof( ((type *)0)-&gt;member) *_mptr = (ptr);\</div><div class="line">    (type *)( (char *)_mptr - offsetof(type,member) );\</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>通过这种方法巧妙地实现了通过结构的一个成员找到整个结构的地址。内核中大使用了这种方法。</p>
+<h1 id="1-双向链表"><a href="#1-双向链表" class="headerlink" title="1 双向链表"></a>1 双向链表</h1><p>list 是双向链表的一个抽象，它的定义在/include/linux目录下。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">struct list_head&#123;</div><div class="line">    struct list_head *next,*prev;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>list_head这个结构看起来怪怪的，它竟没有数据域！所以看到这个结构的人第一反应就是我们怎么访问数据？<br>其实list_head不是拿来单独用的，它一般被嵌到其它结构中，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">struct student</div><div class="line">&#123;</div><div class="line">    int id;</div><div class="line">    char* name;</div><div class="line">    struct list_head list;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>此时list_head就作为它的父结构中的一个成员了，当我们知道list_head的地址（指针）时，我们可以通过list.c提供的宏 list_entry 来获得它的父结构的地址。</p>
+<p>可以参见<a href="http://www.cnblogs.com/zhuyp1015/archive/2012/06/02/2532240.html" target="_blank" rel="external">Linux 内核list_head学习（一）</a></p>
+<p>list提供的list_entry使用了container,通过container可以从list找到整个数据对象，这样list就成为了一种通用的数据结构。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#define list_entry(ptr,type,member)</div><div class="line">container of(ptr,type,member)</div></pre></td></tr></table></figure>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LIST_HEAD //定义并初始化一个list</div><div class="line">list_add_tail // 在list尾部加一个成员</div><div class="line">list_del //删除一个list成员</div><div class="line">list_empty //将list置空</div><div class="line">list_for_each //遍历链表</div><div class="line">list_for_each_safe //遍历并且可以删除成员</div><div class="line">list_for_each_entry //遍历，通过container方法返回结构指针</div></pre></td></tr></table></figure>
+<h3 id="距离"><a href="#距离" class="headerlink" title="距离"></a>距离</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">#include&lt;linux/init.h&gt;</div><div class="line">#include&lt;linux/slab.h&gt;</div><div class="line">#include&lt;linux/module.h&gt;</div><div class="line">#include&lt;linux/kernel.h&gt;</div><div class="line">#include&lt;linux/list.h&gt;</div><div class="line"></div><div class="line">MODULE_LICENSE(&quot;GPL&quot;);</div><div class="line">MODULE_AUTHOR(&quot;joystorage&quot;);</div><div class="line">MODULE_DESCRIPTION(&quot;My First  LKM for list_head!&quot;);</div><div class="line"></div><div class="line">struct student</div><div class="line">&#123;</div><div class="line">    int id;</div><div class="line">    char* name;</div><div class="line">    struct list_head list;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">void print_student(struct student*);</div><div class="line"></div><div class="line">static int testlist_init(void)</div><div class="line">&#123;</div><div class="line">    struct student *stu1, *stu2, *stu3, *stu4;</div><div class="line">    struct student *stu;</div><div class="line">    </div><div class="line">    // init a list head</div><div class="line">    LIST_HEAD(stu_head);</div><div class="line"></div><div class="line">    // init four list nodes</div><div class="line">    stu1 = kmalloc(sizeof(*stu1), GFP_KERNEL);</div><div class="line">    stu1-&gt;id = 1;</div><div class="line">    stu1-&gt;name = &quot;wyb&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu1-&gt;list);</div><div class="line"></div><div class="line">    stu2 = kmalloc(sizeof(*stu2), GFP_KERNEL);</div><div class="line">    stu2-&gt;id = 2;</div><div class="line">    stu2-&gt;name = &quot;wyb2&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu2-&gt;list);</div><div class="line"></div><div class="line">    stu3 = kmalloc(sizeof(*stu3), GFP_KERNEL);</div><div class="line">    stu3-&gt;id = 3;</div><div class="line">    stu3-&gt;name = &quot;wyb3&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu3-&gt;list);</div><div class="line"></div><div class="line">    stu4 = kmalloc(sizeof(*stu4), GFP_KERNEL);</div><div class="line">    stu4-&gt;id = 4;</div><div class="line">    stu4-&gt;name = &quot;wyb4&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu4-&gt;list);</div><div class="line"></div><div class="line">    // add the four nodes to head</div><div class="line">    list_add (&amp;stu1-&gt;list, &amp;stu_head);</div><div class="line">    list_add (&amp;stu2-&gt;list, &amp;stu_head);</div><div class="line">    list_add (&amp;stu3-&gt;list, &amp;stu_head);</div><div class="line">    list_add (&amp;stu4-&gt;list, &amp;stu_head);</div><div class="line"></div><div class="line">    // print each student from 4 to 1</div><div class="line">    list_for_each_entry(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line">    // print each student from 1 to 4</div><div class="line">    list_for_each_entry_reverse(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // delete a entry stu2</div><div class="line">    list_del(&amp;stu2-&gt;list);</div><div class="line">    list_for_each_entry(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // replace stu3 with stu2</div><div class="line">    list_replace(&amp;stu3-&gt;list, &amp;stu2-&gt;list);</div><div class="line">    list_for_each_entry(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">static void testlist_exit(void)</div><div class="line">&#123;</div><div class="line">    printk(KERN_ALERT &quot;*************************\n&quot;);</div><div class="line">    printk(KERN_ALERT &quot;testlist is exited!\n&quot;);</div><div class="line">    printk(KERN_ALERT &quot;*************************\n&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void print_student(struct student *stu)</div><div class="line">&#123;</div><div class="line">    printk (KERN_ALERT &quot;======================\n&quot;);</div><div class="line">    printk (KERN_ALERT &quot;id  =%d\n&quot;, stu-&gt;id);</div><div class="line">    printk (KERN_ALERT &quot;name=%s\n&quot;, stu-&gt;name);</div><div class="line">    printk (KERN_ALERT &quot;======================\n&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">module_init(testlist_init);</div><div class="line">module_exit(testlist_exit);</div></pre></td></tr></table></figure>
+
+      
+
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/20/linux设备驱动-3-基本数据结构/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-flashcache-4-修改与测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/20/flashcache-4-修改与测试/">flashcache-4-修改与测试</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/20/flashcache-4-修改与测试/" class="archive-article-date">
+  	<time datetime="2017-07-20T14:29:23.877Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">flashcache</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">块存储</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <h1 id="flashcache安装"><a href="#flashcache安装" class="headerlink" title="flashcache安装"></a>flashcache安装</h1><p>这里有篇博文推荐一下<a href="http://www.simlinux.com/archives/398.html" target="_blank" rel="external">Flashcache基本使用及注意事项</a></p>
+<ul>
+<li><p>在官网下载文件解压<a href="https://github.com/facebookarchive/flashcache" target="_blank" rel="external">github-flashcache</a></p>
+</li>
+<li><p>进入文件夹并输入</p>
+</li>
+</ul>
+<blockquote>
+<p>SSD:/dev/sdc</p>
+<p>SAS:/dev/sdb2</p>
+<p>创建设备名为cachedev的flashcache</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">##安装git</div><div class="line">sudo apt-get install git</div><div class="line"></div><div class="line"></div><div class="line">##编译安装</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line">##创建缓存设备</div><div class="line">flashcache_create -p back -b 4k cachedev /dev/sdc /dev/sdb2</div></pre></td></tr></table></figure>
+<h4 id="flashcache-create相关参数说明："><a href="#flashcache-create相关参数说明：" class="headerlink" title="flashcache_create相关参数说明："></a>flashcache_create相关参数说明：</h4><p>-p:缓存模式 </p>
+<p>writeback(数据先写到SSD，随后写到普通硬盘)，writethrough(数据同时写到SSD和普通硬盘)，<br>writearound（数据绕过SSD，直接写到普通硬盘）三种，三种模式的所有读都会被缓存到flashcache可以通过dev.flashcache.<cachedev>.cache_all参数调整</cachedev></p>
+<p>-s：缓存大小，可选项，如果未指定则整个SSD设备被用于缓存，默认的计数单位是扇区（sectors）,但是可以接受k/m/g单位。</p>
+<p>-b：指定块大小，可选项，默认为4KB，必须为2的指数。默认单位为扇区。也可以用K作为单位，一般选4KB。</p>
+<p>-f：强制创建，不进行检查</p>
+<p>-m：设备元数据块大小，只有writeback需要存储metadata块，默认4K</p>
+<h4 id="销毁Flashcache"><a href="#销毁Flashcache" class="headerlink" title="销毁Flashcache"></a>销毁Flashcache</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">flashcache_destroy /dev/sdc  ##这种方式删除writeback模式的flashcache时会将SSD上的所有数据删除包括脏数据,建议使用dmsetup命令（device-mapper软件包）删除，会自动将脏数据写入磁盘</div><div class="line">dmsetup remove cachedev</div></pre></td></tr></table></figure>
+<h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">flashcache_create ##查看帮助</div><div class="line">flashcache_load /dev/sdc  cachedev ##(系统重启时使用来加载已经创建过的缓存设备cachedev)</div><div class="line">mount /dev/mapper/cachedev /data ##创建好的flashcache设备是块设备，可格式文件系统后挂在使用,也可以继续对其分区等</div></pre></td></tr></table></figure>
+<h4 id="Flashcache参数优化"><a href="#Flashcache参数优化" class="headerlink" title="Flashcache参数优化"></a>Flashcache参数优化</h4><p>输入下面命令进行查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sysctl dev.flashcache</div></pre></td></tr></table></figure></p>
+<p>默认参数设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">dev.flashcache.sdc+sdb2.io_latency_hist = 0</div><div class="line">dev.flashcache.sdc+sdb2.do_sync = 0</div><div class="line">dev.flashcache.sdc+sdb2.stop_sync = 0</div><div class="line">dev.flashcache.sdc+sdb2.dirty_thresh_pct = 20</div><div class="line">dev.flashcache.sdc+sdb2.max_clean_ios_total = 4</div><div class="line">dev.flashcache.sdc+sdb2.max_clean_ios_set = 2</div><div class="line">dev.flashcache.sdc+sdb2.do_pid_expiry = 0</div><div class="line">dev.flashcache.sdc+sdb2.max_pids = 100</div><div class="line">dev.flashcache.sdc+sdb2.pid_expiry_secs = 60</div><div class="line">dev.flashcache.sdc+sdb2.reclaim_policy = 0</div><div class="line">dev.flashcache.sdc+sdb2.zero_stats = 0</div><div class="line">dev.flashcache.sdc+sdb2.fast_remove = 0</div><div class="line">dev.flashcache.sdc+sdb2.cache_all = 1</div><div class="line">dev.flashcache.sdc+sdb2.fallow_clean_speed = 2</div><div class="line">dev.flashcache.sdc+sdb2.fallow_delay = 900</div><div class="line">dev.flashcache.sdc+sdb2.skip_seq_thresh_kb = 0</div><div class="line">dev.flashcache.sdc+sdb2.clean_on_read_miss = 0</div><div class="line">dev.flashcache.sdc+sdb2.clean_on_write_miss = 0</div><div class="line">dev.flashcache.sdc+sdb2.lru_promote_thresh = 2</div><div class="line">dev.flashcache.sdc+sdb2.lru_hot_pct = 75</div><div class="line">dev.flashcache.sdc+sdb2.new_style_write_merge = 0</div></pre></td></tr></table></figure>
+<p>修改参数的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sysctl -w dev.flashcache.sdc+sdb2.reclaim_policy=1  ###缓存回收策略，0：FIFO，1：LRU，可动态调整</div></pre></td></tr></table></figure>
+<h4 id="Flashcache状态监控"><a href="#Flashcache状态监控" class="headerlink" title="Flashcache状态监控"></a>Flashcache状态监控</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">dmsetup status cachedev</div><div class="line">dmsetup table  cachedev</div><div class="line"> </div><div class="line">错误日志报告 </div><div class="line">/proc/flashcache/sdc+sdb2/flashcache_errors</div><div class="line"> </div><div class="line">状态报告</div><div class="line">/proc/flashcache/sdc+sdb2/flashcache_stats</div><div class="line"> </div><div class="line">亦可使用flashstat命令实时查看</div></pre></td></tr></table></figure>
+<h1 id="推荐IO测试工具"><a href="#推荐IO测试工具" class="headerlink" title="推荐IO测试工具"></a>推荐IO测试工具</h1><p>fio、iozone 更多参考<a href="https://github.com/geekwolf/sa-scripts/blob/master/devops.md" target="_blank" rel="external">https://github.com/geekwolf/sa-scripts/blob/master/devops.md</a></p>
+<h1 id="fio安装"><a href="#fio安装" class="headerlink" title="fio安装"></a>fio安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install fio</div></pre></td></tr></table></figure>
+<h4 id="FIO的用法"><a href="#FIO的用法" class="headerlink" title="FIO的用法"></a>FIO的用法</h4><p>FIO分顺序读，随机读，顺序写，随机写，混合随机读写模式。</p>
+<p>这是一个顺序读的模式：<br>fio -filename=/dev/sda -direct=1 -iodepth 1 -thread -rw=read -ioengine=psync -bs=16k -size=200G -numjobs=30 -runtime=1000 -group_reporting -name=mytest</p>
+<p>说明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">filename=/dev/sdb1                    测试文件名称，通常选择需要测试的盘的data目录。</div><div class="line">direct=1                                     测试过程绕过机器自带的buffer。使测试结果更真实。</div><div class="line">rw=randwrite                             测试随机写的I/O</div><div class="line">rw=randrw                                 测试随机写和读的I/O</div><div class="line">bs=16k                                       单次io的块文件大小为16k</div><div class="line">bsrange=512-2048                      同上，提定数据块的大小范围</div><div class="line">size=5G                                       本次的测试文件大小为5g，以每次4k的io进行测试。</div><div class="line">numjobs=30                               本次的测试线程为30个.</div><div class="line">runtime=1000                             测试时间为1000秒，如果不写则一直将5g文件分4k每次写完为止。</div><div class="line">ioengine=psync                            io引擎使用pync方式</div><div class="line">rwmixwrite=30                            在混合读写的模式下，写占30%</div><div class="line">group_reporting                           关于显示结果的，汇总每个进程的信息。</div><div class="line"></div><div class="line"></div><div class="line">lockmem=1G                                只使用1g内存进行测试。</div><div class="line">zero_buffers                                 用0初始化系统buffer。</div><div class="line">nrfiles=8                                      每个进程生成文件的数量。</div></pre></td></tr></table></figure></p>
+
+      
+
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/20/flashcache-4-修改与测试/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-shell脚本循环" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -271,15 +906,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编程</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
         		</li>
       		
 		</ul>
@@ -610,517 +1245,9 @@
 
 
   
-    <article id="post-linux设备驱动-1-hello world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/22/linux设备驱动-1-hello world/">linux设备驱动-1-hello world</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/22/linux设备驱动-1-hello world/" class="archive-article-date">
-  	<time datetime="2017-05-22T08:00:07.738Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-22</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设备驱动</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <p>内核模块的开发效率更高，而且可以在内核运行时动态加载。由于Linux内核模块是动态加载，所以它也叫可加载内核模块，洋文LKM(Loadable Kernel Module)。Linux内核镜像位于/boot目录下，启动时最先加载，LKM总是在内核启动之后加载。</p>
-<p>LKM主要用于：设备驱动、文件系统驱动和系统调用。</p>
-        
-          <a class="article-more-a" href="/2017/05/22/linux设备驱动-1-hello world/#more">more >></a>
-        
-      
-
-            
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/22/linux设备驱动-1-hello world/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-缓存模拟器-zycache" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/缓存模拟器-zycache/">缓存模拟器-zycache</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/12/缓存模拟器-zycache/" class="archive-article-date">
-  	<time datetime="2017-05-12T07:51:18.523Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">存储</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">zycache</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">缓存</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <p>为了方便实验，最近自己实现了一套缓存模拟器，以<a href="http://iotta.snia.org/tracetypes/3">SNIA网站</a>上提供的TRACE为输入，分别实现了FIFO,LRU,LFU,OPT,ARC等经典的缓存算法，整个模拟器通过C++实现，利用面向对象思想。<a href="https://github.com/zydirtyfish/zycache.git">代码见github</a></p>
-        
-          <a class="article-more-a" href="/2017/05/12/缓存模拟器-zycache/#more">more >></a>
-        
-      
-
-            
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/12/缓存模拟器-zycache/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-般若波罗蜜多心经" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/28/般若波罗蜜多心经/">般若波罗蜜多心经</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/28/般若波罗蜜多心经/" class="archive-article-date">
-  	<time datetime="2017-04-28T05:37:21.005Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-28</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">转载</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/般若波罗蜜1.jpg" alt="image"></p>
-        
-          <a class="article-more-a" href="/2017/04/28/般若波罗蜜多心经/#more">more >></a>
-        
-      
-
-            
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/28/般若波罗蜜多心经/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-一叶孤舟，自强不息" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/一叶孤舟，自强不息/">一叶孤舟，自强不息</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/20/一叶孤舟，自强不息/" class="archive-article-date">
-  	<time datetime="2017-04-20T13:26:34.271Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-20</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/自强不息.png" alt="image"></p>
-<p>这一年，感觉是二十多年来成长最多的一年，并不是提升了多少专业技能，看了多少论文，而是看透了很多事，认识到了自身的诸多不足，这一点得感谢老板的谆谆教诲。</p>
-        
-          <a class="article-more-a" href="/2017/04/20/一叶孤舟，自强不息/#more">more >></a>
-        
-      
-
-            
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/20/一叶孤舟，自强不息/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-安和桥" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/安和桥/">安和桥</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/20/安和桥/" class="archive-article-date">
-  	<time datetime="2017-04-20T06:17:37.131Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-20</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=27646205&auto=0&height=66"></iframe>
-
-<blockquote>
-<p>不得不说，一段非洲鼓奏乐令人印象深刻</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/04/20/安和桥/#more">more >></a>
-        
-      
-
-            
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/20/安和桥/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-VSCode配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/19/VSCode配置/">VSCode配置</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/19/VSCode配置/" class="archive-article-date">
-  	<time datetime="2017-04-19T03:34:34.450Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-19</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">VSCode</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <p>工欲善其事必先利其器，学长都推荐source insight来看代码，用了一段时间，感觉还是不太方便，于是开始转战VS Code了！<br>VS Code确实是一个不错的编辑器，而且支持Linux/Mac Os/Windows系统。</p>
-<p>为什么用它看代码会比较方便呢？比如我要看下面这个变量buswait的定义(图1)，只需要按住ctl点击该变量即可转到定义(图2)，是不是跟eclipse的功能有点像呢！！！对于我这种JAVA转战C的码农简直就是天降福利啊，而且还支持分屏显示(图3)！！！</p>
-<p>图1.<br><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/VSCode配置-2.png" alt="image"><br>
-        
-          <a class="article-more-a" href="/2017/04/19/VSCode配置/#more">more >></a>
-        
-      
-
-            
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/19/VSCode配置/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1244,14 +1371,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flashcache</a>
               </li>
              
@@ -1264,15 +1383,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">转载</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">kmeans聚类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1284,11 +1403,39 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">总线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1300,10 +1447,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">RAID</a>
               </li>
              
@@ -1312,11 +1455,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
+                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1328,11 +1479,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
+                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
+                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
               </li>
             
             <div class="clearfix"></div>
