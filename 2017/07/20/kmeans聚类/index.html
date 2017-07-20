@@ -18,7 +18,7 @@ kmeans简介K-Means之所以很受欢迎，就是其速度很快并且有很好�
 <meta property="og:description" content="聚类算法有很多种，比如K-Means，AP聚类，层次聚类(Hierarchical clustering)等等，主要说一下K-Means.
 kmeans简介K-Means之所以很受欢迎，就是其速度很快并且有很好的可扩展性。K-Means算法是一个重复移动类中心点的过程，把类的中心点，也称重心（centroids），移动到其包含成员的平均位置，然后重新划分其内部成员。
 在博文K-Means聚类中有一">
-<meta property="og:updated_time" content="2017-07-20T14:27:52.572Z">
+<meta property="og:updated_time" content="2017-07-20T14:34:04.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kmeans聚类">
 <meta name="twitter:description" content="聚类算法有很多种，比如K-Means，AP聚类，层次聚类(Hierarchical clustering)等等，主要说一下K-Means.
@@ -300,6 +300,7 @@ kmeans简介K-Means之所以很受欢迎，就是其速度很快并且有很好�
 <h2 id="kmeans简介"><a href="#kmeans简介" class="headerlink" title="kmeans简介"></a>kmeans简介</h2><p>K-Means之所以很受欢迎，就是其速度很快并且有很好的可扩展性。K-Means算法是一个重复移动类中心点的过程，把类的中心点，也称重心（centroids），移动到其包含成员的平均位置，然后重新划分其内部成员。</p>
 <p>在博文<a href="http://imyin.xyz/2016/10/08/K-Means/" target="_blank" rel="external">K-Means聚类</a>中有一个很好的里子说明了kmeans的具体工作原理。</p>
 <h2 id="kmeans库的使用"><a href="#kmeans库的使用" class="headerlink" title="kmeans库的使用"></a>kmeans库的使用</h2><p>在scikit_learn库中就有kmeans算法的具体实现，官方说明见连接<a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html" target="_blank" rel="external">sklearn.cluster.KMeans</a></p>
+<a id="more"></a>
 <p>下面代码是具体的使用的方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"># -*- coding:UTF-8 -*-</div><div class="line">import sys   ##加载sys这个模块</div><div class="line">import pickle, subprocess, pwd</div><div class="line">import numpy as np</div><div class="line">from sklearn.cluster import KMeans</div><div class="line"></div><div class="line">#定义类别数目，参数通过shell指令参数输入</div><div class="line">cn = sys.argv[1];</div><div class="line">#print int(cn);</div><div class="line"></div><div class="line">#通过numpy库的方法导入测试向量</div><div class="line">#测试向量的行数表示样本数</div><div class="line">#测试向量的列数表示参数的维度</div><div class="line">X=np.loadtxt(&apos;test_vec&apos;)</div><div class="line"></div><div class="line"></div><div class="line">#kmeans算法学习</div><div class="line">print(&apos;starting learning...&apos;)</div><div class="line">kmeans  = KMeans(n_clusters=int(cn), random_state=0).fit(X)</div><div class="line"></div><div class="line">#持久化模型</div><div class="line">print(&apos;model dumping begin...&apos;)</div><div class="line">pickle.dump(kmeans , open(&apos;model.pkl&apos;, &apos;wb&apos;))</div><div class="line">print(&apos;model dumping end...&apos;)</div><div class="line"></div><div class="line">#读取模型</div><div class="line">kmeans  = pickle.load(open(&apos;model.pkl&apos;, &apos;rb&apos;))</div><div class="line"></div><div class="line">#输出学习的样本都属于哪个类别</div><div class="line">M =  kmeans.predict(X)</div><div class="line">for j in M:</div><div class="line">	print j</div><div class="line"></div><div class="line">#输出各类别的聚类中心</div><div class="line">cc = kmeans.cluster_centers_;</div><div class="line">for i in cc:</div><div class="line">	for j in i:</div><div class="line">		print(&apos;%lf\t&apos;%j)</div><div class="line">	print &apos;\n&apos;</div><div class="line">print cc[0];</div><div class="line"></div><div class="line">#输出样本到各距离中心的距离总和</div><div class="line">#结合肘部法则，可以确定最佳的K</div><div class="line">dis = kmeans.inertia_ ;</div><div class="line">print dis;</div></pre></td></tr></table></figure>
 
@@ -588,6 +589,14 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flashcache</a>
               </li>
              
@@ -620,6 +629,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
               </li>
              
@@ -628,23 +645,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">github pages</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,6 +658,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,6 +681,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
               </li>
              
@@ -680,27 +697,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">zycache</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">缓存</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
               </li>
             
             <div class="clearfix"></div>

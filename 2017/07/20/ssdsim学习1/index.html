@@ -12,9 +12,7 @@
 本章介绍一个自主开发的高准确性、模块化、可配置的固态盘模拟器SSDsim，它能够对高级命令、能耗进行模拟，最终要的一点是它的模拟结果经过了基本的验证。
 
 源码请参见ssdsim
-时间模拟事件驱动的模拟器是根据系统内部各个部件的状态改变来修改系统时间，SSDsim就是采用的这种方式的驱动方法；
-
-在高性能固态盘中，存在三类主要的部件">
+时间模拟事件驱动的模拟器是根据系统内部各个部件的状态改变来修改系统时间，SSDsim就是采用的这种方式的驱动方法；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ssdsim学习1">
 <meta property="og:url" content="http://yoursite.com/2017/07/20/ssdsim学习1/index.html">
@@ -23,20 +21,16 @@
 本章介绍一个自主开发的高准确性、模块化、可配置的固态盘模拟器SSDsim，它能够对高级命令、能耗进行模拟，最终要的一点是它的模拟结果经过了基本的验证。
 
 源码请参见ssdsim
-时间模拟事件驱动的模拟器是根据系统内部各个部件的状态改变来修改系统时间，SSDsim就是采用的这种方式的驱动方法；
-
-在高性能固态盘中，存在三类主要的部件">
+时间模拟事件驱动的模拟器是根据系统内部各个部件的状态改变来修改系统时间，SSDsim就是采用的这种方式的驱动方法；">
 <meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/ssdsim学习1.jpg">
-<meta property="og:updated_time" content="2017-07-20T14:27:52.908Z">
+<meta property="og:updated_time" content="2017-07-20T14:34:48.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssdsim学习1">
 <meta name="twitter:description" content="说明：==下文内容摘自胡洋博士毕业论文。引文通过特殊格式标出==
 本章介绍一个自主开发的高准确性、模块化、可配置的固态盘模拟器SSDsim，它能够对高级命令、能耗进行模拟，最终要的一点是它的模拟结果经过了基本的验证。
 
 源码请参见ssdsim
-时间模拟事件驱动的模拟器是根据系统内部各个部件的状态改变来修改系统时间，SSDsim就是采用的这种方式的驱动方法；
-
-在高性能固态盘中，存在三类主要的部件">
+时间模拟事件驱动的模拟器是根据系统内部各个部件的状态改变来修改系统时间，SSDsim就是采用的这种方式的驱动方法；">
 <meta name="twitter:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/ssdsim学习1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Yu Zhang&#39;s Blog" type="application/atom+xml">
@@ -316,6 +310,7 @@
 </blockquote>
 <p>源码请参见<a href="http://storage.hust.edu.cn/SSDsim/" target="_blank" rel="external">ssdsim</a></p>
 <h2 id="时间模拟"><a href="#时间模拟" class="headerlink" title="时间模拟"></a>时间模拟</h2><p>事件驱动的模拟器是根据系统内部各个部件的状态改变来修改系统时间，SSDsim就是采用的这种方式的驱动方法；</p>
+<a id="more"></a>
 <blockquote>
 <p>在高性能固态盘中，存在三类主要的部件，既固态盘中的嵌入式处理器，内存颗粒，和闪存颗粒。处理器的时钟通常大于100MHz，既单个时钟的时间为10纳秒甚至更短；内存的读写操作时间是纳秒级；与此形成对比的是，闪存颗粒的读写时间是微秒级。因此在SSDsim中，只考虑对闪存的读写擦除操作的时间开销，内存的读写时间开销取一个平均值，忽略处理器的时间开销。对于一个独立的读、写、擦除操作，可以根据公式5.1、5.2、5.3获得准确的时间开销。表5.1中介绍了三个公式中出现的变量，表中所列参数具体值取自具体的闪存芯片的数据手册</p>
 <p>读操作： 7×tWC+tR+PS×tRC                公式1</p>
@@ -656,6 +651,14 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flashcache</a>
               </li>
              
@@ -688,6 +691,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
               </li>
              
@@ -696,23 +707,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">github pages</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -721,6 +720,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -740,6 +743,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
               </li>
              
@@ -748,27 +759,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">zycache</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">缓存</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
               </li>
             
             <div class="clearfix"></div>
