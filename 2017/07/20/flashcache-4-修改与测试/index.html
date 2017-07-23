@@ -8,52 +8,25 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>flashcache-4-修改与测试 | Yu Zhang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="flashcache安装这里有篇博文推荐一下Flashcache基本使用及注意事项
-
-在官网下载文件解压github-flashcache
-
-进入文件夹并输入
-
-
-
-SSD:/dev/sdc
-SAS:/dev/sdb2
-创建设备名为cachedev的flashcache
-
-12345678910##安装gitsudo apt-get install git##编译安装makemake instal">
+  <meta name="description" content="系统安装由于flashcache在最新版本的ubuntu上会有兼容性问题（新版本ubuntu的linux内核版本高于4，ioctl被删除了，因此新版本ubuntu安装flashcache需要打补丁，比较麻烦），这里选用旧版本的ubuntu 14.10(utopic)
+安装ubuntu14.10 utopic
+这个版本的ubuntu官网之前的源失效了，可以修改源文件（具体参见求助 13.04 更新及">
 <meta property="og:type" content="article">
 <meta property="og:title" content="flashcache-4-修改与测试">
 <meta property="og:url" content="http://yoursite.com/2017/07/20/flashcache-4-修改与测试/index.html">
 <meta property="og:site_name" content="Yu Zhang's Blog">
-<meta property="og:description" content="flashcache安装这里有篇博文推荐一下Flashcache基本使用及注意事项
-
-在官网下载文件解压github-flashcache
-
-进入文件夹并输入
-
-
-
-SSD:/dev/sdc
-SAS:/dev/sdb2
-创建设备名为cachedev的flashcache
-
-12345678910##安装gitsudo apt-get install git##编译安装makemake instal">
-<meta property="og:updated_time" content="2017-07-20T14:35:42.628Z">
+<meta property="og:description" content="系统安装由于flashcache在最新版本的ubuntu上会有兼容性问题（新版本ubuntu的linux内核版本高于4，ioctl被删除了，因此新版本ubuntu安装flashcache需要打补丁，比较麻烦），这里选用旧版本的ubuntu 14.10(utopic)
+安装ubuntu14.10 utopic
+这个版本的ubuntu官网之前的源失效了，可以修改源文件（具体参见求助 13.04 更新及">
+<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-4-修改与测试1.jpg">
+<meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-4-修改与测试2.jpg">
+<meta property="og:updated_time" content="2017-07-23T14:44:06.432Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flashcache-4-修改与测试">
-<meta name="twitter:description" content="flashcache安装这里有篇博文推荐一下Flashcache基本使用及注意事项
-
-在官网下载文件解压github-flashcache
-
-进入文件夹并输入
-
-
-
-SSD:/dev/sdc
-SAS:/dev/sdb2
-创建设备名为cachedev的flashcache
-
-12345678910##安装gitsudo apt-get install git##编译安装makemake instal">
+<meta name="twitter:description" content="系统安装由于flashcache在最新版本的ubuntu上会有兼容性问题（新版本ubuntu的linux内核版本高于4，ioctl被删除了，因此新版本ubuntu安装flashcache需要打补丁，比较麻烦），这里选用旧版本的ubuntu 14.10(utopic)
+安装ubuntu14.10 utopic
+这个版本的ubuntu官网之前的源失效了，可以修改源文件（具体参见求助 13.04 更新及">
+<meta name="twitter:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-4-修改与测试1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Yu Zhang&#39;s Blog" type="application/atom+xml">
   
@@ -330,7 +303,12 @@ SAS:/dev/sdb2
       <br/><br/>
 
       
-        <h1 id="flashcache安装"><a href="#flashcache安装" class="headerlink" title="flashcache安装"></a>flashcache安装</h1><p>这里有篇博文推荐一下<a href="http://www.simlinux.com/archives/398.html" target="_blank" rel="external">Flashcache基本使用及注意事项</a></p>
+        <h1 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h1><p>由于flashcache在最新版本的ubuntu上会有兼容性问题（新版本ubuntu的linux内核版本高于4，ioctl被删除了，因此新版本ubuntu安装flashcache需要打补丁，比较麻烦），这里选用旧版本的ubuntu 14.10(utopic)</p>
+<p>安装<a href="http://old-releases.ubuntu.com/releases/" target="_blank" rel="external">ubuntu14.10 utopic</a></p>
+<p>这个版本的ubuntu官网之前的源失效了，可以修改源文件（具体参见<a href="http://forum.ubuntu.org.cn/viewtopic.php?f=77&amp;t=473404&amp;start=3" target="_blank" rel="external">求助 13.04 更新及升级</a>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gedit /etc/apt/sources.list</div></pre></td></tr></table></figure>
+<p>然后修改为下面的源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">deb http://old-releases.ubuntu.com/ubuntu/ utopic main restricted universe multiverse</div></pre></td></tr></table></figure></p>
+<h1 id="flashcache安装"><a href="#flashcache安装" class="headerlink" title="flashcache安装"></a>flashcache安装</h1><p>这里有篇博文推荐一下<a href="http://www.simlinux.com/archives/398.html" target="_blank" rel="external">Flashcache基本使用及注意事项</a></p>
 <ul>
 <li><p>在官网下载文件解压<a href="https://github.com/facebookarchive/flashcache" target="_blank" rel="external">github-flashcache</a></p>
 </li>
@@ -342,7 +320,7 @@ SAS:/dev/sdb2
 <p>SAS:/dev/sdb2</p>
 <p>创建设备名为cachedev的flashcache</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">##安装git</div><div class="line">sudo apt-get install git</div><div class="line"></div><div class="line"></div><div class="line">##编译安装</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line">##创建缓存设备</div><div class="line">flashcache_create -p back -b 4k cachedev /dev/sdc /dev/sdb2</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">##安装git</div><div class="line">sudo apt-get install git</div><div class="line"></div><div class="line"></div><div class="line">##编译安装</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line">##加载flashcache模块</div><div class="line">modprobe flashcache</div><div class="line">lsmod | grep flashcache</div><div class="line"></div><div class="line">##创建缓存设备</div><div class="line">flashcache_create -p back -b 4k cachedev /dev/sdc /dev/sdb2</div><div class="line"></div><div class="line">##格式化分区</div><div class="line">mkfs.ext4 /dev/mapper/cachedev</div><div class="line"></div><div class="line">##挂载分区</div><div class="line">mount /dev/mapper/cachedev /data</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <h4 id="flashcache-create相关参数说明："><a href="#flashcache-create相关参数说明：" class="headerlink" title="flashcache_create相关参数说明："></a>flashcache_create相关参数说明：</h4><p>-p:缓存模式 </p>
 <p>writeback(数据先写到SSD，随后写到普通硬盘)，writethrough(数据同时写到SSD和普通硬盘)，<br>writearound（数据绕过SSD，直接写到普通硬盘）三种，三种模式的所有读都会被缓存到flashcache可以通过dev.flashcache.<cachedev>.cache_all参数调整</cachedev></p>
@@ -350,7 +328,7 @@ SAS:/dev/sdb2
 <p>-b：指定块大小，可选项，默认为4KB，必须为2的指数。默认单位为扇区。也可以用K作为单位，一般选4KB。</p>
 <p>-f：强制创建，不进行检查</p>
 <p>-m：设备元数据块大小，只有writeback需要存储metadata块，默认4K</p>
-<h4 id="销毁Flashcache"><a href="#销毁Flashcache" class="headerlink" title="销毁Flashcache"></a>销毁Flashcache</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">flashcache_destroy /dev/sdc  ##这种方式删除writeback模式的flashcache时会将SSD上的所有数据删除包括脏数据,建议使用dmsetup命令（device-mapper软件包）删除，会自动将脏数据写入磁盘</div><div class="line">dmsetup remove cachedev</div></pre></td></tr></table></figure>
+<h4 id="销毁Flashcache"><a href="#销毁Flashcache" class="headerlink" title="销毁Flashcache"></a>销毁Flashcache</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">flashcache_destroy /dev/sdc  ##这种方式删除writeback模式的flashcache时会将SSD上的所有数据删除包括脏数据,建议使用dmsetup命令（device-mapper软件包）删除，会自动将脏数据写入磁盘</div><div class="line">dmsetup remove cachedev</div><div class="line"></div><div class="line">##卸载模块</div><div class="line">rmmod flashcache</div></pre></td></tr></table></figure>
 <h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">flashcache_create ##查看帮助</div><div class="line">flashcache_load /dev/sdc  cachedev ##(系统重启时使用来加载已经创建过的缓存设备cachedev)</div><div class="line">mount /dev/mapper/cachedev /data ##创建好的flashcache设备是块设备，可格式文件系统后挂在使用,也可以继续对其分区等</div></pre></td></tr></table></figure>
 <h4 id="Flashcache参数优化"><a href="#Flashcache参数优化" class="headerlink" title="Flashcache参数优化"></a>Flashcache参数优化</h4><p>输入下面命令进行查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sysctl dev.flashcache</div></pre></td></tr></table></figure></p>
 <p>默认参数设置</p>
@@ -363,6 +341,23 @@ SAS:/dev/sdb2
 <h4 id="FIO的用法"><a href="#FIO的用法" class="headerlink" title="FIO的用法"></a>FIO的用法</h4><p>FIO分顺序读，随机读，顺序写，随机写，混合随机读写模式。</p>
 <p>这是一个顺序读的模式：<br>fio -filename=/dev/sda -direct=1 -iodepth 1 -thread -rw=read -ioengine=psync -bs=16k -size=200G -numjobs=30 -runtime=1000 -group_reporting -name=mytest</p>
 <p>说明：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">filename=/dev/sdb1                    测试文件名称，通常选择需要测试的盘的data目录。</div><div class="line">direct=1                                     测试过程绕过机器自带的buffer。使测试结果更真实。</div><div class="line">rw=randwrite                             测试随机写的I/O</div><div class="line">rw=randrw                                 测试随机写和读的I/O</div><div class="line">bs=16k                                       单次io的块文件大小为16k</div><div class="line">bsrange=512-2048                      同上，提定数据块的大小范围</div><div class="line">size=5G                                       本次的测试文件大小为5g，以每次4k的io进行测试。</div><div class="line">numjobs=30                               本次的测试线程为30个.</div><div class="line">runtime=1000                             测试时间为1000秒，如果不写则一直将5g文件分4k每次写完为止。</div><div class="line">ioengine=psync                            io引擎使用pync方式</div><div class="line">rwmixwrite=30                            在混合读写的模式下，写占30%</div><div class="line">group_reporting                           关于显示结果的，汇总每个进程的信息。</div><div class="line"></div><div class="line"></div><div class="line">lockmem=1G                                只使用1g内存进行测试。</div><div class="line">zero_buffers                                 用0初始化系统buffer。</div><div class="line">nrfiles=8                                      每个进程生成文件的数量。</div></pre></td></tr></table></figure></p>
+<h1 id="一个完整的例子"><a href="#一个完整的例子" class="headerlink" title="一个完整的例子"></a>一个完整的例子</h1><h3 id="新建一个虚拟的ssd设备（用内存建立）"><a href="#新建一个虚拟的ssd设备（用内存建立）" class="headerlink" title="新建一个虚拟的ssd设备（用内存建立）"></a>新建一个虚拟的ssd设备（用内存建立）</h3><blockquote>
+<p>mkssd.sh<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">ssd_size=$1</div><div class="line"></div><div class="line"># 限制tmpfs最大不超过10G，避免耗尽内存(测试机器有24G物理内存)</div><div class="line">$sudo mount tmpfs /dev/shm -t tmpfs -o size=10240m</div><div class="line"></div><div class="line"># 创建ssd_size大小的文件，用来模拟flash设备</div><div class="line">$dd if=/dev/zero of=/dev/shm/ssd.img bs=1024k count=$ssd_size</div><div class="line"># 将文件模拟成块设备</div><div class="line">$sudo losetup /dev/loop0 /dev/shm/ssd.img</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="建立flashcache设备"><a href="#建立flashcache设备" class="headerlink" title="建立flashcache设备"></a>建立flashcache设备</h3><blockquote>
+<p>mkcache.sh</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">##缓存名</div><div class="line">cache_name=$1</div><div class="line">##替换策略</div><div class="line">cache_policy=$2</div><div class="line"></div><div class="line">##安装git</div><div class="line">sudo apt-get install git</div><div class="line">##编译安装</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line">##加载flash模块</div><div class="line">modprobe flashcache</div><div class="line">lsmod | grep flashcache</div><div class="line"></div><div class="line">##创建缓存设备</div><div class="line">flashcache_create -p back -b 4k $cache_name /dev/loop0 /dev/sdb</div><div class="line">##格式化分区</div><div class="line">mkfs.ext4 /dev/mapper/$cache_name</div><div class="line">##挂载分区</div><div class="line">mount /dev/mapper/$cache_name /data</div><div class="line"></div><div class="line">##设置缓存替换算法</div><div class="line">sysctl -w dev.flashcache.loop0+sdb.reclaim_policy=$cache_policy</div><div class="line"></div><div class="line">##查看缓存统计信息</div><div class="line">cat /proc/flashcache/loop0+sdb/flashcache_stats</div><div class="line"></div><div class="line">##销毁缓存</div><div class="line">dmsetup remove $cache_name</div><div class="line"></div><div class="line">##卸载flashcache模块</div><div class="line">rmmod flashcache</div><div class="line"></div><div class="line"></div><div class="line">##安装fio</div><div class="line">sudo apt-get install fio</div><div class="line">##测试</div><div class="line">fio -filename=/dev/mapper/$cache_name -direct=1 -iodepth 1 -thread -rw=randrw -ioengine=psync -bs=16k -size=200G -numjobs=30 -runtime=100 -group_reporting -name=mytest</div></pre></td></tr></table></figure>
+<h3 id="运行结果截图"><a href="#运行结果截图" class="headerlink" title="运行结果截图"></a>运行结果截图</h3><blockquote>
+<p>fio测试结果</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fio -filename=/dev/sdb -direct=1 -iodepth 1 -thread -rw=randrw -ioengine=psync -bs=16k -size=200G -numjobs=30 -runtime=100 -group_reporting -name=mytest</div></pre></td></tr></table></figure>
+<p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-4-修改与测试1.jpg" alt="image"></p>
+<blockquote>
+<p>flashcache统计结果</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /proc/flashcache/loop0+sdb/flashcache_stats</div></pre></td></tr></table></figure>
+<p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-4-修改与测试2.jpg" alt="image"></p>
 
       
 
@@ -649,14 +644,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flashcache</a>
               </li>
              
@@ -689,14 +676,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
               </li>
              
@@ -705,11 +684,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -721,10 +716,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
               </li>
              
@@ -733,11 +724,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -749,11 +744,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">

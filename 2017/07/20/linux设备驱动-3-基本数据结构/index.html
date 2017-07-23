@@ -18,7 +18,7 @@ container是Linux中很重要的一个概念，使用container能实现对象封
 <meta property="og:description" content="引言内核中使用的数据结构有双向链表、hash链表和单向链表，另外，红黑树和基树(radix数)也是内核使用的数据结构。
 container是Linux中很重要的一个概念，使用container能实现对象封装。代码如下：
 123456#define offsetof(TYPE,MEMBER) ((size_t)&amp;amp;((TYPE *)0)-&amp;gt;MEMBER)#define container">
-<meta property="og:updated_time" content="2017-07-20T14:35:14.902Z">
+<meta property="og:updated_time" content="2017-07-23T14:44:07.572Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux设备驱动-3-基本数据结构">
 <meta name="twitter:description" content="引言内核中使用的数据结构有双向链表、hash链表和单向链表，另外，红黑树和基树(radix数)也是内核使用的数据结构。
@@ -310,7 +310,7 @@ container是Linux中很重要的一个概念，使用container能实现对象封
 <p>list提供的list_entry使用了container,通过container可以从list找到整个数据对象，这样list就成为了一种通用的数据结构。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#define list_entry(ptr,type,member)</div><div class="line">container of(ptr,type,member)</div></pre></td></tr></table></figure>
 <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LIST_HEAD //定义并初始化一个list</div><div class="line">list_add_tail // 在list尾部加一个成员</div><div class="line">list_del //删除一个list成员</div><div class="line">list_empty //将list置空</div><div class="line">list_for_each //遍历链表</div><div class="line">list_for_each_safe //遍历并且可以删除成员</div><div class="line">list_for_each_entry //遍历，通过container方法返回结构指针</div></pre></td></tr></table></figure>
-<h3 id="距离"><a href="#距离" class="headerlink" title="距离"></a>距离</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">#include&lt;linux/init.h&gt;</div><div class="line">#include&lt;linux/slab.h&gt;</div><div class="line">#include&lt;linux/module.h&gt;</div><div class="line">#include&lt;linux/kernel.h&gt;</div><div class="line">#include&lt;linux/list.h&gt;</div><div class="line"></div><div class="line">MODULE_LICENSE(&quot;GPL&quot;);</div><div class="line">MODULE_AUTHOR(&quot;joystorage&quot;);</div><div class="line">MODULE_DESCRIPTION(&quot;My First  LKM for list_head!&quot;);</div><div class="line"></div><div class="line">struct student</div><div class="line">&#123;</div><div class="line">    int id;</div><div class="line">    char* name;</div><div class="line">    struct list_head list;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">void print_student(struct student*);</div><div class="line"></div><div class="line">static int testlist_init(void)</div><div class="line">&#123;</div><div class="line">    struct student *stu1, *stu2, *stu3, *stu4;</div><div class="line">    struct student *stu;</div><div class="line">    </div><div class="line">    // init a list head</div><div class="line">    LIST_HEAD(stu_head);</div><div class="line"></div><div class="line">    // init four list nodes</div><div class="line">    stu1 = kmalloc(sizeof(*stu1), GFP_KERNEL);</div><div class="line">    stu1-&gt;id = 1;</div><div class="line">    stu1-&gt;name = &quot;wyb&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu1-&gt;list);</div><div class="line"></div><div class="line">    stu2 = kmalloc(sizeof(*stu2), GFP_KERNEL);</div><div class="line">    stu2-&gt;id = 2;</div><div class="line">    stu2-&gt;name = &quot;wyb2&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu2-&gt;list);</div><div class="line"></div><div class="line">    stu3 = kmalloc(sizeof(*stu3), GFP_KERNEL);</div><div class="line">    stu3-&gt;id = 3;</div><div class="line">    stu3-&gt;name = &quot;wyb3&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu3-&gt;list);</div><div class="line"></div><div class="line">    stu4 = kmalloc(sizeof(*stu4), GFP_KERNEL);</div><div class="line">    stu4-&gt;id = 4;</div><div class="line">    stu4-&gt;name = &quot;wyb4&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu4-&gt;list);</div><div class="line"></div><div class="line">    // add the four nodes to head</div><div class="line">    list_add (&amp;stu1-&gt;list, &amp;stu_head);</div><div class="line">    list_add (&amp;stu2-&gt;list, &amp;stu_head);</div><div class="line">    list_add (&amp;stu3-&gt;list, &amp;stu_head);</div><div class="line">    list_add (&amp;stu4-&gt;list, &amp;stu_head);</div><div class="line"></div><div class="line">    // print each student from 4 to 1</div><div class="line">    list_for_each_entry(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line">    // print each student from 1 to 4</div><div class="line">    list_for_each_entry_reverse(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // delete a entry stu2</div><div class="line">    list_del(&amp;stu2-&gt;list);</div><div class="line">    list_for_each_entry(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // replace stu3 with stu2</div><div class="line">    list_replace(&amp;stu3-&gt;list, &amp;stu2-&gt;list);</div><div class="line">    list_for_each_entry(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">static void testlist_exit(void)</div><div class="line">&#123;</div><div class="line">    printk(KERN_ALERT &quot;*************************\n&quot;);</div><div class="line">    printk(KERN_ALERT &quot;testlist is exited!\n&quot;);</div><div class="line">    printk(KERN_ALERT &quot;*************************\n&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void print_student(struct student *stu)</div><div class="line">&#123;</div><div class="line">    printk (KERN_ALERT &quot;======================\n&quot;);</div><div class="line">    printk (KERN_ALERT &quot;id  =%d\n&quot;, stu-&gt;id);</div><div class="line">    printk (KERN_ALERT &quot;name=%s\n&quot;, stu-&gt;name);</div><div class="line">    printk (KERN_ALERT &quot;======================\n&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">module_init(testlist_init);</div><div class="line">module_exit(testlist_exit);</div></pre></td></tr></table></figure>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">#include&lt;linux/init.h&gt;</div><div class="line">#include&lt;linux/slab.h&gt;</div><div class="line">#include&lt;linux/module.h&gt;</div><div class="line">#include&lt;linux/kernel.h&gt;</div><div class="line">#include&lt;linux/list.h&gt;</div><div class="line"></div><div class="line">MODULE_LICENSE(&quot;GPL&quot;);</div><div class="line">MODULE_AUTHOR(&quot;joystorage&quot;);</div><div class="line">MODULE_DESCRIPTION(&quot;My First  LKM for list_head!&quot;);</div><div class="line"></div><div class="line">struct student</div><div class="line">&#123;</div><div class="line">    int id;</div><div class="line">    char* name;</div><div class="line">    struct list_head list;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">void print_student(struct student*);</div><div class="line"></div><div class="line">static int testlist_init(void)</div><div class="line">&#123;</div><div class="line">    struct student *stu1, *stu2, *stu3, *stu4;</div><div class="line">    struct student *stu;</div><div class="line">    </div><div class="line">    // init a list head</div><div class="line">    LIST_HEAD(stu_head);</div><div class="line"></div><div class="line">    // init four list nodes</div><div class="line">    stu1 = kmalloc(sizeof(*stu1), GFP_KERNEL);</div><div class="line">    stu1-&gt;id = 1;</div><div class="line">    stu1-&gt;name = &quot;wyb&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu1-&gt;list);</div><div class="line"></div><div class="line">    stu2 = kmalloc(sizeof(*stu2), GFP_KERNEL);</div><div class="line">    stu2-&gt;id = 2;</div><div class="line">    stu2-&gt;name = &quot;wyb2&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu2-&gt;list);</div><div class="line"></div><div class="line">    stu3 = kmalloc(sizeof(*stu3), GFP_KERNEL);</div><div class="line">    stu3-&gt;id = 3;</div><div class="line">    stu3-&gt;name = &quot;wyb3&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu3-&gt;list);</div><div class="line"></div><div class="line">    stu4 = kmalloc(sizeof(*stu4), GFP_KERNEL);</div><div class="line">    stu4-&gt;id = 4;</div><div class="line">    stu4-&gt;name = &quot;wyb4&quot;;</div><div class="line">    INIT_LIST_HEAD(&amp;stu4-&gt;list);</div><div class="line"></div><div class="line">    // add the four nodes to head</div><div class="line">    list_add (&amp;stu1-&gt;list, &amp;stu_head);</div><div class="line">    list_add (&amp;stu2-&gt;list, &amp;stu_head);</div><div class="line">    list_add (&amp;stu3-&gt;list, &amp;stu_head);</div><div class="line">    list_add (&amp;stu4-&gt;list, &amp;stu_head);</div><div class="line"></div><div class="line">    // print each student from 4 to 1</div><div class="line">    list_for_each_entry(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line">    // print each student from 1 to 4</div><div class="line">    list_for_each_entry_reverse(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // delete a entry stu2</div><div class="line">    list_del(&amp;stu2-&gt;list);</div><div class="line">    list_for_each_entry(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // replace stu3 with stu2</div><div class="line">    list_replace(&amp;stu3-&gt;list, &amp;stu2-&gt;list);</div><div class="line">    list_for_each_entry(stu, &amp;stu_head, list)</div><div class="line">    &#123;</div><div class="line">        print_student(stu);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">static void testlist_exit(void)</div><div class="line">&#123;</div><div class="line">    printk(KERN_ALERT &quot;*************************\n&quot;);</div><div class="line">    printk(KERN_ALERT &quot;testlist is exited!\n&quot;);</div><div class="line">    printk(KERN_ALERT &quot;*************************\n&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">void print_student(struct student *stu)</div><div class="line">&#123;</div><div class="line">    printk (KERN_ALERT &quot;======================\n&quot;);</div><div class="line">    printk (KERN_ALERT &quot;id  =%d\n&quot;, stu-&gt;id);</div><div class="line">    printk (KERN_ALERT &quot;name=%s\n&quot;, stu-&gt;name);</div><div class="line">    printk (KERN_ALERT &quot;======================\n&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">module_init(testlist_init);</div><div class="line">module_exit(testlist_exit);</div></pre></td></tr></table></figure>
 
       
 
@@ -597,14 +597,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">flashcache</a>
               </li>
              
@@ -637,14 +629,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
               </li>
              
@@ -653,11 +637,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -669,10 +669,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
               </li>
              
@@ -681,11 +677,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -697,11 +697,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">
