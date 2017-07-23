@@ -20,7 +20,7 @@
 这个版本的ubuntu官网之前的源失效了，可以修改源文件（具体参见求助 13.04 更新及">
 <meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-4-修改与测试1.jpg">
 <meta property="og:image" content="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/flashcache-4-修改与测试2.jpg">
-<meta property="og:updated_time" content="2017-07-23T14:44:06.432Z">
+<meta property="og:updated_time" content="2017-07-23T14:49:32.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flashcache-4-修改与测试">
 <meta name="twitter:description" content="系统安装由于flashcache在最新版本的ubuntu上会有兼容性问题（新版本ubuntu的linux内核版本高于4，ioctl被删除了，因此新版本ubuntu安装flashcache需要打补丁，比较麻烦），这里选用旧版本的ubuntu 14.10(utopic)
@@ -308,6 +308,7 @@
 <p>这个版本的ubuntu官网之前的源失效了，可以修改源文件（具体参见<a href="http://forum.ubuntu.org.cn/viewtopic.php?f=77&amp;t=473404&amp;start=3" target="_blank" rel="external">求助 13.04 更新及升级</a>）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gedit /etc/apt/sources.list</div></pre></td></tr></table></figure>
 <p>然后修改为下面的源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">deb http://old-releases.ubuntu.com/ubuntu/ utopic main restricted universe multiverse</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <h1 id="flashcache安装"><a href="#flashcache安装" class="headerlink" title="flashcache安装"></a>flashcache安装</h1><p>这里有篇博文推荐一下<a href="http://www.simlinux.com/archives/398.html" target="_blank" rel="external">Flashcache基本使用及注意事项</a></p>
 <ul>
 <li><p>在官网下载文件解压<a href="https://github.com/facebookarchive/flashcache" target="_blank" rel="external">github-flashcache</a></p>
@@ -321,7 +322,6 @@
 <p>创建设备名为cachedev的flashcache</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">##安装git</div><div class="line">sudo apt-get install git</div><div class="line"></div><div class="line"></div><div class="line">##编译安装</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line">##加载flashcache模块</div><div class="line">modprobe flashcache</div><div class="line">lsmod | grep flashcache</div><div class="line"></div><div class="line">##创建缓存设备</div><div class="line">flashcache_create -p back -b 4k cachedev /dev/sdc /dev/sdb2</div><div class="line"></div><div class="line">##格式化分区</div><div class="line">mkfs.ext4 /dev/mapper/cachedev</div><div class="line"></div><div class="line">##挂载分区</div><div class="line">mount /dev/mapper/cachedev /data</div></pre></td></tr></table></figure>
-<a id="more"></a>
 <h4 id="flashcache-create相关参数说明："><a href="#flashcache-create相关参数说明：" class="headerlink" title="flashcache_create相关参数说明："></a>flashcache_create相关参数说明：</h4><p>-p:缓存模式 </p>
 <p>writeback(数据先写到SSD，随后写到普通硬盘)，writethrough(数据同时写到SSD和普通硬盘)，<br>writearound（数据绕过SSD，直接写到普通硬盘）三种，三种模式的所有读都会被缓存到flashcache可以通过dev.flashcache.<cachedev>.cache_all参数调整</cachedev></p>
 <p>-s：缓存大小，可选项，如果未指定则整个SSD设备被用于缓存，默认的计数单位是扇区（sectors）,但是可以接受k/m/g单位。</p>
@@ -660,6 +660,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
@@ -676,14 +684,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
@@ -692,19 +692,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">总线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -724,18 +732,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">排队论</a>
               </li>
              
@@ -744,11 +740,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,6 +753,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">缓存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
               </li>
             
             <div class="clearfix"></div>

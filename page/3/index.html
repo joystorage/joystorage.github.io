@@ -240,19 +240,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-存储相关-2-RAID、虚拟磁盘、卷和文件系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-存储相关-4-虚拟化与系统IO路径优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">存储相关-2-RAID、虚拟磁盘、卷和文件系统</a>
+      <a class="article-title" href="/2017/04/03/存储相关-4-虚拟化与系统IO路径优化/">存储相关-4-虚拟化与系统IO路径优化</a>
     </h1>
   
 
         
-        <a href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/" class="archive-article-date">
+        <a href="/2017/04/03/存储相关-4-虚拟化与系统IO路径优化/" class="archive-article-date">
   	<time datetime="2017-04-03T11:19:36.349Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
 </a>
         
@@ -275,11 +275,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">RAID</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">虚拟化</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">文件系统</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">IO路径优化</a>
         		</li>
       		
 		</ul>
@@ -292,9 +292,13 @@
       <br/><br/>
 
       
-        <h1 id="七种RAID"><a href="#七种RAID" class="headerlink" title="七种RAID"></a>七种RAID</h1><p>RAID以4个扇区组成的块作为基本单位，不同磁盘的相同偏移处的块组成Stripe，也就是条带.对于RAID 0 磁盘组，如果有大块数据写入时，则数据在很大几率上可以以条带为单位写入，并行写入能大大提高写入速度.</p>
+        <h1 id="几个概念"><a href="#几个概念" class="headerlink" title="几个概念"></a>几个概念</h1><ul>
+<li>HPC（High Performance Computing）高性能计算<br>通过增加整个计算系统CPU总核心数，可以成倍缩短执行时间</li>
+<li>HAC（High available Computing）高可用性集群<br>通过备份，当一活动节点发生故障时，备份可用，不会影响整个系统的使用</li>
+<li>LBC负载均衡计算</li>
+</ul>
         
-          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/#more">more >></a>
+          <a class="article-more-a" href="/2017/04/03/存储相关-4-虚拟化与系统IO路径优化/#more">more >></a>
         
       
 
@@ -307,7 +311,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/存储相关-2-RAID、虚拟磁盘、卷和文件系统/">查看全文 >></a>
+          <a class="article-more-a" href="/2017/04/03/存储相关-4-虚拟化与系统IO路径优化/">查看全文 >></a>
         </p>
       
 
@@ -564,6 +568,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
@@ -580,14 +592,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">ssd</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
@@ -596,19 +600,27 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">ssd</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">总线</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,18 +640,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">排队论</a>
               </li>
              
@@ -648,11 +648,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,6 +661,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">缓存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
               </li>
             
             <div class="clearfix"></div>
