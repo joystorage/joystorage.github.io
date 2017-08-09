@@ -9,21 +9,18 @@
   <title>flashcache-5-filebench测试 | Yu Zhang&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在ubuntu上安装filebench的最新版本会有一堆bug，很麻烦，因此用了别人改过的go_filebench，其实两个是一样的，只是改动了一下安装的配置。
-下载后解压，然后输入下面命令即可安装123./configuremakemake install
-具体运行如下更加详细的过程可以参见博客filebench介绍1234567user@host$ sudo su[sudo] password">
+下载后解压，然后输入下面命令即可安装123./configuremakemake install">
 <meta property="og:type" content="article">
 <meta property="og:title" content="flashcache-5-filebench测试">
 <meta property="og:url" content="http://yoursite.com/2017/08/09/flashcache-5-filebench测试/index.html">
 <meta property="og:site_name" content="Yu Zhang's Blog">
 <meta property="og:description" content="在ubuntu上安装filebench的最新版本会有一堆bug，很麻烦，因此用了别人改过的go_filebench，其实两个是一样的，只是改动了一下安装的配置。
-下载后解压，然后输入下面命令即可安装123./configuremakemake install
-具体运行如下更加详细的过程可以参见博客filebench介绍1234567user@host$ sudo su[sudo] password">
-<meta property="og:updated_time" content="2017-08-09T11:44:54.988Z">
+下载后解压，然后输入下面命令即可安装123./configuremakemake install">
+<meta property="og:updated_time" content="2017-08-09T11:52:08.593Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flashcache-5-filebench测试">
 <meta name="twitter:description" content="在ubuntu上安装filebench的最新版本会有一堆bug，很麻烦，因此用了别人改过的go_filebench，其实两个是一样的，只是改动了一下安装的配置。
-下载后解压，然后输入下面命令即可安装123./configuremakemake install
-具体运行如下更加详细的过程可以参见博客filebench介绍1234567user@host$ sudo su[sudo] password">
+下载后解压，然后输入下面命令即可安装123./configuremakemake install">
   
     <link rel="alternative" href="/atom.xml" title="Yu Zhang&#39;s Blog" type="application/atom+xml">
   
@@ -306,6 +303,7 @@
       
         <p>在ubuntu上安装filebench的最新版本会有一堆bug，很麻烦，因此用了别人改过的<a href="http://www.fsl.cs.sunysb.edu/~vass/filebench/" target="_blank" rel="external">go_filebench</a>，其实两个是一样的，只是改动了一下安装的配置。</p>
 <p>下载后解压，然后输入下面命令即可安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">./configure</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>具体运行如下<br>更加详细的过程可以参见博客<a href="http://www.voidcn.com/blog/u012317833/article/p-1427102.html" target="_blank" rel="external">filebench介绍</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">user@host$ sudo su</div><div class="line">[sudo] password for user:</div><div class="line">root@host# echo 0 &gt; /proc/sys/kernel/randomize_va_space</div><div class="line">root@host# go_filebench </div><div class="line">Filebench Version 1.4.9</div><div class="line">12102: 0.000: Allocated 170MB of shared memory</div><div class="line">filebench&gt;</div></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">root@user# go_filebench </div><div class="line">Filebench Version 1.4.9</div><div class="line">12324: 0.000: Allocated 170MB of shared memory</div><div class="line">filebench&gt; load fileserver</div><div class="line">12462: 2.869: FileServer Version 2.2 personality successfully loaded</div><div class="line">12462: 2.869: Usage: set $dir=&lt;dir&gt;</div><div class="line">12462: 2.869:        set $meanfilesize=&lt;size&gt;     defaults to 131072</div><div class="line">12462: 2.869:        set $nfiles=&lt;value&gt;      defaults to 10000</div><div class="line">12462: 2.869:        set $nthreads=&lt;value&gt;    defaults to 50</div><div class="line">12462: 2.869:        set $meanappendsize=&lt;value&gt;  defaults to 16384</div><div class="line">12462: 2.869:        set $iosize=&lt;size&gt;  defaults to 1048576</div><div class="line">12462: 2.869:        set $meandirwidth=&lt;size&gt; defaults to 20</div><div class="line">12462: 2.869: (sets mean dir width and dir depth is calculated as log (width, nfiles)</div><div class="line">12462: 2.869:        run runtime (e.g. run 60)</div><div class="line">filebench&gt; set $dir=/mnt</div><div class="line">filebench&gt; run 60</div><div class="line">12462: 4.909: Creating/pre-allocating files and filesets</div><div class="line">12462: 4.918: Fileset bigfileset: 10000 files, avg dir width = 20, avg dir depth = 3.1, 1240.757MB</div><div class="line">12462: 5.280: Removed any existing fileset bigfileset in 1 seconds</div><div class="line">12462: 5.280: making tree for filset /tmp/bigfileset</div><div class="line">12462: 5.290: Creating fileset bigfileset...</div><div class="line">12462: 6.080: Preallocated 7979 of 10000 of fileset bigfileset in 1 seconds</div><div class="line">12462: 6.080: waiting for fileset pre-allocation to finish</div><div class="line">12466: 6.080: Starting 1 filereader instances</div><div class="line">12467: 6.081: Starting 50 filereaderthread threads</div><div class="line">12462: 7.137: Running...</div><div class="line">12462: 67.142: Run took 60 seconds...</div><div class="line">12462: 67.145: Per-Operation Breakdown</div><div class="line">statfile1            128311ops     2138ops/s   0.0mb/s      0.0ms/op     2320us/op-cpu [0ms - 0ms]</div><div class="line">deletefile1          128316ops     2138ops/s   0.0mb/s      0.2ms/op     2535us/op-cpu [0ms - 458ms]</div><div class="line">closefile3           128323ops     2139ops/s   0.0mb/s      0.0ms/op     2328us/op-cpu [0ms - 0ms]</div><div class="line">readfile1            128327ops     2139ops/s 283.8mb/s      0.1ms/op     2460us/op-cpu [0ms - 267ms]</div><div class="line">openfile2            128329ops     2139ops/s   0.0mb/s      0.0ms/op     2332us/op-cpu [0ms - 2ms]</div><div class="line">closefile2           128332ops     2139ops/s   0.0mb/s      0.0ms/op     2332us/op-cpu [0ms - 0ms]</div><div class="line">appendfilerand1      128337ops     2139ops/s  16.6mb/s      0.1ms/op     2377us/op-cpu [0ms - 559ms]</div><div class="line">openfile1            128343ops     2139ops/s   0.0mb/s      0.0ms/op     2353us/op-cpu [0ms - 2ms]</div><div class="line">closefile1           128349ops     2139ops/s   0.0mb/s      0.0ms/op     2317us/op-cpu [0ms - 1ms]</div><div class="line">wrtfile1             128352ops     2139ops/s 265.2mb/s      0.1ms/op     2601us/op-cpu [0ms - 268ms]</div><div class="line">createfile1          128358ops     2139ops/s   0.0mb/s      0.1ms/op     2396us/op-cpu [0ms - 267ms]</div><div class="line">12462: 67.145: IO Summary: 1411677 ops, 23526 ops/s, (2139/4278 r/w), 565mb/s, 393us cpu/op, 0.2ms latency</div><div class="line">12462: 67.145: Shutting down processes</div><div class="line">root@user#</div></pre></td></tr></table></figure>
 
@@ -428,7 +426,7 @@
   
   
     <a href="/2017/08/09/flashcache-6-利用blktrace记录IO，利用fio重放日志/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">flashcache-5-filebench测试</div>
+      <div class="article-nav-title">flashcache-6-filebench测试</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -585,7 +583,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -649,11 +651,35 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -665,11 +691,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
+                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
+                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -689,39 +715,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cache-sim</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">缓存</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">

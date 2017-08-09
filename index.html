@@ -296,11 +296,11 @@
       <br/><br/>
 
       
-        <p>在ubuntu上安装filebench的最新版本会有一堆bug，很麻烦，因此用了别人改过的<a href="http://www.fsl.cs.sunysb.edu/~vass/filebench/" target="_blank" rel="external">go_filebench</a>，其实两个是一样的，只是改动了一下安装的配置。</p>
+        <p>在ubuntu上安装filebench的最新版本会有一堆bug，很麻烦，因此用了别人改过的<a href="http://www.fsl.cs.sunysb.edu/~vass/filebench/">go_filebench</a>，其实两个是一样的，只是改动了一下安装的配置。</p>
 <p>下载后解压，然后输入下面命令即可安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">./configure</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
-<p>具体运行如下<br>更加详细的过程可以参见博客<a href="http://www.voidcn.com/blog/u012317833/article/p-1427102.html" target="_blank" rel="external">filebench介绍</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">user@host$ sudo su</div><div class="line">[sudo] password for user:</div><div class="line">root@host# echo 0 &gt; /proc/sys/kernel/randomize_va_space</div><div class="line">root@host# go_filebench </div><div class="line">Filebench Version 1.4.9</div><div class="line">12102: 0.000: Allocated 170MB of shared memory</div><div class="line">filebench&gt;</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">root@user# go_filebench </div><div class="line">Filebench Version 1.4.9</div><div class="line">12324: 0.000: Allocated 170MB of shared memory</div><div class="line">filebench&gt; load fileserver</div><div class="line">12462: 2.869: FileServer Version 2.2 personality successfully loaded</div><div class="line">12462: 2.869: Usage: set $dir=&lt;dir&gt;</div><div class="line">12462: 2.869:        set $meanfilesize=&lt;size&gt;     defaults to 131072</div><div class="line">12462: 2.869:        set $nfiles=&lt;value&gt;      defaults to 10000</div><div class="line">12462: 2.869:        set $nthreads=&lt;value&gt;    defaults to 50</div><div class="line">12462: 2.869:        set $meanappendsize=&lt;value&gt;  defaults to 16384</div><div class="line">12462: 2.869:        set $iosize=&lt;size&gt;  defaults to 1048576</div><div class="line">12462: 2.869:        set $meandirwidth=&lt;size&gt; defaults to 20</div><div class="line">12462: 2.869: (sets mean dir width and dir depth is calculated as log (width, nfiles)</div><div class="line">12462: 2.869:        run runtime (e.g. run 60)</div><div class="line">filebench&gt; set $dir=/mnt</div><div class="line">filebench&gt; run 60</div><div class="line">12462: 4.909: Creating/pre-allocating files and filesets</div><div class="line">12462: 4.918: Fileset bigfileset: 10000 files, avg dir width = 20, avg dir depth = 3.1, 1240.757MB</div><div class="line">12462: 5.280: Removed any existing fileset bigfileset in 1 seconds</div><div class="line">12462: 5.280: making tree for filset /tmp/bigfileset</div><div class="line">12462: 5.290: Creating fileset bigfileset...</div><div class="line">12462: 6.080: Preallocated 7979 of 10000 of fileset bigfileset in 1 seconds</div><div class="line">12462: 6.080: waiting for fileset pre-allocation to finish</div><div class="line">12466: 6.080: Starting 1 filereader instances</div><div class="line">12467: 6.081: Starting 50 filereaderthread threads</div><div class="line">12462: 7.137: Running...</div><div class="line">12462: 67.142: Run took 60 seconds...</div><div class="line">12462: 67.145: Per-Operation Breakdown</div><div class="line">statfile1            128311ops     2138ops/s   0.0mb/s      0.0ms/op     2320us/op-cpu [0ms - 0ms]</div><div class="line">deletefile1          128316ops     2138ops/s   0.0mb/s      0.2ms/op     2535us/op-cpu [0ms - 458ms]</div><div class="line">closefile3           128323ops     2139ops/s   0.0mb/s      0.0ms/op     2328us/op-cpu [0ms - 0ms]</div><div class="line">readfile1            128327ops     2139ops/s 283.8mb/s      0.1ms/op     2460us/op-cpu [0ms - 267ms]</div><div class="line">openfile2            128329ops     2139ops/s   0.0mb/s      0.0ms/op     2332us/op-cpu [0ms - 2ms]</div><div class="line">closefile2           128332ops     2139ops/s   0.0mb/s      0.0ms/op     2332us/op-cpu [0ms - 0ms]</div><div class="line">appendfilerand1      128337ops     2139ops/s  16.6mb/s      0.1ms/op     2377us/op-cpu [0ms - 559ms]</div><div class="line">openfile1            128343ops     2139ops/s   0.0mb/s      0.0ms/op     2353us/op-cpu [0ms - 2ms]</div><div class="line">closefile1           128349ops     2139ops/s   0.0mb/s      0.0ms/op     2317us/op-cpu [0ms - 1ms]</div><div class="line">wrtfile1             128352ops     2139ops/s 265.2mb/s      0.1ms/op     2601us/op-cpu [0ms - 268ms]</div><div class="line">createfile1          128358ops     2139ops/s   0.0mb/s      0.1ms/op     2396us/op-cpu [0ms - 267ms]</div><div class="line">12462: 67.145: IO Summary: 1411677 ops, 23526 ops/s, (2139/4278 r/w), 565mb/s, 393us cpu/op, 0.2ms latency</div><div class="line">12462: 67.145: Shutting down processes</div><div class="line">root@user#</div></pre></td></tr></table></figure>
-
+        
+          <a class="article-more-a" href="/2017/08/09/flashcache-5-filebench测试/#more">more >></a>
+        
       
 
             
@@ -340,7 +340,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/09/flashcache-6-利用blktrace记录IO，利用fio重放日志/">flashcache-5-filebench测试</a>
+      <a class="article-title" href="/2017/08/09/flashcache-6-利用blktrace记录IO，利用fio重放日志/">flashcache-6-filebench测试</a>
     </h1>
   
 
@@ -471,17 +471,10 @@
       <br/><br/>
 
       
-        <p>一个读取配置文件的工具类，代码如下<br>Config.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">//////////////////////////////////////////////////////////////////////////</div><div class="line">// Config.h</div><div class="line">// Author: joyyzhang</div><div class="line">// Date: 2017-08</div><div class="line"></div><div class="line">#ifndef Config_h__</div><div class="line">#define Config_h__</div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;fstream&gt;</div><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;string.h&gt;</div><div class="line"></div><div class="line">using namespace std;</div><div class="line"></div><div class="line">#define LINE_LENGTH 500</div><div class="line"></div><div class="line">class Config &#123;</div><div class="line">public:</div><div class="line">	Config()</div><div class="line">	&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	~Config()</div><div class="line">	&#123;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	void Get(const char *key_path, const char *para_name,char *result)</div><div class="line">	&#123;</div><div class="line">		ifstream fin(key_path); </div><div class="line">		if(fin)</div><div class="line">    	        &#123;</div><div class="line">			char str[LINE_LENGTH];</div><div class="line">			while( fin.getline(str,LINE_LENGTH) )</div><div class="line">			&#123;</div><div class="line">				if(str[0] == &apos;#&apos; || str[0] == &apos;\0&apos;)//注释以#开头</div><div class="line">					continue;</div><div class="line">				int cnt = 0;</div><div class="line">				char tmp[2][LINE_LENGTH];</div><div class="line">				//以等号分割配置文件</div><div class="line">				const char *sep = &quot;=&quot;; //可按多个字符来分割</div><div class="line">				char *p;</div><div class="line">				p = strtok(str, sep);</div><div class="line">				strcpy(tmp[cnt],p);</div><div class="line">				while(p)&#123;</div><div class="line">					p = strtok(NULL, sep);</div><div class="line">					cnt++;</div><div class="line">					if(p)</div><div class="line">						strcpy(tmp[cnt],p);</div><div class="line">					else</div><div class="line">						break;</div><div class="line">				&#125;</div><div class="line">				if(cnt == 2)</div><div class="line">				&#123;</div><div class="line">					if(strcmp(tmp[0],para_name) == 0)</div><div class="line">						strcpy(result,tmp[1]);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			fin.close();</div><div class="line">		&#125;</div><div class="line">		else&#123;</div><div class="line">			cout &lt;&lt; &quot;can&apos;t open config file named &apos;&quot; &lt;&lt; key_path &lt;&lt; &quot;&apos;&quot; &lt;&lt;endl;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line">#endif // Config_h__</div></pre></td></tr></table></figure></p>
-<p>测试<br>config文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">a=1234</div><div class="line">b=123</div><div class="line">asdf</div><div class="line">#日志区</div><div class="line">c</div><div class="line">c=4444</div><div class="line">d=1</div></pre></td></tr></table></figure>
-<p>test.cpp</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//////////////////////////////////////////////////////////////////////////</div><div class="line">// test.cpp</div><div class="line">// Author: joyyzhang</div><div class="line">// Date: 2017-08</div><div class="line"></div><div class="line">#include &quot;Config.h&quot;</div><div class="line"></div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">	Config *cf = new Config();</div><div class="line">	char result[LINE_LENGTH];</div><div class="line">	strcpy(result,&quot;&quot;);</div><div class="line">	cf-&gt;Get(&quot;config&quot;,&quot;c&quot;,result);</div><div class="line">	cout &lt;&lt; result &lt;&lt; endl;;</div><div class="line">	system(&quot;pause&quot;);</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4444</div></pre></td></tr></table></figure>
-<blockquote>
-<p>Get函数返回结果为一字符串，可通过atoX函数自行转化为相应的数据类型，如读取的为int类型，可用atoi函数转化等。</p>
-</blockquote>
-
+        <p>一个读取配置文件的工具类，代码如下<br>Config.h</p>
+        
+          <a class="article-more-a" href="/2017/08/09/C++读取配置文件/#more">more >></a>
+        
       
 
             
@@ -656,21 +649,15 @@
       <br/><br/>
 
       
-        <h4 id="代码已经上传至github"><a href="#代码已经上传至github" class="headerlink" title="代码已经上传至github"></a>代码已经上传至<a href="https://github.com/zydirtyfish/cache-sim_v1.0" target="_blank" rel="external">github</a></h4><p>通过下列命令下载</p>
+        <h4 id="代码已经上传至github"><a href="#代码已经上传至github" class="headerlink" title="代码已经上传至github"></a>代码已经上传至<a href="https://github.com/zydirtyfish/cache-sim_v1.0">github</a></h4><p>通过下列命令下载</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/zydirtyfish/cache-sim_v1.0.git</div></pre></td></tr></table></figure>
 <p>进入目录，make进行编译</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make</div></pre></td></tr></table></figure>
 <p>输入下列命令可运行demo程序</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make run</div></pre></td></tr></table></figure>
-<p>demo程序中分析的是trace文件夹的下的example文件，更多的trace文件可在网站<a href="http://iotta.snia.org/tracetypes/3" target="_blank" rel="external">SNIA网站</a>上下载。</p>
-<p>缓存所有的配置信息在config文件中，配置文件属性与值之间以等号连接，注释以#开头<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">#缓存替换算法的类型</div><div class="line">algorithm_type=0</div><div class="line">#缓存的大小</div><div class="line">block_num_conf=65536</div><div class="line">#块大小</div><div class="line">block_size_conf=4096</div><div class="line">#写策略</div><div class="line">write_algorithm_conf=1</div><div class="line">#日志的开始</div><div class="line">log_start=0</div><div class="line">#每次读取的日志数</div><div class="line">log_num=1</div><div class="line">#日志文件的前缀</div><div class="line">log_prefix=./trace/example.csv</div><div class="line"></div><div class="line">#懒惰参数</div><div class="line">PARA=4</div><div class="line">k=16</div></pre></td></tr></table></figure></p>
-<p>程序入口在cache-sim.cpp中的main函数，可以发现，配置文件通过命令行参数传入，即通过下列命令运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./cache-sim.o config</div></pre></td></tr></table></figure></p>
-<h3 id="缓存的初始化"><a href="#缓存的初始化" class="headerlink" title="缓存的初始化"></a>缓存的初始化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">init_cache()//函数读取配置文件并对缓存进行初始化</div><div class="line">destroy_cache()//销毁缓存</div></pre></td></tr></table></figure>
-<h3 id="运行缓存"><a href="#运行缓存" class="headerlink" title="运行缓存"></a>运行缓存</h3><p>main()函数通过调用Run对象的exec()方法运行缓存,exec()函数调用了Algorithm类中的kernel()方法。因此kernel()是整个cache-sim的核心方法。</p>
-<p>不同的缓存替换算法都继承了Algorithm这个算法父类，并且实现了父类中的虚函数map_operation()，kernel()函数通过调用不同的map_operation()实现不同的替换策略，这一点类似于flashcache的实现，flashcache实现的就是map_operation()所实现的功能，而kernel()则类似于device-mapper层提供的转发功能。</p>
-<h3 id="结果显示"><a href="#结果显示" class="headerlink" title="结果显示"></a>结果显示</h3><p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/缓存模拟器-cache-sim1.jpg" alt="image"></p>
-<p><img src="http://onx1obrfu.bkt.clouddn.com/joystorage/blogs/缓存模拟器-cache-sim2.jpg" alt="image"></p>
-
+        
+          <a class="article-more-a" href="/2017/08/09/缓存模拟器-cache-sim_v1.0/#more">more >></a>
+        
       
 
             
@@ -1269,7 +1256,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1333,11 +1324,35 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1349,11 +1364,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
+                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
+                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1373,39 +1388,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cache-sim</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">缓存</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">
