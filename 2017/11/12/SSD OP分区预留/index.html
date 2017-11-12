@@ -16,7 +16,7 @@
 <meta property="og:description" content="SSD上的OP指的是用户不可操作的容量，大小为实际容量减去用户可用容量，OP区域一般被用于优化操作如：WL，GC和坏块映射等。我们知道OP区间对于SSD的性能影响非常大，会减少SSD的可用容量，有减少WA、提高寿命、性能的正面作用。">
 <meta property="og:image" content="http://article.fd.zol-img.com.cn/g5/M00/0D/05/ChMkJ1aqwLaIWY1PAABsS5guYNoAAH0KAPOV4cAAGxj026.jpg">
 <meta property="og:image" content="http://img0.pconline.com.cn/pconline/1212/12/3107731_1_thumb.jpg">
-<meta property="og:updated_time" content="2017-11-10T09:24:34.824Z">
+<meta property="og:updated_time" content="2017-11-12T08:38:34.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSD OP分区预留">
 <meta name="twitter:description" content="SSD上的OP指的是用户不可操作的容量，大小为实际容量减去用户可用容量，OP区域一般被用于优化操作如：WL，GC和坏块映射等。我们知道OP区间对于SSD的性能影响非常大，会减少SSD的可用容量，有减少WA、提高寿命、性能的正面作用。">
@@ -301,6 +301,7 @@
 <li>第二层OP是否存在及容量大小取决于厂商设置，SSD厂商会根据自己的闪存颗粒品质，主控性能，质保年限，或是针对市场定位进行设置。这就看到了有一些标称128G的SSD实际只有112G。</li>
 <li>第三层OP是用户在日常使用可以分配，用户可以在自己初次分区时不把所有的SSD容量全部分满，可以留一些未分区的空间做OP。</li>
 </ul>
+<!-- more-->
 <h4 id="OP预留空间与性能的关系"><a href="#OP预留空间与性能的关系" class="headerlink" title="OP预留空间与性能的关系"></a>OP预留空间与性能的关系</h4><p>由SSD映射表的操作方式可知，删除后继续写入的数据在物理上会写入整个盘，在LBA上会覆盖被删除数据的地址。也就是说，同样写入59G数据，50G的盘已经包含了13G“无效”数据了。（那些被重映射到预留空间的数据，原地址数据就是“无效”、“过期”的）。所以说分区50G的SSD里LBA上数据“有效”的机会比分区59G要少，因为LBA容量小(分区小)，所以在做垃圾回收处理时，需要复制的“有效”数据也少了，自然效率就提高了。</p>
 <p>IBM苏黎世研究院早就指出，固态存储设备的空闲空间越多，写入放大系数就会越小，性能自然也就越高，反之亦然。如果90％的空间都被占用了，写入放大系数怎么也不会低于3.5，而如果能留下30％，系数最低可以只有0.2左右。<br><img src="http://img0.pconline.com.cn/pconline/1212/12/3107731_1_thumb.jpg" alt="image"></p>
 <p>更多内容参见博客<a href="http://diy.pconline.com.cn/ssd/study_ssd/1212/3107731_all.html" target="_blank" rel="external">《预留下25%最佳？SSD空间/性能关系探寻》</a></p>
@@ -589,14 +590,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">OP预留分区</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SSD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
               </li>
              
@@ -605,7 +598,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">OP预留分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SSD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">unordered_set</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -625,14 +634,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">unordered_set</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">STL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">blktrace</a>
               </li>
              
@@ -642,6 +643,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">filebench</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">kmeans聚类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,14 +670,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">kmeans聚类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
               </li>
              
@@ -677,35 +678,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -713,11 +686,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -729,11 +698,35 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -742,6 +735,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">缓存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
              
               <li class="article-tag-list-item">

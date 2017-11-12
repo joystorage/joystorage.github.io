@@ -387,31 +387,9 @@
 <p>  与其他 EBS 卷类型相比，磁性介质卷可提供最低的每 GB 成本。对于数据不常被访问的工作负载以及看重低存储成本的应用来说，磁性介质卷是理想的选择。请参阅 Amazon Elastic Block Store 以了解详细信息。</p>
 </li>
 </ul>
-<h5 id="预配置IOPS功能的优点"><a href="#预配置IOPS功能的优点" class="headerlink" title="预配置IOPS功能的优点"></a>预配置IOPS功能的优点</h5><ul>
-<li>EBS 优化实例可提供专用吞吐量，选择范围为 500 到 4000 Mbps，速度具体取决于所用的实例类型。</li>
-<li>专用吞吐量从最大程度上减小 Amazon EBS I/O 与您的 EC2 实例的其他流量争用吞吐量的情况，从而为您的 EBS 卷提供最佳性能。</li>
-<li>EBS 优化实例专用于标准和预置 IOPS Amazon EBS 卷。在连接到 EBS 优化实例时，预配置 IOPS 卷能够实现几毫秒的延迟，并且能在 99.9% 的时间内，提供波动幅度在 10% 以内的预配置 IOPS 性能。</li>
-</ul>
-<h5 id="密集存储实例"><a href="#密集存储实例" class="headerlink" title="密集存储实例"></a>密集存储实例</h5><p>对于要求为数据密集型应用（例如，大规模并行处理 (MPP) 数据仓库、MapReduce 和 Hadoop 分布式计算，以及日志和数据处理等）提供极高的每实例存储密度和高顺序 I/O 的客户，他们都能从密集型存储实例中受益。密集存储实例属于 Amazon EC2 的一种实例类型，它可以为客户提供高达 3.9GB/s 的顺序 I/O 吞吐量，还能为客户提供跨越 24 个硬盘驱动器，高达 48 TB 的实例存储量。请参阅 Amazon EC2 实例类型，了解有关密集存储实例的详细信息。</p>
-<h5 id="高-I-O-实例"><a href="#高-I-O-实例" class="headerlink" title="高 I/O 实例"></a>高 I/O 实例</h5><p>要求性能非常高、延迟低，以及随机 I/O 访问数据的客户都能受益于高 I/O 实例。高 I/O 实例是一种 Amazon EC2 实例类型，它能为客户提供超过 100 000 个 IOPS 的随机 I/O 速率。I/O 增强型实例采用固态硬盘 (SSD) 技术，特别适合于那些运行超高性能 NoSQL 和关系型数据库的客户。请参阅 Amazon EC2 实例类型，了解有关高 I/O 实例的详细信息。</p>
-<hr>
-<h3 id="SSD-型卷（IOPS-密集型）"><a href="#SSD-型卷（IOPS-密集型）" class="headerlink" title="SSD 型卷（IOPS 密集型）"></a>SSD 型卷（IOPS 密集型）</h3><blockquote>
-<h4 id="预配置-IOPS-SSD-io1-卷"><a href="#预配置-IOPS-SSD-io1-卷" class="headerlink" title="预配置 IOPS SSD (io1) 卷"></a>预配置 IOPS SSD (io1) 卷</h4></blockquote>
-<p>由固态硬盘 (SSD) 提供支持的 IO1 是最高性能 EBS 存储选项，专用于关键的 I/O 密集型数据库和应用程序工作负载，以及 HBase、Vertica 和 Cassandra 等吞吐量密集型数据库和数据仓库工作负载。这些卷非常适用于需要极低延迟的 IOPS 密集型和吞吐量密集型工作负载。</p>
-<p>IO1 旨在实现从最高 50 IOPS/GB 的一致基准性能到 20000 IOPS 的极限性能，每个卷的吞吐量最高可达 320MB/s。为了最大限度地利用 io1 的优势，我们推荐使用 EBS 优化型 EC2 实例。挂载到 EBS 优化型 EC2 实例后，io1 能够实现低于 10 毫秒的延迟，并且能在 99.9% 的时间内实现预配置的性能。有关可作为 EBS 优化型实例启动的实例类型的更多信息，请参阅 Amazon EC2 实例类型。有关 Amazon EBS 性能指南的更多信息，请参阅提升 EBS 性能。</p>
-<blockquote>
-<h4 id="通用型-SSD-gp2-卷"><a href="#通用型-SSD-gp2-卷" class="headerlink" title="通用型 SSD (gp2) 卷"></a>通用型 SSD (gp2) 卷</h4></blockquote>
-<p>GP2 是 Amazon EC2 实例的默认 EBS 卷类型。这些卷由固态硬盘 (SSD) 提供支持，适用于各种交易型工作负载，包括开发/测试环境、低延迟交互式应用程序和启动卷。GP2 旨在提供低于 10 毫秒的延迟，可实现从 3 IOPS/GB 的一致基准性能到 10000 IOPS 的极限性能，每个卷的吞吐量最高可达 160MB/s。小于 1TB 的 GP2 卷还能够突增至 3000 IOPS。GP2 的价格中已包含 I/O，因此您只需为预置的每 GB 存储支付费用。GP2 的设计目的是在 99% 的时间内提供预配置的性能。如果您所需的 IOPS 大于 gp2 可以提供的数量，或者您的工作负载需要实现低延迟，或是您需要更稳定的性能，我们建议您使用 io1。为了最大限度地提高 gp2 的性能，我们推荐您使用 EBS 优化型 EC2 实例。 </p>
-<h3 id="HDD-型卷（MB-s-密集型）"><a href="#HDD-型卷（MB-s-密集型）" class="headerlink" title="HDD 型卷（MB/s 密集型）"></a>HDD 型卷（MB/s 密集型）</h3><blockquote>
-<h4 id="吞吐量优化型-HDD-st1-卷"><a href="#吞吐量优化型-HDD-st1-卷" class="headerlink" title="吞吐量优化型 HDD (st1) 卷"></a>吞吐量优化型 HDD (st1) 卷</h4></blockquote>
-<p>ST1 由普通硬盘 (HDD) 提供支持，非常适用于拥有大型数据集和 I/O 且会频繁访问的吞吐量密集型工作负载，例如 MapReduce、Kafka、日志处理、数据仓库以及 ETL 工作负载。这些卷提供吞吐量方面的性能（以 MB/s 为单位），能够突增至每 TB 250MB/s，其中基准吞吐量为每 TB 40MB/s，最大吞吐量为每卷 500MB/s。ST1 的设计目的是在 99% 的时间内提供预期的吞吐量性能，且拥有的 I/O 点数足以支持以突增速率进行全卷扫描。为了最大限度地提高 st1 的性能，我们推荐使用 EBS 优化型 EC2 实例。</p>
-<blockquote>
-<h4 id="Cold-HDD-sc1-卷"><a href="#Cold-HDD-sc1-卷" class="headerlink" title="Cold HDD (sc1) 卷"></a>Cold HDD (sc1) 卷</h4><p>SC1 由普通硬盘 (HDD) 提供支持，能为所有 EBS 卷类型提供最低的每 GB 成本。它非常适用于非频繁访问且拥有大型冷数据集的工作负载。与 st1 类似，sc1 也提供突增模型：这些卷能突增至每 TB 80MB/s，其中基准吞吐量为每 TB 12MB/s，最大吞吐量为每卷 250MB/s。对于非频繁访问的数据，sc1 提供极其经济实惠的存储。SC1 的设计目的是在 99% 的时间内提供预期的吞吐量性能，且拥有的 I/O 点数足以支持以突增速率进行全卷扫描。为了最大限度地提高 sc1 的性能，我们推荐使用 EBS 优化型 EC2 实例。</p>
-</blockquote>
-<p>详情参见</p>
-<p><a href="https://aws.amazon.com/cn/ec2/details/" target="_blank" rel="external">Amazon EC2 产品详细信息</a></p>
-<p><a href="https://aws.amazon.com/cn/ebs/details/#SSDvolumes" target="_blank" rel="external">Amazon EBS 产品详情</a></p>
-
+        
+          <a class="article-more-a" href="/2017/11/12/Amazon Elastic Block Store学习/#more">more >></a>
+        
       
 
             
@@ -1294,14 +1272,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">OP预留分区</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SSD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
               </li>
              
@@ -1310,7 +1280,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">OP预留分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SSD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">unordered_set</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1330,14 +1316,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">unordered_set</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">STL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">blktrace</a>
               </li>
              
@@ -1347,6 +1325,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">filebench</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">kmeans聚类</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1366,14 +1352,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">kmeans聚类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
               </li>
              
@@ -1382,35 +1360,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">总线</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1418,11 +1368,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
+                <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1434,11 +1380,35 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">排队论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">ad hoc无线网</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">虚拟化</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">IO路径优化</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1447,6 +1417,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">缓存</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
              
               <li class="article-tag-list-item">
