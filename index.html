@@ -240,6 +240,210 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SSD OP分区预留" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/12/SSD OP分区预留/">SSD OP分区预留</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/12/SSD OP分区预留/" class="archive-article-date">
+  	<time datetime="2017-11-12T08:35:02.048Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-12</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">OP预留分区</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SSD</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <p>SSD上的OP指的是用户不可操作的容量，大小为实际容量减去用户可用容量，OP区域一般被用于优化操作如：WL，GC和坏块映射等。我们知道OP区间对于SSD的性能影响非常大，会减少SSD的可用容量，有减少WA、提高寿命、性能的正面作用。</p>
+        
+          <a class="article-more-a" href="/2017/11/12/SSD OP分区预留/#more">more >></a>
+        
+      
+
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/12/SSD OP分区预留/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-Amazon Elastic Block Store学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/12/Amazon Elastic Block Store学习/">Amazon Elastic Block Store学习</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/12/Amazon Elastic Block Store学习/" class="archive-article-date">
+  	<time datetime="2017-11-12T08:35:02.032Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-12</time>
+</a>
+        
+ 
+     
+
+      </header>
+
+    
+    <div class="article-entry" itemprop="articleBody">
+   
+      <div style="margin-left:-5px">
+        
+	<div class="article-tag tagcloud">
+		<!--i class="icon-price-tags icon"></i-->
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">aws</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">弹性块存储</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+        
+
+      </div>
+
+      <br/><br/>
+
+      
+        <ul>
+<li>通过网络访问，并且能独立于实例的生命周期而存在</li>
+<li>可用性和可靠性都非常高的存储卷</li>
+</ul>
+<h5 id="Amazon-EBS-提供最佳满足工作负载需求的三种卷类型"><a href="#Amazon-EBS-提供最佳满足工作负载需求的三种卷类型" class="headerlink" title="Amazon EBS 提供最佳满足工作负载需求的三种卷类型"></a>Amazon EBS 提供最佳满足工作负载需求的三种卷类型</h5><ul>
+<li><p>通用型 (SSD) </p>
+<p>  通用型 (SSD) 是一款以 SSD 为支持的全新通用型 EBS 卷类型，也是我们推荐给客户的默认类型。通用型 (SSD) 卷适用于各种工作负载，包括小型到中型数据库、开发和测试环境以及启动卷。</p>
+</li>
+<li><p>预配置 IOPS (SSD) </p>
+<p>  预配置 IOPS (SSD) 卷提供的存储具有一致性高和延迟低的特点，旨在为 I/O 密集型应用程序提供服务，例如大型关系数据库或 NoSQL 数据库。</p>
+</li>
+<li><p>磁性介质</p>
+<p>  与其他 EBS 卷类型相比，磁性介质卷可提供最低的每 GB 成本。对于数据不常被访问的工作负载以及看重低存储成本的应用来说，磁性介质卷是理想的选择。请参阅 Amazon Elastic Block Store 以了解详细信息。</p>
+</li>
+</ul>
+<h5 id="预配置IOPS功能的优点"><a href="#预配置IOPS功能的优点" class="headerlink" title="预配置IOPS功能的优点"></a>预配置IOPS功能的优点</h5><ul>
+<li>EBS 优化实例可提供专用吞吐量，选择范围为 500 到 4000 Mbps，速度具体取决于所用的实例类型。</li>
+<li>专用吞吐量从最大程度上减小 Amazon EBS I/O 与您的 EC2 实例的其他流量争用吞吐量的情况，从而为您的 EBS 卷提供最佳性能。</li>
+<li>EBS 优化实例专用于标准和预置 IOPS Amazon EBS 卷。在连接到 EBS 优化实例时，预配置 IOPS 卷能够实现几毫秒的延迟，并且能在 99.9% 的时间内，提供波动幅度在 10% 以内的预配置 IOPS 性能。</li>
+</ul>
+<h5 id="密集存储实例"><a href="#密集存储实例" class="headerlink" title="密集存储实例"></a>密集存储实例</h5><p>对于要求为数据密集型应用（例如，大规模并行处理 (MPP) 数据仓库、MapReduce 和 Hadoop 分布式计算，以及日志和数据处理等）提供极高的每实例存储密度和高顺序 I/O 的客户，他们都能从密集型存储实例中受益。密集存储实例属于 Amazon EC2 的一种实例类型，它可以为客户提供高达 3.9GB/s 的顺序 I/O 吞吐量，还能为客户提供跨越 24 个硬盘驱动器，高达 48 TB 的实例存储量。请参阅 Amazon EC2 实例类型，了解有关密集存储实例的详细信息。</p>
+<h5 id="高-I-O-实例"><a href="#高-I-O-实例" class="headerlink" title="高 I/O 实例"></a>高 I/O 实例</h5><p>要求性能非常高、延迟低，以及随机 I/O 访问数据的客户都能受益于高 I/O 实例。高 I/O 实例是一种 Amazon EC2 实例类型，它能为客户提供超过 100 000 个 IOPS 的随机 I/O 速率。I/O 增强型实例采用固态硬盘 (SSD) 技术，特别适合于那些运行超高性能 NoSQL 和关系型数据库的客户。请参阅 Amazon EC2 实例类型，了解有关高 I/O 实例的详细信息。</p>
+<hr>
+<h3 id="SSD-型卷（IOPS-密集型）"><a href="#SSD-型卷（IOPS-密集型）" class="headerlink" title="SSD 型卷（IOPS 密集型）"></a>SSD 型卷（IOPS 密集型）</h3><blockquote>
+<h4 id="预配置-IOPS-SSD-io1-卷"><a href="#预配置-IOPS-SSD-io1-卷" class="headerlink" title="预配置 IOPS SSD (io1) 卷"></a>预配置 IOPS SSD (io1) 卷</h4></blockquote>
+<p>由固态硬盘 (SSD) 提供支持的 IO1 是最高性能 EBS 存储选项，专用于关键的 I/O 密集型数据库和应用程序工作负载，以及 HBase、Vertica 和 Cassandra 等吞吐量密集型数据库和数据仓库工作负载。这些卷非常适用于需要极低延迟的 IOPS 密集型和吞吐量密集型工作负载。</p>
+<p>IO1 旨在实现从最高 50 IOPS/GB 的一致基准性能到 20000 IOPS 的极限性能，每个卷的吞吐量最高可达 320MB/s。为了最大限度地利用 io1 的优势，我们推荐使用 EBS 优化型 EC2 实例。挂载到 EBS 优化型 EC2 实例后，io1 能够实现低于 10 毫秒的延迟，并且能在 99.9% 的时间内实现预配置的性能。有关可作为 EBS 优化型实例启动的实例类型的更多信息，请参阅 Amazon EC2 实例类型。有关 Amazon EBS 性能指南的更多信息，请参阅提升 EBS 性能。</p>
+<blockquote>
+<h4 id="通用型-SSD-gp2-卷"><a href="#通用型-SSD-gp2-卷" class="headerlink" title="通用型 SSD (gp2) 卷"></a>通用型 SSD (gp2) 卷</h4></blockquote>
+<p>GP2 是 Amazon EC2 实例的默认 EBS 卷类型。这些卷由固态硬盘 (SSD) 提供支持，适用于各种交易型工作负载，包括开发/测试环境、低延迟交互式应用程序和启动卷。GP2 旨在提供低于 10 毫秒的延迟，可实现从 3 IOPS/GB 的一致基准性能到 10000 IOPS 的极限性能，每个卷的吞吐量最高可达 160MB/s。小于 1TB 的 GP2 卷还能够突增至 3000 IOPS。GP2 的价格中已包含 I/O，因此您只需为预置的每 GB 存储支付费用。GP2 的设计目的是在 99% 的时间内提供预配置的性能。如果您所需的 IOPS 大于 gp2 可以提供的数量，或者您的工作负载需要实现低延迟，或是您需要更稳定的性能，我们建议您使用 io1。为了最大限度地提高 gp2 的性能，我们推荐您使用 EBS 优化型 EC2 实例。 </p>
+<h3 id="HDD-型卷（MB-s-密集型）"><a href="#HDD-型卷（MB-s-密集型）" class="headerlink" title="HDD 型卷（MB/s 密集型）"></a>HDD 型卷（MB/s 密集型）</h3><blockquote>
+<h4 id="吞吐量优化型-HDD-st1-卷"><a href="#吞吐量优化型-HDD-st1-卷" class="headerlink" title="吞吐量优化型 HDD (st1) 卷"></a>吞吐量优化型 HDD (st1) 卷</h4></blockquote>
+<p>ST1 由普通硬盘 (HDD) 提供支持，非常适用于拥有大型数据集和 I/O 且会频繁访问的吞吐量密集型工作负载，例如 MapReduce、Kafka、日志处理、数据仓库以及 ETL 工作负载。这些卷提供吞吐量方面的性能（以 MB/s 为单位），能够突增至每 TB 250MB/s，其中基准吞吐量为每 TB 40MB/s，最大吞吐量为每卷 500MB/s。ST1 的设计目的是在 99% 的时间内提供预期的吞吐量性能，且拥有的 I/O 点数足以支持以突增速率进行全卷扫描。为了最大限度地提高 st1 的性能，我们推荐使用 EBS 优化型 EC2 实例。</p>
+<blockquote>
+<h4 id="Cold-HDD-sc1-卷"><a href="#Cold-HDD-sc1-卷" class="headerlink" title="Cold HDD (sc1) 卷"></a>Cold HDD (sc1) 卷</h4><p>SC1 由普通硬盘 (HDD) 提供支持，能为所有 EBS 卷类型提供最低的每 GB 成本。它非常适用于非频繁访问且拥有大型冷数据集的工作负载。与 st1 类似，sc1 也提供突增模型：这些卷能突增至每 TB 80MB/s，其中基准吞吐量为每 TB 12MB/s，最大吞吐量为每卷 250MB/s。对于非频繁访问的数据，sc1 提供极其经济实惠的存储。SC1 的设计目的是在 99% 的时间内提供预期的吞吐量性能，且拥有的 I/O 点数足以支持以突增速率进行全卷扫描。为了最大限度地提高 sc1 的性能，我们推荐使用 EBS 优化型 EC2 实例。</p>
+</blockquote>
+<p>详情参见</p>
+<p><a href="https://aws.amazon.com/cn/ec2/details/" target="_blank" rel="external">Amazon EC2 产品详细信息</a></p>
+<p><a href="https://aws.amazon.com/cn/ebs/details/#SSDvolumes" target="_blank" rel="external">Amazon EBS 产品详情</a></p>
+
+      
+
+            
+    </div>
+
+    <div class="article-info article-info-index">
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/12/Amazon Elastic Block Store学习/">查看全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+  
     <article id="post-STL unordered_set的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -721,11 +925,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">cache-sim</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">缓存</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">缓存</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">cache-sim</a>
         		</li>
       		
 		</ul>
@@ -956,182 +1160,6 @@
 
 
   
-    <article id="post-kmeans聚类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/kmeans聚类/">kmeans聚类</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/20/kmeans聚类/" class="archive-article-date">
-  	<time datetime="2017-07-20T14:29:23.882Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">kmeans聚类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <p>聚类算法有很多种，比如K-Means，AP聚类，层次聚类(Hierarchical clustering)等等，主要说一下K-Means.</p>
-<h2 id="kmeans简介"><a href="#kmeans简介" class="headerlink" title="kmeans简介"></a>kmeans简介</h2><p>K-Means之所以很受欢迎，就是其速度很快并且有很好的可扩展性。K-Means算法是一个重复移动类中心点的过程，把类的中心点，也称重心（centroids），移动到其包含成员的平均位置，然后重新划分其内部成员。</p>
-<p>在博文<a href="http://imyin.xyz/2016/10/08/K-Means/">K-Means聚类</a>中有一个很好的里子说明了kmeans的具体工作原理。</p>
-<h2 id="kmeans库的使用"><a href="#kmeans库的使用" class="headerlink" title="kmeans库的使用"></a>kmeans库的使用</h2><p>在scikit_learn库中就有kmeans算法的具体实现，官方说明见连接<a href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">sklearn.cluster.KMeans</a></p>
-        
-          <a class="article-more-a" href="/2017/07/20/kmeans聚类/#more">more >></a>
-        
-      
-
-            
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/20/kmeans聚类/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-ssdsim学习1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/ssdsim学习1/">ssdsim学习1</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/20/ssdsim学习1/" class="archive-article-date">
-  	<time datetime="2017-07-20T14:29:23.880Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-20</time>
-</a>
-        
- 
-     
-
-      </header>
-
-    
-    <div class="article-entry" itemprop="articleBody">
-   
-      <div style="margin-left:-5px">
-        
-	<div class="article-tag tagcloud">
-		<!--i class="icon-price-tags icon"></i-->
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ssdsim</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssd</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-        
-
-      </div>
-
-      <br/><br/>
-
-      
-        <blockquote>
-<p>说明：==下文内容摘自胡洋博士毕业论文。引文通过特殊格式标出==</p>
-<p>本章介绍一个自主开发的高准确性、模块化、可配置的固态盘模拟器SSDsim，它能够对高级命令、能耗进行模拟，最终要的一点是它的模拟结果经过了基本的验证。</p>
-</blockquote>
-<p>源码请参见<a href="http://storage.hust.edu.cn/SSDsim/">ssdsim</a></p>
-<h2 id="时间模拟"><a href="#时间模拟" class="headerlink" title="时间模拟"></a>时间模拟</h2><p>事件驱动的模拟器是根据系统内部各个部件的状态改变来修改系统时间，SSDsim就是采用的这种方式的驱动方法；</p>
-        
-          <a class="article-more-a" href="/2017/07/20/ssdsim学习1/#more">more >></a>
-        
-      
-
-            
-    </div>
-
-    <div class="article-info article-info-index">
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/20/ssdsim学习1/">查看全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1258,15 +1286,31 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">aws</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">弹性块存储</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">OP预留分区</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SSD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">unordered_set</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1286,7 +1330,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">filebench</a>
+                <a href="javascript:void(0)" class="js-tag color4">unordered_set</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">STL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1298,19 +1346,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">kmeans聚类</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+                <a href="javascript:void(0)" class="js-tag color5">filebench</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1322,6 +1358,22 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">kmeans聚类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ssdsim</a>
               </li>
              
@@ -1330,23 +1382,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">总线</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1358,19 +1398,23 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">scikit_learn</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">RAID</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">github pages</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1382,6 +1426,14 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">存储阵列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">存储系统</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
@@ -1390,7 +1442,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">cache-sim</a>
+                <a href="javascript:void(0)" class="js-tag color3">zycache</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1398,15 +1450,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">VSCode</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">c++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">zycache</a>
+                <a href="javascript:void(0)" class="js-tag color5">cache-sim</a>
               </li>
             
             <div class="clearfix"></div>
